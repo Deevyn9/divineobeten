@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  * {
+    @apply border-white/10;
+  }
+
+  ::selection {
+    background: rgba(251, 191, 36, 0.35);
+    color: white;
+  }
+}
+
+@layer components {
+  .eyebrow {
+    @apply text-xs font-medium uppercase tracking-[0.35em] text-amber-300;
+  }
+
+  .panel {
+    @apply rounded-[2rem] border border-white/10 bg-white/5 p-6 backdrop-blur;
+  }
+
+  .button-primary {
+    @apply inline-flex items-center justify-center rounded-full bg-white px-5 py-3 text-sm font-medium text-neutral-950 transition hover:bg-amber-300;
+  }
+
+  .button-secondary {
+    @apply inline-flex items-center justify-center rounded-full border border-white/15 px-5 py-3 text-sm font-medium text-white transition hover:border-white/30 hover:bg-white/5;
+  }
+
+  .chip {
+    @apply rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-neutral-200;
+  }
+
+  .nav-link {
+    @apply rounded-full px-4 py-2 text-sm text-neutral-300 transition hover:bg-white/5 hover:text-white;
+  }
+
+  .nav-link-active {
+    @apply bg-white/10 text-white;
+  }
+
+  .stack-row {
+    @apply flex items-center justify-between gap-4 rounded-2xl border border-white/8 bg-black/20 px-4 py-3;
+  }
+
+  .stack-row span {
+    @apply text-neutral-400;
+  }
+
+  .stack-row strong {
+    @apply font-medium text-white;
+  }
+
+  .footer-link {
+    @apply text-neutral-400 transition hover:text-white;
+  }
+}

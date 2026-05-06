@@ -1,0 +1,42 @@
+<div
+  class="preloader fixed inset-0 z-50 grid place-items-center bg-neutral-950"
+  aria-hidden="true"
+>
+  <div class="flex items-center gap-3 text-sm uppercase tracking-[0.45em] text-neutral-300">
+    <span class="h-2.5 w-2.5 rounded-full bg-amber-300"></span>
+    <span>Loading portfolio</span>
+  </div>
+</div>
+
+<script>
+  import { gsap } from 'gsap';
+
+  const initPreloader = () => {
+    const preloader = document.querySelector('.preloader');
+    const introItems = document.querySelectorAll('[data-intro]');
+
+    if (!preloader) return;
+
+    gsap
+      .timeline({ defaults: { ease: 'power3.out' } })
+      .to(preloader, {
+        delay: 0.35,
+        yPercent: -100,
+        duration: 0.9
+      })
+      .from(
+        introItems,
+        {
+          y: 32,
+          opacity: 0,
+          stagger: 0.08,
+          duration: 0.7
+        },
+        '-=0.25'
+      )
+      .set(preloader, { display: 'none' });
+  };
+
+  document.addEventListener('astro:page-load', initPreloader);
+  initPreloader();
+</script>

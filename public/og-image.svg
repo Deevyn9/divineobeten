@@ -1,0 +1,23 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" rx="32" fill="#09090B"/>
+  <circle cx="979" cy="123" r="234" fill="#F59E0B" fill-opacity="0.16"/>
+  <circle cx="188" cy="516" r="260" fill="#14B8A6" fill-opacity="0.16"/>
+  <rect x="64" y="64" width="1072" height="502" rx="28" fill="url(#paint0_linear)" stroke="rgba(255,255,255,0.12)"/>
+  <text x="104" y="188" fill="#FBBF24" font-family="Arial, Helvetica, sans-serif" font-size="28" letter-spacing="8">DIVINE OBETEN</text>
+  <text x="104" y="286" fill="white" font-family="Arial, Helvetica, sans-serif" font-size="76" font-weight="700">
+    Frontend Developer
+  </text>
+  <text x="104" y="364" fill="#D4D4D8" font-family="Arial, Helvetica, sans-serif" font-size="34">
+    Portfolio crafted with Astro, Tailwind CSS, and GSAP.
+  </text>
+  <rect x="104" y="432" width="236" height="58" rx="29" fill="white"/>
+  <text x="145" y="470" fill="#09090B" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">
+    divineobeten.com
+  </text>
+  <defs>
+    <linearGradient id="paint0_linear" x1="93" y1="64" x2="1021" y2="591" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#18181B"/>
+      <stop offset="1" stop-color="#111827"/>
+    </linearGradient>
+  </defs>
+</svg>
