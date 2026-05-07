@@ -1,8 +1,9 @@
 ---
-import Footer from '../components/Footer.astro';
-import Navbar from '../components/Navbar.astro';
-import { ClientRouter } from 'astro:transitions';
-import '../styles/global.css';
+import Footer from "../components/Footer.astro";
+import Navbar from "../components/Navbar.astro";
+import { ClientRouter } from "astro:transitions";
+import "../styles/global.css";
+import Preloader from "../components/Preloader.astro";
 
 interface Props {
   title?: string;
@@ -11,9 +12,9 @@ interface Props {
 }
 
 const {
-  title = 'Divine Obeten | Portfolio',
-  description = 'A lightweight, animation-ready portfolio built with Astro, Tailwind, and GSAP.',
-  image = '/og-image.svg'
+  title = "Divine Obeten | Portfolio",
+  description = "A lightweight, animation-ready portfolio built with Astro, Tailwind, and GSAP.",
+  image = "/og-image.svg",
 } = Astro.props;
 
 const siteUrl = Astro.site ?? Astro.url;
@@ -37,7 +38,10 @@ const socialImage = new URL(image, siteUrl).toString();
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:image" content={socialImage} />
-    <meta property="og:image:alt" content="Preview card for Divine Obeten portfolio" />
+    <meta
+      property="og:image:alt"
+      content="Preview card for Divine Obeten portfolio"
+    />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
@@ -47,6 +51,7 @@ const socialImage = new URL(image, siteUrl).toString();
   </head>
   <body class="min-h-screen bg-neutral-950 text-neutral-100 antialiased">
     <Navbar />
+    <Preloader />
     <main transition:animate="slide" class="min-h-[calc(100vh-9rem)]">
       <slot />
     </main>
