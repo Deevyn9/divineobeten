@@ -1,41 +1,37 @@
 ---
-import Preloader from '../components/Preloader.astro';
-import Layout from '../layouts/Layout.astro';
+import Preloader from "../components/Preloader.astro";
+import Layout from "../layouts/Layout.astro";
 
 const skills = [
-  'Frontend Engineering',
-  'Responsive UI Systems',
-  'Motion Design',
-  'Design-to-Code',
-  'JavaScript / TypeScript',
-  'Performance-minded Builds'
+  "Frontend Engineering",
+  "Responsive UI Systems",
+  "Motion Design",
+  "Design-to-Code",
+  "JavaScript / TypeScript",
+  "Performance-minded Builds",
 ];
 
 const sections = [
   {
-    eyebrow: 'About',
-    title: 'A sharp personal introduction goes here.',
-    copy:
-      'Use this section to explain who you are, what you care about, and the kind of work you want to be known for.'
+    eyebrow: "About",
+    title: "A sharp personal introduction goes here.",
+    copy: "Use this section to explain who you are, what you care about, and the kind of work you want to be known for.",
   },
   {
-    eyebrow: 'Projects',
-    title: 'Showcase work with context, not just screenshots.',
-    copy:
-      'We can turn each project into a case study with the challenge, your thinking, the stack, and the outcome.'
+    eyebrow: "Projects",
+    title: "Showcase work with context, not just screenshots.",
+    copy: "We can turn each project into a case study with the challenge, your thinking, the stack, and the outcome.",
   },
   {
-    eyebrow: 'Experience',
-    title: 'Tell the story behind your growth.',
-    copy:
-      'List roles, freelance work, leadership, internships, or meaningful contributions that build trust fast.'
+    eyebrow: "Experience",
+    title: "Tell the story behind your growth.",
+    copy: "List roles, freelance work, leadership, internships, or meaningful contributions that build trust fast.",
   },
   {
-    eyebrow: 'Contact',
-    title: 'Make it easy to reach you.',
-    copy:
-      'Add email, socials, and a call to action for recruiters, founders, or clients who land here.'
-  }
+    eyebrow: "Contact",
+    title: "Make it easy to reach you.",
+    copy: "Add email, socials, and a call to action for recruiters, founders, or clients who land here.",
+  },
 ];
 ---
 
@@ -44,68 +40,93 @@ const sections = [
   description="Portfolio scaffold built with Astro, Tailwind CSS, and GSAP."
   image="/og-image.svg"
 >
-  <Preloader />
-
   <section class="relative overflow-hidden px-6 pb-18 pt-24 sm:px-10 lg:px-16">
-      <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(251,191,36,0.18),transparent_34%),radial-gradient(circle_at_80%_20%,rgba(45,212,191,0.12),transparent_22%),linear-gradient(180deg,rgba(255,255,255,0.02),transparent)]"></div>
-      <div class="mx-auto grid max-w-6xl gap-14 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
-        <div class="space-y-8">
-          <p data-intro class="eyebrow">Portfolio scaffold</p>
-          <div class="space-y-5">
-            <h1
-              data-intro
-              class="max-w-4xl text-5xl font-semibold tracking-tight text-white sm:text-6xl lg:text-7xl"
-            >
-              Lightweight, SEO-friendly, and ready for your real story.
-            </h1>
-            <p data-intro class="max-w-2xl text-base leading-7 text-neutral-300 sm:text-lg">
-              This starter gives you Astro, Tailwind, GSAP, and Astro view transitions in a clean base
-              we can now shape around your identity, work, and voice.
-            </p>
-          </div>
-          <div data-intro class="flex flex-wrap gap-3">
-            <a class="button-primary" href="#about">Start shaping it</a>
-            <a class="button-secondary" href="#stack">See the stack</a>
-          </div>
+    <div
+      class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(251,191,36,0.18),transparent_34%),radial-gradient(circle_at_80%_20%,rgba(45,212,191,0.12),transparent_22%),linear-gradient(180deg,rgba(255,255,255,0.02),transparent)]"
+    >
+    </div>
+    <div
+      class="mx-auto grid max-w-6xl gap-14 lg:grid-cols-[1.15fr_0.85fr] lg:items-end"
+    >
+      <div class="space-y-8">
+        <p data-intro class="eyebrow">Portfolio scaffold</p>
+        <div class="space-y-5">
+          <h1
+            data-intro
+            class="max-w-4xl text-5xl font-semibold tracking-tight text-white sm:text-6xl lg:text-7xl"
+          >
+            Lightweight, SEO-friendly, and ready for your real story.
+          </h1>
+          <p
+            data-intro
+            class="max-w-2xl text-base leading-7 text-neutral-300 sm:text-lg"
+          >
+            This starter gives you Astro, Tailwind, GSAP, and Astro view
+            transitions in a clean base we can now shape around your identity,
+            work, and voice.
+          </p>
         </div>
-
-        <aside data-intro class="panel space-y-6">
-          <div class="flex items-center justify-between border-b border-white/10 pb-4">
-            <p class="text-sm uppercase tracking-[0.3em] text-neutral-400">Current stack</p>
-            <span class="rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1 text-xs text-emerald-300">
-              Ready
-            </span>
-          </div>
-          <ul id="stack" class="grid gap-3 text-sm text-neutral-200">
-            <li class="stack-row"><span>Framework</span><strong>Astro</strong></li>
-            <li class="stack-row"><span>Styling</span><strong>Tailwind CSS</strong></li>
-            <li class="stack-row"><span>Animation</span><strong>GSAP</strong></li>
-            <li class="stack-row"><span>Transitions</span><strong>astro:transitions</strong></li>
-            <li class="stack-row"><span>Language</span><strong>TypeScript-ready</strong></li>
-          </ul>
-        </aside>
+        <div data-intro class="flex flex-wrap gap-3">
+          <a class="button-primary" href="#about">Start shaping it</a>
+          <a class="button-secondary" href="#stack">See the stack</a>
+        </div>
       </div>
+
+      <aside data-intro class="panel space-y-6">
+        <div
+          class="flex items-center justify-between border-b border-white/10 pb-4"
+        >
+          <p class="text-sm uppercase tracking-[0.3em] text-neutral-400">
+            Current stack
+          </p>
+          <span
+            class="rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1 text-xs text-emerald-300"
+          >
+            Ready
+          </span>
+        </div>
+        <ul id="stack" class="grid gap-3 text-sm text-neutral-200">
+          <li class="stack-row">
+            <span>Framework</span><strong>Astro</strong>
+          </li>
+          <li class="stack-row">
+            <span>Styling</span><strong>Tailwind CSS</strong>
+          </li>
+          <li class="stack-row"><span>Animation</span><strong>GSAP</strong></li>
+          <li class="stack-row">
+            <span>Transitions</span><strong>astro:transitions</strong>
+          </li>
+          <li class="stack-row">
+            <span>Language</span><strong>TypeScript-ready</strong>
+          </li>
+        </ul>
+      </aside>
+    </div>
   </section>
 
   <section class="px-6 py-10 sm:px-10 lg:px-16">
     <div class="mx-auto max-w-6xl">
       <div class="flex flex-wrap gap-3">
-        {skills.map((skill) => (
-          <span class="chip">{skill}</span>
-        ))}
+        {skills.map((skill) => <span class="chip">{skill}</span>)}
       </div>
     </div>
   </section>
 
   <section id="about" class="px-6 py-10 sm:px-10 lg:px-16">
     <div class="mx-auto grid max-w-6xl gap-6 md:grid-cols-2">
-      {sections.map((section) => (
-        <article class="panel min-h-64 space-y-4">
-          <p class="eyebrow">{section.eyebrow}</p>
-          <h2 class="text-2xl font-semibold tracking-tight text-white">{section.title}</h2>
-          <p class="max-w-xl text-sm leading-7 text-neutral-300">{section.copy}</p>
-        </article>
-      ))}
+      {
+        sections.map((section) => (
+          <article class="panel min-h-64 space-y-4">
+            <p class="eyebrow">{section.eyebrow}</p>
+            <h2 class="text-2xl font-semibold tracking-tight text-white">
+              {section.title}
+            </h2>
+            <p class="max-w-xl text-sm leading-7 text-neutral-300">
+              {section.copy}
+            </p>
+          </article>
+        ))
+      }
     </div>
   </section>
 </Layout>
