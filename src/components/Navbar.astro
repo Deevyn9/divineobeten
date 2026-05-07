@@ -1,32 +1,44 @@
 ---
 const links = [
-  { href: '/', label: 'Home' },
-  { href: '/about', label: 'About' },
-  { href: '/projects', label: 'Projects' },
-  { href: '/contact', label: 'Contact' }
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
+  { href: "/projects", label: "Projects" },
+  { href: "/contact", label: "Contact" },
 ];
 
 const currentPath = Astro.url.pathname;
 ---
 
-<header class="sticky top-0 z-40 border-b border-white/10 bg-neutral-950/75 backdrop-blur-xl">
-  <nav class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4 sm:px-10 lg:px-16">
-    <a class="text-sm font-semibold uppercase tracking-[0.35em] text-white" href="/">
+<header class="sticky top-0 z-20">
+  <nav
+    class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4 sm:px-10 lg:px-16"
+  >
+    <a
+      class="text-sm font-semibold uppercase tracking-[0.35em] text-white"
+      href="/"
+    >
       Divine Obeten
     </a>
 
     <div class="hidden items-center gap-2 md:flex">
-      {links.map((link) => {
-        const isActive = currentPath === link.href;
+      {
+        links.map((link) => {
+          const isActive = currentPath === link.href;
 
-        return (
-          <a class:list={['nav-link', { 'nav-link-active': isActive }]} href={link.href}>
-            {link.label}
-          </a>
-        );
-      })}
+          return (
+            <a
+              class:list={["nav-link", { "nav-link-active": isActive }]}
+              href={link.href}
+            >
+              {link.label}
+            </a>
+          );
+        })
+      }
     </div>
 
-    <a class="button-secondary hidden md:inline-flex" href="/contact">Let&apos;s talk</a>
+    <a class="button-secondary hidden md:inline-flex" href="/contact"
+      >Let&apos;s talk</a
+    >
   </nav>
 </header>
