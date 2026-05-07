@@ -1,42 +1,169 @@
+---
+import AstroDark from "../assets/icons/Astro_dark.svg";
+import Javascript from "../assets/icons/javascript.svg";
+import NextJS from "../assets/icons/nextjs_icon_dark.svg";
+import NodeJS from "../assets/icons/nodejs.svg";
+import ReactDark from "../assets/icons/React_dark.svg";
+import Redux from "../assets/icons/redux.svg";
+import TailwindCSS from "../assets/icons/tailwindcss.svg";
+import Typescript from "../assets/icons/typescript.svg";
+import Vue from "../assets/icons/vue.svg";
+
+const icons = [
+  AstroDark,
+  Javascript,
+  NextJS,
+  NodeJS,
+  ReactDark,
+  Redux,
+  TailwindCSS,
+  Typescript,
+  Vue,
+];
+---
+
 <div
-  class="preloader fixed inset-0 z-50 grid place-items-center bg-neutral-950"
-  aria-hidden="true"
+  class="preloader fixed top-0 bg-[#d9d9d9] inset-0 z-9999 grid place-items-center"
 >
-  <div class="flex items-center gap-3 text-sm uppercase tracking-[0.45em] text-neutral-300">
-    <span class="h-2.5 w-2.5 rounded-full bg-amber-300"></span>
-    <span>Loading portfolio</span>
+  <!-- aria-hidden="true" -->
+  <div
+    id="trail-wrapper"
+    class="absolute inset-0 overflow-hidden pointer-events-none"
+  >
+    {
+      icons.map((icon) => (
+        <img class="flair absolute opacity-0 w-12 h-12" src={icon.src} />
+      ))
+    }
+  </div>
+
+  <div
+    class="flex flex-col items-center text-2xl uppercase text-gray-900 font-semibold leading-6"
+  >
+    <span>Divine Obeten</span>
+    <span class="text-xs">(wiggle your mouse around.)</span>
+  </div>
+  <div
+    class="absolute flex gap-1 items-center capitalize italic text-gray-900 right-5 bottom-5 font-semibold"
+  >
+    <div
+      class="bg-green-300 p-px w-3 h-3 rounded-full grid place-items-center animate-pulse"
+    >
+      <div class="bg-green-600 w-1.5 h-1.5 rounded-full animate-pulse"></div>
+    </div>
+    in dev
   </div>
 </div>
 
 <script>
-  import { gsap } from 'gsap';
+  document.body.style.overflow = "hidden";
+  import { gsap } from "gsap";
 
-  const initPreloader = () => {
-    const preloader = document.querySelector('.preloader');
-    const introItems = document.querySelectorAll('[data-intro]');
+  // Mouse Trail setup
+  const flair = gsap.utils.toArray<HTMLImageElement>(".flair");
+  const wrapper = gsap.utils.wrap(0, flair.length);
+  let index = 0;
+  let gap = 90;
+  let mousePos = { x: 0, y: 0 };
+  let lastMousePos = { x: 0, y: 0 };
+  let cachedMousePos = { x: 0, y: 0 };
 
-    if (!preloader) return;
-
-    gsap
-      .timeline({ defaults: { ease: 'power3.out' } })
-      .to(preloader, {
-        delay: 0.35,
-        yPercent: -100,
-        duration: 0.9
-      })
-      .from(
-        introItems,
+  function playAnimation(shape: HTMLImageElement) {
+    let tl = gsap.timeline();
+    tl.from(shape, {
+      opacity: 0,
+      scale: 0,
+      ease: "elastic.out(1,0.3)",
+    })
+      .to(
+        shape,
         {
-          y: 32,
-          opacity: 0,
-          stagger: 0.08,
-          duration: 0.7
+          rotation: "random([-360, 360])",
         },
-        '-=0.25'
+        "<",
       )
-      .set(preloader, { display: 'none' });
-  };
+      .to(
+        shape,
+        {
+          y: "120vh",
+          ease: "back.in(.4)",
+          duration: 1,
+        },
+        0,
+      );
+  }
 
-  document.addEventListener('astro:page-load', initPreloader);
-  initPreloader();
+  function animateImage() {
+    let wrappedIndex = wrapper(index);
+    let img = flair[wrappedIndex];
+    gsap.killTweensOf(img);
+    gsap.set(img, { clearProps: "all" });
+    gsap.set(img, {
+      opacity: 1,
+      left: mousePos.x,
+      top: mousePos.y,
+      xPercent: -50,
+      yPercent: -50,
+    });
+    playAnimation(img);
+    index++;
+  }
+
+  function ImageTrail() {
+    let travelDistance = Math.hypot(
+      lastMousePos.x - mousePos.x,
+      lastMousePos.y - mousePos.y,
+    );
+    cachedMousePos.x = gsap.utils.interpolate(
+      cachedMousePos.x || mousePos.x,
+      mousePos.x,
+      0.1,
+    );
+    cachedMousePos.y = gsap.utils.interpolate(
+      cachedMousePos.y || mousePos.y,
+      mousePos.y,
+      0.1,
+    );
+    if (travelDistance > gap) {
+      animateImage();
+      lastMousePos = { ...mousePos };
+    }
+  }
+
+  window.addEventListener("mousemove", (e) => {
+    mousePos = { x: e.clientX, y: e.clientY };
+  });
+
+  gsap.defaults({ duration: 1 });
+  gsap.ticker.add(ImageTrail);
+
+  // PRELOADER EXIT
+  // const initPreloader = () => {
+  //   const preloader = document.querySelector('.preloader');
+  //   const introItems = document.querySelectorAll('[data-intro]');
+
+  //   if (!preloader) return;
+
+  //   gsap
+  //     .timeline({ defaults: { ease: 'power3.out' } })
+  //     .to(preloader, {
+  //       delay: 0.35,
+  //       yPercent: -100,
+  //       duration: 0.9
+  //     })
+  //     .from(
+  //       introItems,
+  //       {
+  //         y: 32,
+  //         opacity: 0,
+  //         stagger: 0.08,
+  //         duration: 0.7
+  //       },
+  //       '-=0.25'
+  //     )
+  //     .set(preloader, { display: 'none' });
+  // };
+
+  // document.addEventListener('astro:page-load', initPreloader);
+  // initPreloader();
 </script>
