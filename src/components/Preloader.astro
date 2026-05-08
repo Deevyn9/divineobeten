@@ -24,8 +24,8 @@ const icons = [
 
 <div
   class="preloader fixed top-0 bg-[#d9d9d9] inset-0 z-9999 grid place-items-center"
+  aria-hidden="true"
 >
-  <!-- aria-hidden="true" -->
   <div
     id="trail-wrapper"
     class="absolute inset-0 overflow-hidden pointer-events-none"
@@ -56,7 +56,6 @@ const icons = [
 </div>
 
 <script>
-  document.body.style.overflow = "hidden";
   import { gsap } from "gsap";
 
   // Mouse Trail setup
@@ -138,32 +137,32 @@ const icons = [
   gsap.ticker.add(ImageTrail);
 
   // PRELOADER EXIT
-  // const initPreloader = () => {
-  //   const preloader = document.querySelector('.preloader');
-  //   const introItems = document.querySelectorAll('[data-intro]');
+  const initPreloader = () => {
+    const preloader = document.querySelector(".preloader");
+    const introItems = document.querySelectorAll("[data-intro]");
 
-  //   if (!preloader) return;
+    if (!preloader) return;
 
-  //   gsap
-  //     .timeline({ defaults: { ease: 'power3.out' } })
-  //     .to(preloader, {
-  //       delay: 0.35,
-  //       yPercent: -100,
-  //       duration: 0.9
-  //     })
-  //     .from(
-  //       introItems,
-  //       {
-  //         y: 32,
-  //         opacity: 0,
-  //         stagger: 0.08,
-  //         duration: 0.7
-  //       },
-  //       '-=0.25'
-  //     )
-  //     .set(preloader, { display: 'none' });
-  // };
+    gsap
+      .timeline({ defaults: { ease: "power3.out" } })
+      .to(preloader, {
+        delay: 5,
+        yPercent: -100,
+        duration: 0.9,
+      })
+      // .from(
+      //   introItems,
+      //   {
+      //     y: 32,
+      //     opacity: 0,
+      //     stagger: 0.08,
+      //     duration: 0.7,
+      //   },
+      //   "-=0.25",
+      // )
+      .set(preloader, { display: "none" });
+  };
 
-  // document.addEventListener('astro:page-load', initPreloader);
-  // initPreloader();
+  document.addEventListener("astro:page-load", initPreloader);
+  initPreloader();
 </script>
