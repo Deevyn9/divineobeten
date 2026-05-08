@@ -9,36 +9,84 @@ const links = [
 const currentPath = Astro.url.pathname;
 ---
 
-<header class="sticky top-0 z-20">
-  <nav
-    class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4 sm:px-10 lg:px-16"
-  >
-    <a
-      class="text-sm font-semibold uppercase tracking-[0.35em] text-white"
-      href="/"
+<header class="fixed top-0 left-0 z-50 w-full">
+  <div class="relative overflow-hidden">
+    <!-- Progressive blur layers -->
+    <div
+      class="pointer-events-none absolute inset-0 z-1"
+      style="
+    mask-image: linear-gradient(
+  to top,
+  rgba(0,0,0,0) 0%,
+  rgba(0,0,0,0.2) 20%,
+  rgba(0,0,0,0.5) 45%,
+  rgba(0,0,0,1) 100%
+);
+  "
     >
-      Divine Obeten
-    </a>
-
-    <div class="hidden items-center gap-2 md:flex">
-      {
-        links.map((link) => {
-          const isActive = currentPath === link.href;
-
-          return (
-            <a
-              class:list={["nav-link", { "nav-link-active": isActive }]}
-              href={link.href}
-            >
-              {link.label}
-            </a>
-          );
-        })
-      }
     </div>
 
-    <a class="button-secondary hidden md:inline-flex" href="/contact"
-      >Let&apos;s talk</a
+    <div
+      class="pointer-events-none absolute inset-0 z-2"
+      style="
+    mask-image: linear-gradient(to top,
+    rgba(0,0,0,0) 20%,
+    rgba(0,0,0,1) 100%);
+    backdrop-filter: blur(2px);
+  "
     >
-  </nav>
+    </div>
+
+    <div
+      class="pointer-events-none absolute inset-0 z-3"
+      style="
+    mask-image: linear-gradient(to top,
+    rgba(0,0,0,0) 40%,
+    rgba(0,0,0,1) 100%);
+    backdrop-filter: blur(4px);
+  "
+    >
+    </div>
+
+    <div
+      class="pointer-events-none absolute inset-0 z-4"
+      style="
+    mask-image: linear-gradient(to top,
+    rgba(0,0,0,0) 60%,
+    rgba(0,0,0,1) 100%);
+    backdrop-filter: blur(8px);
+  "
+    >
+    </div>
+
+    <div class="absolute inset-0 bg-white/10"></div>
+
+    <!-- navbar -->
+    <nav
+      class="relative z-10 mx-auto flex max-w-6xl items-center justify-between px-5 py-4 sm:px-10 lg:px-25"
+    >
+      <a class="text-sm font-semibold uppercase text-black" href="/">
+        Divine Obeten
+      </a>
+
+      <div class="hidden items-center gap-2 md:flex">
+        {
+          links.map((link) => {
+            const isActive = currentPath === link.href;
+
+            return (
+              <a
+                class:list={["nav-link", { "nav-link-active": isActive }]}
+                href={link.href}
+              >
+                {link.label}
+              </a>
+            );
+          })
+        }
+      </div>
+
+      <div></div>
+    </nav>
+  </div>
 </header>
