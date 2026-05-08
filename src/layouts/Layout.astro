@@ -23,7 +23,7 @@ const socialImage = new URL(image, siteUrl).toString();
 ---
 
 <!doctype html>
-<html lang="en" class="bg-neutral-950 text-neutral-100">
+<html lang="en" class="">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -49,10 +49,10 @@ const socialImage = new URL(image, siteUrl).toString();
     <title>{title}</title>
     <ClientRouter />
   </head>
-  <body class="min-h-screen bg-neutral-950 text-neutral-100 antialiased">
+  <body class="min-h-screen bg-[#ffffff] text-neutral-100 antialiased">
     <Navbar />
-    <Preloader />
-    <main transition:animate="slide" class="min-h-[calc(100vh-9rem)]">
+    <!-- <Preloader /> -->
+    <main transition:animate="slide" class="min-h-screen">
       <slot />
     </main>
     <Footer />
