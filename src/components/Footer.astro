@@ -1,10 +1,90 @@
-<footer class="border-t border-white/10 px-6 py-8 sm:px-10 lg:px-16">
-  <div class="mx-auto flex max-w-6xl flex-col gap-4 text-sm text-neutral-400 md:flex-row md:items-center md:justify-between">
-    <p>Built with Astro, Tailwind CSS, and GSAP.</p>
-    <div class="flex items-center gap-4">
-      <a class="footer-link" href="mailto:hello@divineobeten.com">Email</a>
-      <a class="footer-link" href="https://www.linkedin.com" target="_blank" rel="noreferrer">LinkedIn</a>
-      <a class="footer-link" href="https://github.com" target="_blank" rel="noreferrer">GitHub</a>
+<div class="footer-wrapper">
+  <svg
+    preserveAspectRatio="none"
+    id="footer-wave"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 2278 120"
+    aria-hidden="true"
+  >
+    <path
+      id="bouncy-path"
+      fill="#000000"
+      d="M0-0.3C0-0.3,464,156,1139,156S2278-0.3,2278-0.3V120H0V-0.3z"></path>
+  </svg>
+
+  <footer
+    class="footer-body border-t border-white/10 px-6 py-8 sm:px-10 lg:px-16"
+  >
+    <div
+      class="mx-auto flex max-w-6xl flex-col gap-4 text-sm text-neutral-400 md:flex-row md:items-center md:justify-between"
+    >
+      <p>Built with Astro, Tailwind CSS, and GSAP.</p>
+      <div class="flex items-center gap-4">
+        <a class="footer-link" href="mailto:hello@divineobeten.com">Email</a>
+        <a
+          class="footer-link"
+          href="https://www.linkedin.com"
+          target="_blank"
+          rel="noreferrer">LinkedIn</a
+        >
+        <a
+          class="footer-link"
+          href="https://github.com"
+          target="_blank"
+          rel="noreferrer">GitHub</a
+        >
+      </div>
     </div>
-  </div>
-</footer>
+  </footer>
+</div>
+
+<style>
+  .footer-wrapper {
+    position: relative;
+    width: 100%;
+    background-color: transparent;
+  }
+
+  #footer-wave {
+    display: block;
+    width: 100%;
+    height: 50px;
+    overflow: visible;
+  }
+
+  .footer-body {
+    background-color: #000000;
+    margin-top: -1px;
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import { MorphSVGPlugin } from "gsap/MorphSVGPlugin";
+
+  gsap.registerPlugin(ScrollTrigger, MorphSVGPlugin);
+  const down = "M0-0.3C0-0.3,464,156,1139,156S2278-0.3,2278-0.3V120H0V-0.3z";
+  const center = "M0-0.3C0-0.3,464,0,1139,0s1139-0.3,1139-0.3V120H0V-0.3z";
+
+  ScrollTrigger.create({
+    trigger: ".footer-wrapper",
+    start: "top bottom",
+    toggleActions: "play pause resume reverse",
+    onEnter: (self) => {
+      const velocity = self.getVelocity();
+      const variation = velocity / 10000;
+
+      gsap.fromTo(
+        "#bouncy-path",
+        { morphSVG: down },
+        {
+          duration: 2,
+          morphSVG: center,
+          ease: `elastic.out(${1 + variation}, ${1 - variation})`,
+          overwrite: true,
+        },
+      );
+    },
+  });
+</script>
