@@ -12,9 +12,11 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@tailwindcss/vite": "^4.2.4",
+    "@hugeicons/core-free-icons": "^4.1.2",
+    "@hugeicons/react": "^1.1.6",
+    "@tailwindcss/vite": "^4.3.0",
     "astro": "^5.18.1",
     "gsap": "^3.15.0",
-    "tailwindcss": "^4.2.4"
+    "tailwindcss": "^4.3.0"
   }
 }
