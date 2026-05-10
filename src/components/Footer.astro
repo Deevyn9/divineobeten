@@ -1,6 +1,5 @@
 ---
-import { HugeiconsIcon } from "@hugeicons/react";
-import { ArrowUpRight01Icon } from "@hugeicons/core-free-icons";
+import { Icon } from "astro-icon/components";
 ---
 
 <div class="footer-wrapper">
@@ -21,15 +20,14 @@ import { ArrowUpRight01Icon } from "@hugeicons/core-free-icons";
     class="footer-body border-t border-white/10 px-6 py-8 sm:px-10 lg:px-16"
   >
     <p class="uppercase text-gray-400 font-semibold text-xs">Get in touch</p>
-    <div class="">
+    <div class="font-display mt-5 text-9xl font-black">
       <h3>Say hi!</h3>
-      <h3>
-        Let's talk <HugeiconsIcon
-          icon={ArrowUpRight01Icon}
-          size={16}
-          color="currentColor"
-          strokeWidth={1.5}
-        />
+      <h3 data-hover class="flex group relative items-end w-max cursor-pointer">
+        Let's talk <Icon name="lucide:arrow-up-right" class="w-32 h-32" />
+        <span
+          id="hover-line"
+          class="absolute bottom-0 left-0 h-1 w-full bg-white origin-left transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)]"
+          style="transform: scaleX(0)"></span>
       </h3>
     </div>
     <!-- <div
@@ -90,7 +88,7 @@ import { ArrowUpRight01Icon } from "@hugeicons/core-free-icons";
     toggleActions: "play pause resume reverse",
     onEnter: (self) => {
       const velocity = self.getVelocity();
-      const variation = velocity / 10000;
+      const variation = velocity / 5000;
 
       gsap.fromTo(
         "#bouncy-path",
@@ -103,5 +101,22 @@ import { ArrowUpRight01Icon } from "@hugeicons/core-free-icons";
         },
       );
     },
+  });
+
+  // line hover facilitator
+  document.querySelectorAll("[data-hover]").forEach((el) => {
+    const line = el.querySelector("#hover-line") as HTMLElement | null;
+
+    el.addEventListener("mouseenter", () => {
+      if (!line) return;
+      line.style.transformOrigin = "left";
+      line.style.transform = "scaleX(1)";
+    });
+
+    el.addEventListener("mouseleave", () => {
+      if (!line) return;
+      line.style.transformOrigin = "right";
+      line.style.transform = "scaleX(0)";
+    });
   });
 </script>
