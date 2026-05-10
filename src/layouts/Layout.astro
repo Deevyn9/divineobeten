@@ -30,7 +30,7 @@ const socialImage = new URL(image, siteUrl).toString();
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&family=Space+Grotesk:wght@300..700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=Inter:wght@300..700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"
       rel="stylesheet"
     />
     <meta name="generator" content={Astro.generator} />
@@ -51,6 +51,31 @@ const socialImage = new URL(image, siteUrl).toString();
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImage} />
     <title>{title}</title>
+    <script>
+      document.addEventListener("astro:page-load", () => {
+        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+          anchor.addEventListener("click", (e) => {
+            e.preventDefault();
+            const href = anchor.getAttribute("href");
+            if (!href) return;
+            const target = document.querySelector(href);
+            target?.scrollIntoView({ behavior: "smooth" });
+          });
+        });
+      });
+    </script>
+    <script>
+      import Lenis from "lenis";
+
+      const lenis = new Lenis();
+
+      function raf(time: number) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
+
+      requestAnimationFrame(raf);
+    </script>
     <ClientRouter />
   </head>
   <body
