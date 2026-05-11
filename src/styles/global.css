@@ -16,6 +16,15 @@ body {
   --font-sans: "Inter", sans-serif;
   --font-display: "Bricolage Grotesque", sans-serif;
   --font-mono: "Space Mono", monospace;
+  --color-bg: #ffffff;
+  --color-bg2: #f7f7f7;
+  --color-fg: #0c0c0c;
+  --color-muted: #6f6f6f;
+  --color-border: rgba(0, 0, 0, 0.08);
+  --color-border-hover: rgba(0, 0, 0, 0.2);
+  --color-accent: #2563eb;
+  --color-accent2: #60a5fa;
+  --radius: 14px;
 }
 
 @layer base {
