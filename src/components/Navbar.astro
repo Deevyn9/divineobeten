@@ -25,7 +25,6 @@ const currentPath = Astro.url.pathname;
         {
           links.map((link) => {
             const isActive = currentPath === link.href;
-
             return (
               <a
                 class={`hover:scale-110 transition-transform duration-200 ${isActive ? "font-bold text-black" : "font-light text-gray-500"}`}
@@ -37,6 +36,84 @@ const currentPath = Astro.url.pathname;
           })
         }
       </div>
+
+      <button
+        id="menu-btn"
+        class="md:hidden text-black"
+        aria-label="Toggle menu"
+      >
+        <svg
+          id="icon-open"
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          viewBox="0 0 24 24"
+        >
+          <line x1="3" y1="6" x2="21" y2="6"></line><line
+            x1="3"
+            y1="12"
+            x2="21"
+            y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+        <svg
+          id="icon-close"
+          class="hidden"
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          viewBox="0 0 24 24"
+        >
+          <line x1="18" y1="6" x2="6" y2="18"></line><line
+            x1="6"
+            y1="6"
+            x2="18"
+            y2="18"></line>
+        </svg>
+      </button>
     </nav>
+
+    <div
+      id="mobile-menu"
+      class="hidden md:hidden flex-col px-5 pb-6 gap-5 font-display text-sm"
+    >
+      {
+        links.map((link) => {
+          const isActive = currentPath === link.href;
+          return (
+            <a
+              class={`${isActive ? "font-bold text-black" : "font-light text-gray-500"}`}
+              href={link.href}
+            >
+              {link.label}
+            </a>
+          );
+        })
+      }
+    </div>
   </div>
 </header>
+
+<script>
+  const btn = document.getElementById("menu-btn");
+  const menu = document.getElementById("mobile-menu");
+  const iconOpen = document.getElementById("icon-open");
+  const iconClose = document.getElementById("icon-close");
+
+  btn?.addEventListener("click", () => {
+    const isOpen = !menu?.classList.contains("hidden");
+    menu?.classList.toggle("hidden", isOpen);
+    menu?.classList.toggle("flex", !isOpen);
+    iconOpen?.classList.toggle("hidden", !isOpen);
+    iconClose?.classList.toggle("hidden", isOpen);
+  });
+</script>
