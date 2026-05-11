@@ -17,39 +17,72 @@ import { Icon } from "astro-icon/components";
   </svg>
 
   <footer
-    class="footer-body border-t border-white/10 px-6 py-8 sm:px-10 lg:px-16"
+    class="footer-body border-t flex justify-center border-white/10 pb-14 px-5 md:px-0"
   >
-    <p class="uppercase text-gray-400 font-semibold text-xs">Get in touch</p>
-    <div class="font-display mt-5 text-9xl font-black">
-      <h3>Say hi!</h3>
-      <h3 data-hover class="flex group relative items-end w-max cursor-pointer">
-        Let's talk <Icon name="lucide:arrow-up-right" class="w-32 h-32" />
-        <span
-          id="hover-line"
-          class="absolute bottom-0 left-0 h-1 w-full bg-white origin-left transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)]"
-          style="transform: scaleX(0)"></span>
-      </h3>
-    </div>
-    <!-- <div
-      class="mx-auto flex max-w-6xl flex-col gap-4 text-sm text-neutral-400 md:flex-row md:items-center md:justify-between"
-    >
-      <p>Built with Astro, Tailwind CSS, and GSAP.</p>
-      <div class="flex items-center gap-4">
-        <a class="footer-link" href="mailto:hello@divineobeten.com">Email</a>
+    <div class="w-full md:w-7xl">
+      <p id="footer-eyebrow" class="uppercase text-muted font-semibold text-xs">
+        Get in touch
+      </p>
+      <div
+        class="font-display mt-4 text-3xl sm:text-4xl md:text-6xl lg:text-9xl font-black"
+      >
+        <h3>Say hi!</h3>
         <a
-          class="footer-link"
-          href="https://www.linkedin.com"
-          target="_blank"
-          rel="noreferrer">LinkedIn</a
+          data-hover
+          href="mailto:divineobeten5@gmail.com"
+          class="flex group relative hover:text-accent items-center lg:items-end w-max cursor-pointer"
         >
-        <a
-          class="footer-link"
-          href="https://github.com"
-          target="_blank"
-          rel="noreferrer">GitHub</a
-        >
+          Let's talk <Icon
+            name="lucide:arrow-up-right"
+            class="w-7.5 h-7.5 sm:w-9 sm:h-9 md:w-15 md:h-15 lg:w-32 lg:h-32"
+          />
+          <span
+            id="hover-line"
+            class="absolute bottom-0 left-0 h-1 w-full group-hover:bg-accent bg-white origin-left transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.16,1)]"
+            style="transform: scaleX(0)"></span>
+        </a>
       </div>
-    </div> -->
+      <div
+        class="mx-auto flex flex-col gap-4 text-sm text-muted md:flex-row md:items-center w-full md:justify-between mt-7.5"
+      >
+        <p id="footer-location" class="flex items-center gap-0.5">
+          <Icon name="proicons:location" width="24" height="24" /> Enugu, Nigeria
+        </p>
+        <div id="footer-links" class="flex flex-wrap items-center gap-4">
+          <a
+            data-social="#24292e"
+            class="footer-link"
+            href="https://github.com/deevyn9"
+            ><Icon name="ri:github-fill" width="16" height="16" /> Github</a
+          >
+          <a
+            class="footer-link"
+            data-social="#0A66C2"
+            href="https://www.linkedin.com/in/deevyn9"
+            target="_blank"
+            rel="noreferrer"
+            ><Icon name="mingcute:linkedin-line" width="16" height="16" /> LinkedIn</a
+          >
+          <a
+            class="footer-link"
+            data-social="#000000"
+            href="https://x.com/wyddivine"
+            target="_blank"
+            rel="noreferrer"
+            ><Icon name="ri:twitter-x-line" width="14" height="14" /> Twitter</a
+          >
+          <a
+            class="footer-link"
+            data-social="#E1306C"
+            href="https://instagram.com/iamdivineobeten"
+            target="_blank"
+            rel="noreferrer"
+            ><Icon name="mingcute:instagram-line" width="16" height="16" /> Instagram</a
+          >
+        </div>
+      </div>
+      <div class=""></div>
+    </div>
   </footer>
 </div>
 
@@ -71,12 +104,82 @@ import { Icon } from "astro-icon/components";
     background-color: #000000;
     margin-top: -1px;
   }
+
+  .footer-link {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+  }
 </style>
 
 <script>
   import { gsap } from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
   import { MorphSVGPlugin } from "gsap/MorphSVGPlugin";
+
+  const footerBody = document.querySelector(
+    ".footer-body",
+  ) as HTMLElement | null;
+  const bouncyPath = document.querySelector(
+    "#bouncy-path",
+  ) as SVGPathElement | null;
+  const defaultColor = "#000000";
+
+  document.querySelectorAll("[data-social]").forEach((el) => {
+    const color = el.getAttribute("data-social");
+    const htmlEl = el as HTMLElement;
+
+    el.addEventListener("mouseenter", () => {
+      if (!footerBody || !bouncyPath || !color) return;
+      gsap.to(footerBody, {
+        backgroundColor: color,
+        duration: 0.4,
+        ease: "power2.out",
+      });
+      gsap.to(bouncyPath, { fill: color, duration: 0.4, ease: "power2.out" });
+      gsap.to(htmlEl, {
+        color: "#e8e8e8",
+        scale: 1.08,
+        duration: 0.2,
+        ease: "power2.out",
+      });
+      gsap.to(
+        "#footer-eyebrow, #footer-location, #footer-links a:not([data-social='" +
+          color +
+          "'])",
+        {
+          color: "#d4d4d4",
+          duration: 0.2,
+          ease: "power2.out",
+        },
+      );
+    });
+
+    el.addEventListener("mouseleave", () => {
+      if (!footerBody || !bouncyPath || !color) return;
+      gsap.to(footerBody, {
+        backgroundColor: defaultColor,
+        duration: 0.4,
+        ease: "power2.out",
+      });
+      gsap.to(bouncyPath, {
+        fill: defaultColor,
+        duration: 0.4,
+        ease: "power2.out",
+      });
+      gsap.to(htmlEl, {
+        color: "",
+        scale: 1,
+        duration: 0.2,
+        ease: "power2.out",
+      });
+      gsap.to("#footer-eyebrow, #footer-location, #footer-links a", {
+        color: "",
+        duration: 0.2,
+        ease: "power2.out",
+      });
+    });
+  });
 
   gsap.registerPlugin(ScrollTrigger, MorphSVGPlugin);
   const down = "M0-0.3C0-0.3,464,156,1139,156S2278-0.3,2278-0.3V120H0V-0.3z";
