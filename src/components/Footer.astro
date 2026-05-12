@@ -17,9 +17,9 @@ import { Icon } from "astro-icon/components";
   </svg>
 
   <footer
-    class="footer-body border-t flex justify-center border-white/10 pb-14 px-5 md:px-0"
+    class="footer-body border-t flex justify-center border-white/10 pb-14 px-5 xl:px-0"
   >
-    <div class="w-full md:w-7xl">
+    <div class="w-full xl:w-6xl">
       <p id="footer-eyebrow" class="uppercase text-muted font-semibold text-xs">
         Get in touch
       </p>
@@ -125,101 +125,103 @@ import { Icon } from "astro-icon/components";
   ) as SVGPathElement | null;
   const defaultColor = "#000000";
 
-  document.querySelectorAll("[data-social]").forEach((el) => {
-    const color = el.getAttribute("data-social");
-    const htmlEl = el as HTMLElement;
+  document.addEventListener("astro:page-load", () => {
+    document.querySelectorAll("[data-social]").forEach((el) => {
+      const color = el.getAttribute("data-social");
+      const htmlEl = el as HTMLElement;
 
-    el.addEventListener("mouseenter", () => {
-      if (!footerBody || !bouncyPath || !color) return;
-      gsap.to(footerBody, {
-        backgroundColor: color,
-        duration: 0.4,
-        ease: "power2.out",
-      });
-      gsap.to(bouncyPath, { fill: color, duration: 0.4, ease: "power2.out" });
-      gsap.to(htmlEl, {
-        color: "#e8e8e8",
-        scale: 1.08,
-        duration: 0.2,
-        ease: "power2.out",
-      });
-      gsap.to(
-        "#footer-eyebrow, #footer-location, #footer-links a:not([data-social='" +
-          color +
-          "'])",
-        {
-          color: "#d4d4d4",
+      el.addEventListener("mouseenter", () => {
+        if (!footerBody || !bouncyPath || !color) return;
+        gsap.to(footerBody, {
+          backgroundColor: color,
+          duration: 0.4,
+          ease: "power2.out",
+        });
+        gsap.to(bouncyPath, { fill: color, duration: 0.4, ease: "power2.out" });
+        gsap.to(htmlEl, {
+          color: "#e8e8e8",
+          scale: 1.08,
           duration: 0.2,
           ease: "power2.out",
-        },
-      );
+        });
+        gsap.to(
+          "#footer-eyebrow, #footer-location, #footer-links a:not([data-social='" +
+            color +
+            "'])",
+          {
+            color: "#d4d4d4",
+            duration: 0.2,
+            ease: "power2.out",
+          },
+        );
+      });
+
+      el.addEventListener("mouseleave", () => {
+        if (!footerBody || !bouncyPath || !color) return;
+        gsap.to(footerBody, {
+          backgroundColor: defaultColor,
+          duration: 0.4,
+          ease: "power2.out",
+        });
+        gsap.to(bouncyPath, {
+          fill: defaultColor,
+          duration: 0.4,
+          ease: "power2.out",
+        });
+        gsap.to(htmlEl, {
+          color: "",
+          scale: 1,
+          duration: 0.2,
+          ease: "power2.out",
+        });
+        gsap.to("#footer-eyebrow, #footer-location, #footer-links a", {
+          color: "",
+          duration: 0.2,
+          ease: "power2.out",
+        });
+      });
     });
 
-    el.addEventListener("mouseleave", () => {
-      if (!footerBody || !bouncyPath || !color) return;
-      gsap.to(footerBody, {
-        backgroundColor: defaultColor,
-        duration: 0.4,
-        ease: "power2.out",
-      });
-      gsap.to(bouncyPath, {
-        fill: defaultColor,
-        duration: 0.4,
-        ease: "power2.out",
-      });
-      gsap.to(htmlEl, {
-        color: "",
-        scale: 1,
-        duration: 0.2,
-        ease: "power2.out",
-      });
-      gsap.to("#footer-eyebrow, #footer-location, #footer-links a", {
-        color: "",
-        duration: 0.2,
-        ease: "power2.out",
-      });
-    });
-  });
+    gsap.registerPlugin(ScrollTrigger, MorphSVGPlugin);
+    const down = "M0-0.3C0-0.3,464,156,1139,156S2278-0.3,2278-0.3V120H0V-0.3z";
+    const center = "M0-0.3C0-0.3,464,0,1139,0s1139-0.3,1139-0.3V120H0V-0.3z";
 
-  gsap.registerPlugin(ScrollTrigger, MorphSVGPlugin);
-  const down = "M0-0.3C0-0.3,464,156,1139,156S2278-0.3,2278-0.3V120H0V-0.3z";
-  const center = "M0-0.3C0-0.3,464,0,1139,0s1139-0.3,1139-0.3V120H0V-0.3z";
+    ScrollTrigger.create({
+      trigger: ".footer-wrapper",
+      start: "top bottom",
+      toggleActions: "play pause resume reverse",
+      onEnter: (self) => {
+        const velocity = self.getVelocity();
+        const variation = velocity / 5000;
 
-  ScrollTrigger.create({
-    trigger: ".footer-wrapper",
-    start: "top bottom",
-    toggleActions: "play pause resume reverse",
-    onEnter: (self) => {
-      const velocity = self.getVelocity();
-      const variation = velocity / 5000;
-
-      gsap.fromTo(
-        "#bouncy-path",
-        { morphSVG: down },
-        {
-          duration: 2,
-          morphSVG: center,
-          ease: `elastic.out(${1 + variation}, ${1 - variation})`,
-          overwrite: true,
-        },
-      );
-    },
-  });
-
-  // line hover facilitator
-  document.querySelectorAll("[data-hover]").forEach((el) => {
-    const line = el.querySelector("#hover-line") as HTMLElement | null;
-
-    el.addEventListener("mouseenter", () => {
-      if (!line) return;
-      line.style.transformOrigin = "left";
-      line.style.transform = "scaleX(1)";
+        gsap.fromTo(
+          "#bouncy-path",
+          { morphSVG: down },
+          {
+            duration: 2,
+            morphSVG: center,
+            ease: `elastic.out(${1 + variation}, ${1 - variation})`,
+            overwrite: true,
+          },
+        );
+      },
     });
 
-    el.addEventListener("mouseleave", () => {
-      if (!line) return;
-      line.style.transformOrigin = "right";
-      line.style.transform = "scaleX(0)";
+    // line hover facilitator
+    document.querySelectorAll("[data-hover]").forEach((el) => {
+      const line = el.querySelector("#hover-line") as HTMLElement | null;
+
+      el.addEventListener("mouseenter", () => {
+        if (!line) return;
+        line.style.transformOrigin = "left";
+        line.style.transform = "scaleX(1)";
+      });
+
+      el.addEventListener("mouseleave", () => {
+        if (!line) return;
+        line.style.transformOrigin = "right";
+        line.style.transform = "scaleX(0)";
+      });
     });
   });
 </script>
