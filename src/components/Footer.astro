@@ -109,6 +109,7 @@ import { Icon } from "astro-icon/components";
     display: flex;
     align-items: center;
     gap: 2px;
+    color: #6f6f6f;
   }
 </style>
 
@@ -207,7 +208,6 @@ import { Icon } from "astro-icon/components";
       },
     });
 
-    // line hover facilitator
     document.querySelectorAll("[data-hover]").forEach((el) => {
       const line = el.querySelector("#hover-line") as HTMLElement | null;
 
