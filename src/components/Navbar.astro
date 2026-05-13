@@ -12,10 +12,10 @@ const currentPath = Astro.url.pathname;
 <header class="fixed top-0 left-0 z-50 w-full bg-white">
   <div class="relative">
     <nav
-      class="relative z-10 mx-auto flex w-full lg:4xl xl:w-6xl items-center justify-between px-5 xl:px-0 py-4"
+      class="relative z-30 bg-white mx-auto flex w-full lg:4xl xl:w-6xl items-center justify-between px-5 xl:px-0 py-4"
     >
       <a
-        class="text-2xl font-display font-black tracking-wide text-black capitalize"
+        class="text-xl outline-none md:text-2xl font-display font-black tracking-wide text-black capitalize"
         href="/"
       >
         obeten
@@ -27,7 +27,7 @@ const currentPath = Astro.url.pathname;
             const isActive = currentPath === link.href;
             return (
               <a
-                class={`hover:scale-110 transition-transform duration-200 ${isActive ? "font-bold text-black" : "font-light text-gray-500"}`}
+                class={`hover:scale-110 outline-none transition-transform duration-200 ${isActive ? "font-bold text-black" : "font-light text-gray-500"}`}
                 href={link.href}
               >
                 {link.label}
@@ -55,7 +55,7 @@ const currentPath = Astro.url.pathname;
 
     <div
       id="mobile-menu"
-      class="md:hidden flex flex-col px-5 pb-6 gap-5 font-display text-sm bg-white absolute w-full transition-transform duration-300 ease-in-out"
+      class="md:hidden z-20 flex flex-col px-5 pb-6 gap-5 font-display text-sm bg-white absolute w-full transition-transform duration-300 ease-in-out"
       style="transform: translateY(-150%)"
     >
       {
