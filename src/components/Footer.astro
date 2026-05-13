@@ -20,66 +20,83 @@ import { Icon } from "astro-icon/components";
     class="footer-body border-t flex justify-center border-white/10 pb-14 px-5 xl:px-0"
   >
     <div class="w-full xl:w-6xl">
-      <p id="footer-eyebrow" class="uppercase text-muted font-semibold text-xs">
-        Get in touch
-      </p>
       <div
-        class="font-display mt-4 text-3xl sm:text-4xl md:text-6xl lg:text-9xl font-black"
+        class="flex gap-y-5 flex-col sm:flex-row justify-between items-start"
       >
-        <h3>Say hi!</h3>
-        <a
-          data-hover
-          href="mailto:divineobeten5@gmail.com"
-          class="flex group relative hover:text-accent items-center lg:items-end w-max cursor-pointer"
+        <div class="font-display text-3xl md:text-4xl font-black">
+          <h3>Say hi!</h3>
+          <a
+            data-hover
+            href="mailto:divineobeten5@gmail.com"
+            class="flex group relative hover:text-accent items-center lg:items-end w-max cursor-pointer"
+          >
+            Let's talk <Icon name="lucide:arrow-up-right" class="w-8 h-8" />
+            <span
+              id="hover-line"
+              class="absolute bottom-0 left-0 h-1 w-full group-hover:bg-accent bg-white origin-left transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.16,1)]"
+              style="transform:scaleX(0)"></span>
+          </a>
+        </div>
+        <div
+          id="footer-links"
+          class="flex justify-between flex-wrap sm:grid grid-cols-2 grid-rows-2 items-center lg:gap-x-4 gap-x-2 gap-y-1"
         >
-          Let's talk <Icon
-            name="lucide:arrow-up-right"
-            class="w-7.5 h-7.5 sm:w-9 sm:h-9 md:w-15 md:h-15 lg:w-32 lg:h-32"
-          />
-          <span
-            id="hover-line"
-            class="absolute bottom-0 left-0 h-1 w-full group-hover:bg-accent bg-white origin-left transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.16,1)]"
-            style="transform: scaleX(0)"></span>
-        </a>
-      </div>
-      <div
-        class="mx-auto flex flex-col gap-4 text-sm text-muted md:flex-row md:items-center w-full md:justify-between mt-7.5"
-      >
-        <p id="footer-location" class="flex items-center gap-0.5">
-          <Icon name="proicons:location" width="24" height="24" /> Enugu, Nigeria
-        </p>
-        <div id="footer-links" class="flex flex-wrap items-center gap-4">
           <a
             data-social="#24292e"
             class="footer-link"
-            href="https://github.com/deevyn9"
-            ><Icon name="ri:github-fill" width="16" height="16" /> Github</a
+            href="https://github.com/deevyn9">Github</a
           >
           <a
             class="footer-link"
             data-social="#0A66C2"
             href="https://www.linkedin.com/in/deevyn9"
             target="_blank"
-            rel="noreferrer"
-            ><Icon name="mingcute:linkedin-line" width="16" height="16" /> LinkedIn</a
+            rel="noreferrer">LinkedIn</a
           >
           <a
             class="footer-link"
             data-social="#000000"
             href="https://x.com/wyddivine"
             target="_blank"
-            rel="noreferrer"
-            ><Icon name="ri:twitter-x-line" width="14" height="14" /> Twitter</a
+            rel="noreferrer">Twitter</a
           >
           <a
             class="footer-link"
             data-social="#E1306C"
-            href="https://instagram.com/iamdivineobeten"
+            href="https://instagram.com/ledivineobeten"
             target="_blank"
-            rel="noreferrer"
-            ><Icon name="mingcute:instagram-line" width="16" height="16" /> Instagram</a
+            rel="noreferrer">Instagram</a
           >
         </div>
+      </div>
+
+      <div class="my-5 lg:my-12.5">
+        <svg
+          viewBox="0 0 1200 230"
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-full"
+          aria-label="Divine Obeten"
+        >
+          <text
+            x="0"
+            y="220"
+            font-family="Bricolage Grotesque, sans-serif"
+            font-weight="900"
+            fill="rgba(255,255,255,0.07)"
+            font-size="300"
+            textLength="1200"
+            lengthAdjust="spacingAndGlyphs"
+          >
+            Divine Obeten
+          </text>
+        </svg>
+      </div>
+      <div
+        class="mx-auto flex flex-col gap-y-5 gap-0.5 text-sm text-muted md:flex-row md:items-center w-full md:justify-between"
+      >
+        <p id="footer-location" class="flex items-center gap-0.5">
+          <Icon name="proicons:location" width="16" height="16" /> Enugu, Nigeria
+        </p>
       </div>
       <div class=""></div>
     </div>
@@ -141,7 +158,6 @@ import { Icon } from "astro-icon/components";
         gsap.to(bouncyPath, { fill: color, duration: 0.4, ease: "power2.out" });
         gsap.to(htmlEl, {
           color: "#e8e8e8",
-          scale: 1.08,
           duration: 0.2,
           ease: "power2.out",
         });
@@ -150,7 +166,7 @@ import { Icon } from "astro-icon/components";
             color +
             "'])",
           {
-            color: "#d4d4d4",
+            color: "#a0a0a0",
             duration: 0.2,
             ease: "power2.out",
           },
@@ -171,7 +187,6 @@ import { Icon } from "astro-icon/components";
         });
         gsap.to(htmlEl, {
           color: "",
-          scale: 1,
           duration: 0.2,
           ease: "power2.out",
         });
