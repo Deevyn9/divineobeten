@@ -36,78 +36,35 @@ const sections = [
 
 <Layout
   title="Divine Obeten | Portfolio"
-  description="Portfolio scaffold built with Astro, Tailwind CSS, and GSAP."
+  description="Frontend Engineer"
   image="/og-image.svg"
 >
   <main
-    class="bg-[radial-gradient(circle,#ebebeb_1px,transparent_1px)] bg-size-[28px_28px]"
+    class="min-h-screen text-black bg-[radial-gradient(circle,#ebebeb_1px,transparent_1px)] bg-size-[28px_28px]"
   >
-    <section
-      class="relative overflow-hidden px-6 pb-18 pt-24 sm:px-10 lg:px-16"
-    >
-      <div class="pointer-events-none absolute inset-0"></div>
-      <div
-        class="mx-auto grid max-w-6xl gap-14 lg:grid-cols-[1.15fr_0.85fr] lg:items-end"
+    <div class="mx-auto w-full lg:w-4xl xl:w-6xl px-5 xl:px-0">
+      <section
+        class="relative overflow-hidden pb-10 pt-24 md:pt-36 min-h-[85vh] flex flex-col"
       >
-        <div class="space-y-8">
-          <p data-intro class="eyebrow">Portfolio scaffold</p>
-          <div class="space-y-5">
-            <h1
-              data-intro
-              class="max-w-4xl text-5xl font-semibold tracking-tight text-white sm:text-6xl lg:text-7xl"
-            >
-              Lightweight, SEO-friendly, and ready for your real story.
-            </h1>
-            <p
-              data-intro
-              class="max-w-2xl text-base leading-7 text-neutral-300 sm:text-lg"
-            >
-              This starter gives you Astro, Tailwind, GSAP, and Astro view
-              transitions in a clean base we can now shape around your identity,
-              work, and voice.
-            </p>
-          </div>
-          <div data-intro class="flex flex-wrap gap-3">
-            <a class="button-primary" href="#about">Start shaping it</a>
-            <a class="button-secondary" href="#stack">See the stack</a>
-          </div>
+        <p class="text-xs font-display mb-2 sm:mb-0">
+          2026 <span class="font-semibold text-base"> / Frontend Engineer</span>
+        </p>
+        <h3 class="capitalize text-3xl max-w-175 font-normal">
+          Building modern interfaces through a balance of design thinking,
+          frontend engineering, and interaction design — creating experiences
+          that are both visually refined and functionally effective.
+        </h3>
+        <div class="mt-5 flex items-center gap-1">
+          <div class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></div>
+          <p class="font-display text-xs uppercase leading-none">
+            available for global opportunities
+          </p>
         </div>
+        <div class="mt-auto">helllooooo</div>
+      </section>
 
-        <aside data-intro class="panel space-y-6">
-          <div
-            class="flex items-center justify-between border-b border-white/10 pb-4"
-          >
-            <p class="text-sm uppercase tracking-[0.3em] text-neutral-400">
-              Current stack
-            </p>
-            <span
-              class="rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1 text-xs text-emerald-300"
-            >
-              Ready
-            </span>
-          </div>
-          <ul id="stack" class="grid gap-3 text-sm text-neutral-200">
-            <li class="stack-row">
-              <span>Framework</span><strong>Astro</strong>
-            </li>
-            <li class="stack-row">
-              <span>Styling</span><strong>Tailwind CSS</strong>
-            </li>
-            <li class="stack-row">
-              <span>Animation</span><strong>GSAP</strong>
-            </li>
-            <li class="stack-row">
-              <span>Transitions</span><strong>astro:transitions</strong>
-            </li>
-            <li class="stack-row">
-              <span>Language</span><strong>TypeScript-ready</strong>
-            </li>
-          </ul>
-        </aside>
-      </div>
-    </section>
-
-    <section class="px-6 py-10 sm:px-10 lg:px-16">
+      <!-- <section class="px-6 py-10 sm:px-10 lg:px-16">
+  </div>
       <div class="mx-auto max-w-6xl">
         <div class="flex flex-wrap gap-3">
           {skills.map((skill) => <span class="chip">{skill}</span>)}
@@ -131,6 +88,7 @@ const sections = [
           ))
         }
       </div>
-    </section>
+    </section> -->
+    </div>
   </main>
 </Layout>
