@@ -1,24 +1,27 @@
 ---
 const links = [
-  { href: "/", label: "01 Home" },
-  { href: "/about", label: "02 About" },
-  { href: "/projects", label: "03 Projects" },
-  { href: "/contact", label: "04 Contact" },
+  { href: "/", label: "Home" },
+  { href: "/projects", label: "Works" },
+  { href: "#about", label: "Him" },
+  { href: "#contact", label: "Contact" },
 ];
 
 const currentPath = Astro.url.pathname;
 ---
 
-<header class="fixed top-0 left-0 z-50 w-full bg-white">
+<header
+  id="site-header"
+  class="fixed top-0 left-0 z-50 w-full bg-white transition-transform duration-300 ease-in-out"
+>
   <div class="relative">
     <nav
-      class="relative z-30 bg-white mx-auto flex w-full lg:4xl xl:w-6xl items-center justify-between px-5 xl:px-0 py-4"
+      class="relative z-30 bg-white mx-auto flex w-full xl:w-6xl items-center justify-between px-5 xl:px-0 py-4"
     >
       <a
-        class="text-lg outline-none md:text-2xl font-display font-semibold tracking-wide text-black capitalize"
+        class="text-lg outline-none md:text-2xl font-display font-semibold tracking-normal text-black capitalize"
         href="/"
       >
-        obeten.
+        o<span class="italic -ml-0.75 mr-px">b</span>eten.
       </a>
 
       <div class="hidden items-center gap-5 md:flex font-display text-sm">
@@ -27,9 +30,12 @@ const currentPath = Astro.url.pathname;
             const isActive = currentPath === link.href;
             return (
               <a
-                class={`hover:scale-110 outline-none transition-transform duration-200 ${isActive ? "font-bold text-black" : "font-light text-gray-500"}`}
+                class={`nav-link relative flex items-center gap-1 outline-none transition-all duration-200 ${isActive ? "font-bold text-black" : "font-light text-gray-500"}`}
                 href={link.href}
               >
+                <span class="nav-arrow inline-block translate-x-0 opacity-0 transition-all duration-200 ease-out">
+                  ↗
+                </span>
                 {link.label}
               </a>
             );
@@ -83,6 +89,54 @@ const currentPath = Astro.url.pathname;
 
 <script>
   document.addEventListener("astro:page-load", () => {
+    // --- scroll hide/show ---
+    const header = document.getElementById("site-header");
+    let lastScrollY = window.scrollY;
+    let ticking = false;
+
+    window.addEventListener("scroll", () => {
+      if (ticking) return;
+      window.requestAnimationFrame(() => {
+        const currentScrollY = window.scrollY;
+
+        if (currentScrollY <= 0) {
+          // at the very top, always show
+          header?.style.setProperty("transform", "translateY(0)");
+        } else if (currentScrollY > lastScrollY) {
+          // scrolling down — hide
+          header?.style.setProperty("transform", "translateY(-100%)");
+        } else {
+          // scrolling up — show
+          header?.style.setProperty("transform", "translateY(0)");
+        }
+
+        lastScrollY = currentScrollY;
+        ticking = false;
+      });
+
+      ticking = true;
+    });
+
+    // --- arrow hover effect ---
+    const navLinks = document.querySelectorAll(".nav-link");
+
+    navLinks.forEach((link) => {
+      const arrow = link.querySelector(".nav-arrow") as HTMLElement;
+
+      link.addEventListener("mouseenter", () => {
+        if (!arrow) return;
+        arrow.style.opacity = "1";
+        arrow.style.transform = "translateX(0px)";
+      });
+
+      link.addEventListener("mouseleave", () => {
+        if (!arrow) return;
+        arrow.style.opacity = "0";
+        arrow.style.transform = "translateX(-6px)";
+      });
+    });
+
+    // --- mobile menu ---
     const btn = document.getElementById("menu-btn");
     const menu = document.getElementById("mobile-menu");
     const backdrop = document.getElementById("menu-backdrop");
