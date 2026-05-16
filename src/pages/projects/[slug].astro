@@ -1,0 +1,99 @@
+---
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+
+export async function getStaticPaths() {
+  const projects = await getCollection("projects");
+  return projects.map((project: CollectionEntry<"projects">) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+interface Props {
+  project: CollectionEntry<"projects">;
+}
+
+const { project } = Astro.props;
+const { Content } = await project.render();
+const {
+  title,
+  category,
+  year,
+  problem,
+  role,
+  outcome,
+  tags,
+  image,
+  live,
+  caseStudy,
+} = project.data;
+---
+
+<Layout title={title}>
+  <main class="mx-auto w-full xl:w-6xl px-5 xl:px-0 pt-24 pb-20">
+    <!-- Header -->
+    <div class="mb-12">
+      <p
+        class="font-display text-xs uppercase tracking-[0.2em] text-muted mb-2"
+      >
+        {category} — {year}
+      </p>
+      <h1 class="text-3xl md:text-5xl font-normal mb-6">{title}</h1>
+
+      <!-- Description -->
+      <div
+        class="flex flex-col gap-2 text-sm text-muted leading-relaxed max-w-2xl"
+      >
+        <p><span class="text-black font-medium">Problem —</span> {problem}</p>
+        <p><span class="text-black font-medium">Role —</span> {role}</p>
+        <p><span class="text-black font-medium">Outcome —</span> {outcome}</p>
+      </div>
+    </div>
+
+    <!-- Tags + links -->
+    <div class="flex flex-wrap items-center justify-between gap-4 mb-12">
+      <div class="flex flex-wrap gap-2">
+        {
+          tags.map((tag) => (
+            <span class="font-display text-xs px-3 py-1 border border-neutral-200 text-muted">
+              {tag}
+            </span>
+          ))
+        }
+      </div>
+      <div class="flex items-center gap-4">
+        {
+          caseStudy && (
+            <span class="font-display text-xs uppercase tracking-[0.2em] text-muted">
+              Case Study
+            </span>
+          )
+        }
+        {
+          live && (
+            <a
+              href={live}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="font-display text-xs uppercase tracking-[0.2em] text-black hover:underline underline-offset-4"
+            >
+              Live ↗
+            </a>
+          )
+        }
+      </div>
+    </div>
+
+    <!-- Hero image -->
+    <div class="w-full aspect-video bg-neutral-100 overflow-hidden mb-16">
+      <img src={image} alt={title} class="w-full h-full object-cover" />
+    </div>
+
+    <!-- Case study content from markdown -->
+    <div class="prose prose-neutral max-w-2xl">
+      <Content />
+    </div>
+  </main>
+</Layout>
