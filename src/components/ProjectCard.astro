@@ -3,9 +3,7 @@ interface Props {
   title: string;
   category: string;
   year: string;
-  problem: string;
-  role: string;
-  outcome: string;
+  description: string;
   tags: string[];
   image: string;
   slug: string;
@@ -18,9 +16,7 @@ const {
   title,
   category,
   year,
-  problem,
-  role,
-  outcome,
+  description,
   tags,
   image,
   slug,
@@ -37,7 +33,7 @@ const {
     <img
       src={image}
       alt={title}
-      class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+      class="w-full h-full object-cover transition-transform duration-500 ease-out scale-105 group-hover:scale-100"
     />
   </div>
   <!-- </a> -->
@@ -69,9 +65,7 @@ const {
 
   <!-- Description: problem → role → outcome -->
   <div class="flex flex-col gap-1 text-sm text-muted leading-relaxed max-w-md">
-    <p><span class="text-black font-medium">Problem —</span> {problem}</p>
-    <p><span class="text-black font-medium">Role —</span> {role}</p>
-    <p><span class="text-black font-medium">Outcome —</span> {outcome}</p>
+    <p>{description}</p>
   </div>
 
   <!-- Tags -->
@@ -93,7 +87,7 @@ const {
           href={`/projects/${slug}`}
           class="font-display text-xs uppercase tracking-[0.2em] text-black hover:underline underline-offset-4 transition-all duration-200"
         >
-          Case Study →
+          Deep Dive →
         </a>
       )
     }
