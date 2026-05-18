@@ -1,7 +1,7 @@
 ---
 title: "SeguraPay"
 category: "Fintech"
-year: "2023 — Present"
+year: "2024 — Present"
 featured: true
 order: 1
 description: "A comprehensive Banking-as-a-Service platform providing corporate clients with banking functionalities through a secure, scalable API-first architecture — enabling businesses to integrate account management, payments processing, and financial transactions directly into their operations."
