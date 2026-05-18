@@ -6,7 +6,7 @@ featured: true
 order: 2
 description: "A job application tracker built for engineers in active job searches — track applications, log statuses, monitor streaks, and filter opportunities, all in one focused tool designed and built from scratch."
 tags: ["Next.js", "TypeScript", "Tailwind CSS"]
-image: "/images/applymate.png"
+image: "/images/applymate.webp"
 live: "https://applymate.divineobeten.xyz"
 caseStudy: true
 ---
