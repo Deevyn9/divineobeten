@@ -11,6 +11,7 @@ const projects = defineCollection({
     description: z.string(),
     tags: z.array(z.string()),
     image: z.string(),
+    images: z.array(z.string()).optional(),
     live: z.string().optional(),
     caseStudy: z.boolean().default(true),
   }),
