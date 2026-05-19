@@ -7,6 +7,12 @@ order: 1
 description: "A comprehensive Banking-as-a-Service platform providing corporate clients with banking functionalities through a secure, scalable API-first architecture — enabling businesses to integrate account management, payments processing, and financial transactions directly into their operations."
 tags: ["Next.js", "TypeScript", "Tailwind CSS"]
 image: "/images/segura-dash.webp"
+images:
+  [
+    "/images/segura-auth.webp",
+    "/images/segura-users.webp",
+    "/images/segura-wallet.webp",
+  ]
 caseStudy: true
 ---
 
@@ -41,6 +47,8 @@ Integrated backend APIs across every feature — handling data fetching, error s
 
 **Interactions & Polish**
 Delivered seamless transitions and interactions across the platform, ensuring the product felt considered and production-ready beyond just being functional.
+
+## More from this project
 
 ## Outcome
 

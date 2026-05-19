@@ -7,6 +7,12 @@ order: 2
 description: "A job application tracker built for engineers in active job searches — track applications, log statuses, monitor streaks, and filter opportunities, all in one focused tool designed and built from scratch."
 tags: ["Next.js", "TypeScript", "Tailwind CSS"]
 image: "/images/applymate.webp"
+images:
+  [
+    "/images/segura-auth.webp",
+    "/images/segura-users.webp",
+    "/images/segura-wallet.webp",
+  ]
 live: "https://applymate.divineobeten.xyz"
 caseStudy: true
 ---
@@ -39,6 +45,8 @@ Built full authentication — signup, login, session management — so data is t
 
 **Design**
 Designed the entire product myself — dark-themed UI with a focus on clarity, data density, and a polished feel that goes beyond a typical utility tool.
+
+## More from this project
 
 ## Outcome
 
