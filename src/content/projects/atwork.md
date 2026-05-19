@@ -39,8 +39,8 @@ Built the complete gig workflow — gig creation, listing and discovery, freelan
 **API Integration:**
 Connected all bounty and gig APIs end-to-end — handling request states, response mapping, error handling, and edge cases across every flow.
 
-## **More from this project**
-
 ## **Outcome**
 
 Delivered a fully functional on-chain bounty and gig marketplace connecting freelancers to hirers, with complete frontend ownership from UI rebuild through API integration.
+
+## **More from this project**
