@@ -8,7 +8,7 @@ interface Props {
   image: string;
   slug: string;
   live?: string;
-  caseStudy: boolean;
+  caseStudy?: boolean;
   order?: number;
 }
 
@@ -21,7 +21,7 @@ const {
   image,
   slug,
   live,
-  caseStudy,
+  caseStudy = true,
   order,
 } = Astro.props;
 ---
