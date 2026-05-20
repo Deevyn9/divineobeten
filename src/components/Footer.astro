@@ -135,15 +135,17 @@ import { Icon } from "astro-icon/components";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
   import { MorphSVGPlugin } from "gsap/MorphSVGPlugin";
 
-  const footerBody = document.querySelector(
-    ".footer-body",
-  ) as HTMLElement | null;
-  const bouncyPath = document.querySelector(
-    "#bouncy-path",
-  ) as SVGPathElement | null;
-  const defaultColor = "#000000";
+  gsap.registerPlugin(ScrollTrigger, MorphSVGPlugin);
 
   document.addEventListener("astro:page-load", () => {
+    const footerBody = document.querySelector(
+      ".footer-body",
+    ) as HTMLElement | null;
+    const bouncyPath = document.querySelector(
+      "#bouncy-path",
+    ) as SVGPathElement | null;
+    const defaultColor = "#000000";
+
     document.querySelectorAll("[data-social]").forEach((el) => {
       const color = el.getAttribute("data-social");
       const htmlEl = el as HTMLElement;
@@ -198,7 +200,6 @@ import { Icon } from "astro-icon/components";
       });
     });
 
-    gsap.registerPlugin(ScrollTrigger, MorphSVGPlugin);
     const down = "M0-0.3C0-0.3,464,156,1139,156S2278-0.3,2278-0.3V120H0V-0.3z";
     const center = "M0-0.3C0-0.3,464,0,1139,0s1139-0.3,1139-0.3V120H0V-0.3z";
 
