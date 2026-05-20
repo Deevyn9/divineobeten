@@ -1,0 +1,51 @@
+---
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import ProjectCard from "../../components/ProjectCard.astro";
+
+const allProjects = await getCollection("projects");
+const projects = allProjects.sort(
+  (a: CollectionEntry<"projects">, b: CollectionEntry<"projects">) =>
+    (a.data.order ?? 99) - (b.data.order ?? 99),
+);
+---
+
+<Layout title="Projects">
+  <main class="mx-auto w-full xl:w-6xl px-5 xl:px-0 pt-24 pb-20">
+    <!-- Header -->
+    <div class="mb-16">
+      <p
+        class="font-display text-xs uppercase tracking-[0.2em] text-muted mb-2"
+      >
+        All Work
+      </p>
+      <div class="flex items-end gap-4">
+        <h1 class="text-3xl md:text-5xl font-normal">Projects</h1>
+        <span class="font-display text-xs text-muted mb-2 md:mb-3">
+          {projects.length} projects
+        </span>
+      </div>
+    </div>
+
+    <!-- Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-20">
+      {
+        projects.map((project) => (
+          <ProjectCard
+            title={project.data.title}
+            category={project.data.category}
+            year={project.data.year}
+            description={project.data.description}
+            tags={project.data.tags}
+            image={project.data.image}
+            slug={project.slug}
+            live={project.data.live}
+            caseStudy={project.data.caseStudy ?? true}
+            order={project.data.order}
+          />
+        ))
+      }
+    </div>
+  </main>
+</Layout>
