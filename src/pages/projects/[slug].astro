@@ -30,7 +30,7 @@ const {
 } = project.data;
 ---
 
-<Layout title={title}>
+<Layout title={`Dive deeper in my work on ${title}`}>
   <main class="mx-auto text-muted w-full xl:w-6xl px-5 xl:px-0 pt-24 pb-20">
     <!-- Back link -->
     <a
@@ -159,17 +159,17 @@ const {
       )
     }
 
-    <!-- Next project -->
+    <!-- Back Home -->
     <div class="border-t border-neutral-200 pt-12">
       <a
-        href="/projects"
+        href="/"
         class="group inline-flex items-center gap-2 font-display text-xs uppercase tracking-[0.2em] text-muted hover:text-black transition-colors duration-200"
       >
         <span
           class="group-hover:-translate-x-0.5 transition-transform duration-200"
           >←</span
         >
-        Back to all projects
+        Back Home
       </a>
     </div>
   </main>
