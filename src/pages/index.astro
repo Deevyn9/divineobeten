@@ -89,6 +89,133 @@ const sections = [
       <!-- Works section -->
       <FeaturedProjects />
 
+      <!-- About section -->
+      <section class="py-20 w-full" id="about">
+        <!-- Section heading -->
+        <div class="mb-16">
+          <p
+            class="font-display text-xs uppercase tracking-[0.2em] text-muted mb-2"
+          >
+            About
+          </p>
+          <h2 class="text-2xl md:text-3xl font-normal">Who I Am</h2>
+        </div>
+
+        <!-- Main grid: left (bio + skills) / right (experience) -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+          <!-- Left: bio + skills -->
+          <div class="flex flex-col gap-10">
+            <!-- Bio -->
+            <div class="flex flex-col gap-4 text-sm text-muted leading-relaxed">
+              <p>
+                I'm Divine Obeten, a Frontend Engineer based in Enugu, Nigeria.
+                I build websites and web apps across fintech, edtech, ecommerce,
+                and web3 — and somewhere along the way I became obsessed with
+                how things feel, not just what they do.
+              </p>
+              <p>
+                I care deeply about the layer beyond functionality — the
+                transitions, the microinteractions, the details that nobody
+                explicitly asks for but everybody feels. That's where I operate.
+              </p>
+              <p>
+                Currently working as a founding frontend engineer at SeguraPay,
+                building production-grade fintech infrastructure, while actively
+                seeking remote opportunities at funded startups and SaaS
+                companies that care about craft.
+              </p>
+            </div>
+
+            <!-- Skills -->
+            <div>
+              <p
+                class="font-display text-xs uppercase tracking-[0.2em] text-muted mb-4"
+              >
+                Skills & Tools
+              </p>
+              <div class="flex flex-wrap gap-2">
+                {
+                  [
+                    "React",
+                    "Next.js",
+                    "TypeScript",
+                    "Tailwind CSS",
+                    "GSAP",
+                    "Framer Motion",
+                    "Astro",
+                    "REST APIs",
+                    "Figma",
+                    "Git",
+                    "Motion Design",
+                    "Design Systems",
+                    "Responsive UI",
+                    "Web3 / Solidity",
+                  ].map((skill) => (
+                    <span class="font-display text-xs px-3 py-1 border border-neutral-200 text-muted">
+                      {skill}
+                    </span>
+                  ))
+                }
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: experience -->
+          <div class="flex flex-col gap-6">
+            <p
+              class="font-display text-xs uppercase tracking-[0.2em] text-muted mb-2"
+            >
+              Experience
+            </p>
+
+            {
+              [
+                {
+                  company: "SeguraPay",
+                  role: "Founding Frontend Engineer",
+                  period: "2023 — Present",
+                  description:
+                    "Building the entire frontend of a B2B payment gateway and Banking-as-a-Service platform. Owned the architecture, dashboards, RBAC system, and all user-facing features across three user roles.",
+                },
+                {
+                  company: "Illusion Services",
+                  role: "Frontend Developer",
+                  period: "2024 — Present",
+                  description:
+                    "Built across multiple products including a Web3 freelance platform and logistics SaaS. Rebuilt full frontends, integrated APIs, and delivered production-ready interfaces from Figma designs.",
+                },
+                {
+                  company: "Freelance",
+                  role: "Frontend Developer",
+                  period: "2022 — 2023",
+                  description:
+                    "Delivered websites and web apps for clients across ecommerce and edtech — including landing pages, multi-page sites, and interactive UIs.",
+                },
+              ].map((exp) => (
+                <div class="flex flex-col gap-1 pb-6 border-b border-neutral-100 last:border-none">
+                  <div class="flex items-start justify-between gap-4">
+                    <div>
+                      <p class="text-sm font-medium text-black">
+                        {exp.company}
+                      </p>
+                      <p class="font-display text-xs text-muted mt-0.5">
+                        {exp.role}
+                      </p>
+                    </div>
+                    <span class="font-display text-xs text-muted shrink-0 mt-0.5">
+                      {exp.period}
+                    </span>
+                  </div>
+                  <p class="text-sm text-muted leading-relaxed mt-2">
+                    {exp.description}
+                  </p>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      </section>
+
       <!-- <section class="px-6 py-10 sm:px-10 lg:px-16">
   </div>
       <div class="mx-auto max-w-6xl">
