@@ -1,0 +1,78 @@
+---
+const explorations = [
+  {
+    id: "01",
+    name: "Hold to Delete",
+    description: "A satisfying hold interaction for destructive actions.",
+    preview: "/explorations/hold-to-delete.gif",
+    slug: "hold-to-delete",
+  },
+  {
+    id: "02",
+    name: "Hover Reveal",
+    description: "Project images revealed on cursor hover.",
+    preview: "/explorations/hover-reveal.gif",
+    slug: "hover-reveal",
+  },
+  {
+    id: "03",
+    name: "Password Validation",
+    description: "Live animated password strength feedback.",
+    preview: "/explorations/password-validation.gif",
+    slug: "password-validation",
+  },
+  {
+    id: "04",
+    name: "Page Transition",
+    description: "Full page entrance and exit animations.",
+    preview: "/explorations/page-transition.gif",
+    slug: "page-transition",
+  },
+];
+---
+
+<section class="py-20 w-full" id="explorations">
+
+  <!-- Header -->
+  <div class="flex items-end justify-between mb-12">
+    <div>
+      <p class="font-display text-xs uppercase tracking-[0.2em] text-muted mb-2">
+        The Lab
+      </p>
+      <h2 class="text-2xl md:text-3xl font-normal">Explorations</h2>
+    </div>
+    <a
+      href="/explorations"
+      class="group font-display text-xs uppercase tracking-[0.2em] text-muted flex items-center gap-1 hover:text-black transition-colors duration-200"
+    >
+      <span class="group-hover:translate-x-0.5 transition-transform duration-200">
+        View All
+      </span>
+      ↗
+    </a>
+  </div>
+
+  <!-- Filmstrip row -->
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+    {
+      explorations.map((exp) => (
+        <div class="flex flex-col gap-3">
+          <!-- Square preview -->
+          <div class="exploration-preview relative w-full aspect-square bg-neutral-100 overflow-hidden">
+            <img
+              src={exp.preview}
+              alt={exp.name}
+              class="w-full h-full object-cover"
+            />
+          </div>
+          <!-- Name -->
+          <div>
+            <p class="text-sm font-normal">{exp.name}</p>
+            <p class="font-display text-xs text-muted mt-0.5">{exp.description}</p>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+
+</section>
