@@ -1,0 +1,145 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const explorations = [
+  {
+    id: "01",
+    name: "Hold to Delete",
+    description: "A satisfying hold interaction for destructive actions — press and hold to confirm deletion, release to cancel.",
+    preview: "/explorations/hold-to-delete.gif",
+    tags: ["Interaction", "Microinteraction", "GSAP"],
+    source: "https://github.com/Deevyn9/hold-to-delete",
+  },
+  {
+    id: "02",
+    name: "Hover Reveal",
+    description: "A list of items where hovering reveals a floating image preview that follows the cursor.",
+    preview: "/explorations/hover-reveal.gif",
+    tags: ["Cursor", "Interaction", "GSAP"],
+    source: "https://github.com/Deevyn9/hover-reveal",
+  },
+  {
+    id: "03",
+    name: "Password Validation",
+    description: "Live animated password strength feedback with smooth state transitions as the user types.",
+    preview: "/explorations/password-validation.gif",
+    tags: ["UI Component", "Animation", "UX"],
+    source: "https://github.com/Deevyn9/password-validation",
+  },
+  {
+    id: "04",
+    name: "Page Transition",
+    description: "Full viewport entrance and exit animations between pages — smooth, intentional, and fast.",
+    preview: "/explorations/page-transition.gif",
+    tags: ["Animation", "GSAP", "Motion"],
+    source: "https://github.com/Deevyn9/page-transition",
+  },
+];
+---
+
+<Layout title="Explorations — Divine Obeten">
+  <main class="mx-auto w-full xl:w-6xl px-5 xl:px-0 pt-24 pb-20">
+
+    <!-- Header -->
+    <div class="mb-16">
+      <p class="font-display text-xs uppercase tracking-[0.2em] text-muted mb-2">
+        The Lab
+      </p>
+      <div class="flex items-end gap-4">
+        <h1 class="text-3xl md:text-5xl font-normal">Explorations</h1>
+        <span class="font-display text-xs text-muted mb-2 md:mb-3">
+          {explorations.length} experiments
+        </span>
+      </div>
+    </div>
+
+    <!-- Full width stacked list -->
+    <div class="flex flex-col gap-20">
+      {
+        explorations.map((exp) => (
+          <div class="flex flex-col gap-4">
+
+            <!-- Full width preview -->
+            <div class="exploration-skew relative w-full aspect-16/7 bg-neutral-100 overflow-hidden">
+              <img
+                src={exp.preview}
+                alt={exp.name}
+                class="w-full h-full object-cover"
+              />
+            </div>
+
+            <!-- Name + meta + source -->
+            <div class="flex items-start justify-between gap-4">
+              <div class="flex flex-col gap-2">
+                <div class="flex items-center gap-3">
+                  <span class="font-display text-xs text-muted">{exp.id}</span>
+                  <h2 class="text-xl font-normal">{exp.name}</h2>
+                </div>
+                <p class="text-sm text-muted leading-relaxed max-w-xl">
+                  {exp.description}
+                </p>
+                <div class="flex flex-wrap gap-2 mt-1">
+                  {exp.tags.map((tag) => (
+                    <span class="font-display text-xs px-3 py-1 border border-neutral-200 text-muted">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <a
+                href={exp.source}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="shrink-0 font-display text-xs uppercase tracking-[0.2em] text-muted hover:text-black transition-colors duration-200 mt-1"
+              >
+                Source ↗
+              </a>
+            </div>
+
+          </div>
+        ))
+      }
+    </div>
+
+  </main>
+</Layout>
+
+<script>
+  import gsap from "gsap";
+  import ScrollTrigger from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  document.addEventListener("astro:page-load", () => {
+    const images = document.querySelectorAll(".exploration-skew");
+
+    let currentSkew = 0;
+    let lastScrollY = window.scrollY;
+    let rafId: number;
+
+    const clamp = (value: number, min: number, max: number) =>
+      Math.max(min, Math.min(max, value));
+
+    const update = () => {
+      const currentScrollY = window.scrollY;
+      const velocity = currentScrollY - lastScrollY;
+      lastScrollY = currentScrollY;
+
+      const targetSkew = clamp(velocity * 0.05, -6, 6);
+      currentSkew += (targetSkew - currentSkew) * 0.1;
+
+      images.forEach((img) => {
+        (img as HTMLElement).style.transform = `skewY(${currentSkew}deg)`;
+      });
+
+      rafId = requestAnimationFrame(update);
+    };
+
+    rafId = requestAnimationFrame(update);
+
+    // cleanup on page leave
+    document.addEventListener("astro:before-preparation", () => {
+      cancelAnimationFrame(rafId);
+    });
+  });
+</script>
