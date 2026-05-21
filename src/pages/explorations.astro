@@ -41,12 +41,21 @@ const explorations = [
   <main class="mx-auto w-full xl:w-6xl px-5 xl:px-0 pt-24 pb-20">
 
     <!-- Header -->
-    <div class="mb-16">
+      <a
+        href="/"
+        class="group inline-flex items-center gap-1 font-display text-xs uppercase tracking-[0.2em] text-muted hover:text-black transition-colors duration-200"
+      >
+        <span
+          class="group-hover:-translate-x-0.5 transition-transform duration-200"
+          >←</span
+        >
+        Back Home
+      </a>
+    <div class="my-6 flex items-center justify-between">
       <p class="font-display text-xs uppercase tracking-[0.2em] text-muted mb-2">
         The Lab
       </p>
       <div class="flex items-end gap-4">
-        <h1 class="text-3xl md:text-5xl font-normal">Explorations</h1>
         <span class="font-display text-xs text-muted mb-2 md:mb-3">
           {explorations.length} experiments
         </span>
