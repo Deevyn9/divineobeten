@@ -93,9 +93,10 @@ const currentPath = Astro.url.pathname;
     const header = document.getElementById("site-header");
     let lastScrollY = window.scrollY;
     let ticking = false;
+    let isOpen = false;
 
     window.addEventListener("scroll", () => {
-      if (ticking) return;
+      if (ticking || isOpen) return;
       window.requestAnimationFrame(() => {
         const currentScrollY = window.scrollY;
 
@@ -143,16 +144,19 @@ const currentPath = Astro.url.pathname;
     const dots = btn?.querySelectorAll("[data-dot]");
 
     const greyDots = new Set([1, 3, 5, 7]);
-    let isOpen = false;
 
     const openMenu = () => {
       isOpen = true;
+      header?.style.setProperty("transform", "translateY(0)");
       if (menu) menu.style.transform = "translateY(0)";
       if (backdrop) {
         backdrop.style.opacity = "1";
         backdrop.style.pointerEvents = "auto";
       }
       document.body.style.overflow = "hidden";
+      document.body.style.height = "100%";
+      document.documentElement.style.overflow = "hidden";
+      document.documentElement.style.height = "100%";
       dots?.forEach((dot, i) => {
         (dot as HTMLElement).style.backgroundColor = greyDots.has(i)
           ? "#9ca3af"
@@ -167,7 +171,10 @@ const currentPath = Astro.url.pathname;
         backdrop.style.opacity = "0";
         backdrop.style.pointerEvents = "none";
       }
-      document.body.style.overflow = "";
+      document.body.style.overflow = "scroll";
+      document.body.style.height = "auto";
+      document.documentElement.style.overflow = "scroll";
+      document.documentElement.style.height = "auto";
       dots?.forEach((dot) => {
         (dot as HTMLElement).style.backgroundColor = "#000000";
       });
