@@ -13,16 +13,18 @@ const featured = allProjects
   );
 ---
 
-<section class="py-20 w-full">
+<section class="pt-20 w-full">
   <!-- Header -->
   <div class="flex items-end justify-between mb-16">
     <div>
       <p
         class="font-display text-xs uppercase tracking-[0.2em] text-muted mb-2"
       >
-        Selected Work
+        What has Divine been doing?
       </p>
-      <h2 class="text-2xl md:text-3xl font-normal">Featured Projects</h2>
+      <h2 class="text-2xl font-medium font-display md:text-3xl">
+        Featured <span class="italic -ml-0.75 mr-px">P</span>rojects
+      </h2>
     </div>
     <a
       href="/projects"
@@ -38,7 +40,7 @@ const featured = allProjects
   </div>
 
   <!-- Row 1 -->
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mb-24">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
     {
       featured[0] && (
         <div>
