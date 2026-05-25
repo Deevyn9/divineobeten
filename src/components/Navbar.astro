@@ -182,5 +182,9 @@ const currentPath = Astro.url.pathname;
 
     btn?.addEventListener("click", () => (isOpen ? closeMenu() : openMenu()));
     backdrop?.addEventListener("click", closeMenu);
+    const mobileLinks = menu?.querySelectorAll("a");
+    mobileLinks?.forEach((link) => {
+      link.addEventListener("click", closeMenu);
+    });
   });
 </script>
