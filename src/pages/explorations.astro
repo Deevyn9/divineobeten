@@ -12,25 +12,89 @@ const explorations = [
   },
   {
     id: "02",
-    name: "Hover Reveal",
+    name: "Grid-Stack",
     description: "A list of items where hovering reveals a floating image preview that follows the cursor.",
-    preview: "/explorations/hover-reveal.gif",
+    preview: "/videos/Gridstack.mp4",
     tags: ["Cursor", "Interaction", "GSAP"],
     source: "https://github.com/Deevyn9/hover-reveal",
   },
   {
     id: "03",
-    name: "Password Validation",
+    name: "Bubble Studios",
     description: "Live animated password strength feedback with smooth state transitions as the user types.",
-    preview: "/explorations/password-validation.gif",
+    preview: "/videos/Bubblestudios.mp4",
     tags: ["UI Component", "Animation", "UX"],
     source: "https://github.com/Deevyn9/password-validation",
   },
   {
     id: "04",
-    name: "Page Transition",
+    name: "Mouse Trail",
     description: "Full viewport entrance and exit animations between pages — smooth, intentional, and fast.",
-    preview: "/explorations/page-transition.gif",
+    preview: "/videos/Mousetrail.mp4",
+    tags: ["Animation", "GSAP", "Motion"],
+    source: "https://github.com/Deevyn9/page-transition",
+  },
+  {
+    id: "05",
+    name: "Magnetic Hover",
+    description: "Full viewport entrance and exit animations between pages — smooth, intentional, and fast.",
+    preview: "/videos/Magnetichover.mp4",
+    tags: ["Animation", "GSAP", "Motion"],
+    source: "https://github.com/Deevyn9/page-transition",
+  },
+  {
+    id: "06",
+    name: "Japon",
+    description: "Full viewport entrance and exit animations between pages — smooth, intentional, and fast.",
+    preview: "/videos/Japon.mp4",
+    tags: ["Animation", "GSAP", "Motion"],
+    source: "https://github.com/Deevyn9/page-transition",
+  },
+  {
+    id: "07",
+    name: "Obongjayar",
+    description: "Full viewport entrance and exit animations between pages — smooth, intentional, and fast.",
+    preview: "/videos/Obonjayar.mp4",
+    tags: ["Animation", "GSAP", "Motion"],
+    source: "https://github.com/Deevyn9/page-transition",
+  },
+  {
+    id: "08",
+    name: "Airpods Pro",
+    description: "Full viewport entrance and exit animations between pages — smooth, intentional, and fast.",
+    preview: "/videos/Airpodspro.mp4",
+    tags: ["Animation", "GSAP", "Motion"],
+    source: "https://github.com/Deevyn9/page-transition",
+  },
+  {
+    id: "09",
+    name: "Animated Dropdown",
+    description: "Full viewport entrance and exit animations between pages — smooth, intentional, and fast.",
+    preview: "/videos/Animatednav.mp4",
+    tags: ["Animation", "GSAP", "Motion"],
+    source: "https://github.com/Deevyn9/page-transition",
+  },
+  {
+    id: "10",
+    name: "Animated Sidebar",
+    description: "Full viewport entrance and exit animations between pages — smooth, intentional, and fast.",
+    preview: "/videos/Animatedsidebar.mp4",
+    tags: ["Animation", "GSAP", "Motion"],
+    source: "https://github.com/Deevyn9/page-transition",
+  },
+  {
+    id: "11",
+    name: "Button Hover Reveal",
+    description: "Full viewport entrance and exit animations between pages — smooth, intentional, and fast.",
+    preview: "/videos/Buttonhoverreveal.mp4",
+    tags: ["Animation", "GSAP", "Motion"],
+    source: "https://github.com/Deevyn9/page-transition",
+  },
+  {
+    id: "12",
+    name: "Theme Changing Footer",
+    description: "Full viewport entrance and exit animations between pages — smooth, intentional, and fast.",
+    preview: "/videos/Coolfooter.mp4",
     tags: ["Animation", "GSAP", "Motion"],
     source: "https://github.com/Deevyn9/page-transition",
   },
@@ -70,7 +134,7 @@ const explorations = [
 
             <!-- Full width preview -->
             <div class="exploration-skew relative w-full aspect-16/7 bg-neutral-100 overflow-hidden p-5 md:py-10 md:px-7">
-  <video autoplay muted loop playsinline class="w-full h-full object-cover">
+  <video autoplay muted loop playsinline class="w-full h-full object-contain">
     <source src={exp.preview} type="video/mp4" />
   </video>
 </div>

@@ -3,30 +3,34 @@ const explorations = [
   {
     id: "01",
     name: "Hold to Delete",
-    description: "A satisfying hold interaction for destructive actions.",
-    preview: "/explorations/hold-to-delete.gif",
-    slug: "hold-to-delete",
+    description: "A satisfying hold interaction for destructive actions — press and hold to confirm deletion, release to cancel.",
+    preview: "/videos/Holdtocopy.mp4",
+    tags: ["Interaction", "Microinteraction", "GSAP"],
+    source: "https://github.com/Deevyn9/hold-to-delete",
   },
   {
     id: "02",
-    name: "Hover Reveal",
-    description: "Project images revealed on cursor hover.",
-    preview: "/explorations/hover-reveal.gif",
-    slug: "hover-reveal",
+    name: "Grid-Stack",
+    description: "A list of items where hovering reveals a floating image preview that follows the cursor.",
+    preview: "/videos/Gridstack.mp4",
+    tags: ["Cursor", "Interaction", "GSAP"],
+    source: "https://github.com/Deevyn9/hover-reveal",
   },
   {
     id: "03",
-    name: "Password Validation",
-    description: "Live animated password strength feedback.",
-    preview: "/explorations/password-validation.gif",
-    slug: "password-validation",
+    name: "Bubble Studios",
+    description: "Live animated password strength feedback with smooth state transitions as the user types.",
+    preview: "/videos/Bubblestudios.mp4",
+    tags: ["UI Component", "Animation", "UX"],
+    source: "https://github.com/Deevyn9/password-validation",
   },
   {
     id: "04",
-    name: "Page Transition",
-    description: "Full page entrance and exit animations.",
-    preview: "/explorations/page-transition.gif",
-    slug: "page-transition",
+    name: "Mouse Trail",
+    description: "Full viewport entrance and exit animations between pages — smooth, intentional, and fast.",
+    preview: "/videos/Mousetrail.mp4",
+    tags: ["Animation", "GSAP", "Motion"],
+    source: "https://github.com/Deevyn9/page-transition",
   },
 ];
 ---
@@ -58,12 +62,10 @@ const explorations = [
       explorations.map((exp) => (
         <div class="flex flex-col gap-3">
           <!-- Square preview -->
-          <div class="exploration-preview relative w-full aspect-square bg-neutral-100 overflow-hidden">
-            <img
-              src={exp.preview}
-              alt={exp.name}
-              class="w-full h-full object-cover"
-            />
+          <div class="exploration-preview relative w-full aspect-square bg-neutral-100 px-4 overflow-hidden">
+              <video autoplay muted loop playsinline class="w-full h-full object-contain">
+    <source src={exp.preview} type="video/mp4" />
+  </video>
           </div>
           <!-- Name -->
           <div>
