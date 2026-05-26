@@ -63,9 +63,10 @@ const explorations = [
     <source src={exp.preview} type="video/mp4" />
   </video>
           </div>
-          <!-- Name -->
-          <div>
+          
+          <div class="flex justify-between items-baseline">
             <p class="text-sm font-normal">{exp.name}</p>
+            <p class="text-xs text-muted font-normal">{exp.id}</p>
              </div>
         </div>
       ))
