@@ -2,7 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 
 const explorations = [
-    {
+  {
     id: "01",
     name: "Hold to Copy",
     preview: "/videos/Holdtocopy.mp4",
@@ -79,74 +79,74 @@ const explorations = [
 
 <Layout title="Divine's Explorations">
   <main class="mx-auto w-full xl:w-6xl px-5 xl:px-0 pt-24 pb-20">
-
-  <!-- Header -->
-  <div class="mb-10">
-    <a
-      href="/"
-      class="group inline-flex items-center gap-1 font-display text-xs uppercase tracking-[0.2em] text-muted hover:text-black transition-colors duration-200"
-    >
-      <span
-        class="group-hover:-translate-x-0.5 transition-transform duration-200"
-        >←</span
+    <!-- Header -->
+    <div class="mb-10">
+      <a
+        href="/"
+        class="group inline-flex items-center gap-1 font-display text-xs uppercase tracking-[0.2em] text-muted hover:text-black transition-colors duration-200"
       >
-      Back Home
-    </a>
-
-    <div class="mt-10 flex items-start justify-between gap-6">
-      <div class="">
-        <p class="font-display text-xl text-black">
-          The Lab
-        </p>
-
-        <p
-          class="max-w-2xl text-sm leading-relaxed text-muted"
+        <span
+          class="group-hover:-translate-x-0.5 transition-transform duration-200"
+          >←</span
         >
-          A space for experiments, playful interactions,
-          motion studies and interface ideas.
-        </p>
+        Back Home
+      </a>
+
+      <div class="mt-10 flex items-start justify-between gap-6">
+        <div class="">
+          <p class="font-display text-xl text-black">The Lab</p>
+
+          <p class="max-w-2xl text-sm leading-relaxed text-muted">
+            A space for experiments, playful interactions, motion studies and
+            interface ideas.
+          </p>
+        </div>
+
+        <span class="shrink-0 font-display text-xs text-muted mt-1">
+          {explorations.length} experiments
+        </span>
       </div>
-
-      <span class="shrink-0 font-display text-xs text-muted mt-1">
-        {explorations.length} experiments
-      </span>
     </div>
-  </div>
 
-  <!-- Full width stacked list -->
-  <div class="flex flex-col gap-10 lg:gap-20">
-    {
-      explorations.map((exp) => (
-        <div class="flex flex-col gap-4">
+    <!-- Full width stacked list -->
+    <div class="flex flex-col gap-10 lg:gap-20">
+      {
+        explorations.map((exp) => (
+          <div class="flex flex-col gap-4">
+            <div class="exploration-skew relative w-full aspect-16/7 bg-neutral-100 overflow-hidden p-5 md:py-10 md:px-7">
+              <video
+                autoplay
+                muted
+                loop
+                playsinline
+                class="w-full h-full object-contain"
+              >
+                <source src={exp.preview} type="video/mp4" />
+              </video>
+            </div>
 
-          <!-- Full width preview -->
-          <div class="exploration-skew relative w-full aspect-16/7 bg-neutral-100 overflow-hidden p-5 md:py-10 md:px-7">
-            <video autoplay muted loop playsinline class="w-full h-full object-contain">
-              <source src={exp.preview} type="video/mp4" />
-            </video>
-          </div>
+            <div class="flex items-start justify-between gap-4">
+              <div class="flex flex-col gap-2">
+                <div class="flex items-baseline gap-2 lg:gap-3">
+                  <p class="font-display leading-none text-xs text-muted -mt-0.5">
+                    {exp.id}
+                  </p>
 
-          <!-- Name + meta + source -->
-          <div class="flex items-start justify-between gap-4">
-            <div class="flex flex-col gap-2">
-              <div class="flex items-end gap-2 lg:gap-3">
-                <span class="font-display leading-none text-xs text-muted">{exp.id}</span>
+                  <h2 class="text-xl leading-none text-black font-display transform font-normal">
+                    {exp.name}
+                  </h2>
+                </div>
 
-                <h2 class="text-xl leading-none text-black font-display font-normal">
-                  {exp.name}
-                </h2>
-              </div>
-
-              {/* <div class="flex flex-wrap gap-2 mt-1">
+                {/* <div class="flex flex-wrap gap-2 mt-1">
                 {exp.tags.map((tag) => (
                   <span class="font-display text-xs px-3 py-1 border border-neutral-200 text-muted">
                     {tag}
                   </span>
                 ))}
               </div> */}
-            </div>
+              </div>
 
-            {/* <a
+              {/* <a
               href={exp.source}
               target="_blank"
               rel="noopener noreferrer"
@@ -154,14 +154,12 @@ const explorations = [
             >
               Source ↗
             </a> */}
+            </div>
           </div>
-
-        </div>
-      ))
-    }
-  </div>
-
-</main>
+        ))
+      }
+    </div>
+  </main>
 </Layout>
 
 <script>
