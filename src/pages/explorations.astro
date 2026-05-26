@@ -2,177 +2,166 @@
 import Layout from "../layouts/Layout.astro";
 
 const explorations = [
-  {
+    {
     id: "01",
-    name: "Hold to Delete",
-    description: "A satisfying hold interaction for destructive actions — press and hold to confirm deletion, release to cancel.",
+    name: "Hold to Copy",
     preview: "/videos/Holdtocopy.mp4",
-    tags: ["Interaction", "Microinteraction", "GSAP"],
     source: "https://github.com/Deevyn9/hold-to-delete",
   },
   {
     id: "02",
     name: "Grid-Stack",
-    description: "A list of items where hovering reveals a floating image preview that follows the cursor.",
     preview: "/videos/Gridstack.mp4",
-    tags: ["Cursor", "Interaction", "GSAP"],
     source: "https://github.com/Deevyn9/hover-reveal",
   },
   {
     id: "03",
     name: "Bubble Studios",
-    description: "Live animated password strength feedback with smooth state transitions as the user types.",
     preview: "/videos/Bubblestudios.mp4",
-    tags: ["UI Component", "Animation", "UX"],
     source: "https://github.com/Deevyn9/password-validation",
   },
   {
     id: "04",
     name: "Mouse Trail",
-    description: "Full viewport entrance and exit animations between pages — smooth, intentional, and fast.",
     preview: "/videos/Mousetrail.mp4",
-    tags: ["Animation", "GSAP", "Motion"],
     source: "https://github.com/Deevyn9/page-transition",
   },
   {
     id: "05",
     name: "Magnetic Hover",
-    description: "Full viewport entrance and exit animations between pages — smooth, intentional, and fast.",
     preview: "/videos/Magnetichover.mp4",
-    tags: ["Animation", "GSAP", "Motion"],
     source: "https://github.com/Deevyn9/page-transition",
   },
   {
     id: "06",
     name: "Japon",
-    description: "Full viewport entrance and exit animations between pages — smooth, intentional, and fast.",
     preview: "/videos/Japon.mp4",
-    tags: ["Animation", "GSAP", "Motion"],
     source: "https://github.com/Deevyn9/page-transition",
   },
   {
     id: "07",
     name: "Obongjayar",
-    description: "Full viewport entrance and exit animations between pages — smooth, intentional, and fast.",
     preview: "/videos/Obonjayar.mp4",
-    tags: ["Animation", "GSAP", "Motion"],
     source: "https://github.com/Deevyn9/page-transition",
   },
   {
     id: "08",
     name: "Airpods Pro",
-    description: "Full viewport entrance and exit animations between pages — smooth, intentional, and fast.",
     preview: "/videos/Airpodspro.mp4",
-    tags: ["Animation", "GSAP", "Motion"],
     source: "https://github.com/Deevyn9/page-transition",
   },
   {
     id: "09",
     name: "Animated Dropdown",
-    description: "Full viewport entrance and exit animations between pages — smooth, intentional, and fast.",
     preview: "/videos/Animatednav.mp4",
-    tags: ["Animation", "GSAP", "Motion"],
     source: "https://github.com/Deevyn9/page-transition",
   },
   {
     id: "10",
     name: "Animated Sidebar",
-    description: "Full viewport entrance and exit animations between pages — smooth, intentional, and fast.",
     preview: "/videos/Animatedsidebar.mp4",
-    tags: ["Animation", "GSAP", "Motion"],
     source: "https://github.com/Deevyn9/page-transition",
   },
   {
     id: "11",
     name: "Button Hover Reveal",
-    description: "Full viewport entrance and exit animations between pages — smooth, intentional, and fast.",
     preview: "/videos/Buttonhoverreveal.mp4",
-    tags: ["Animation", "GSAP", "Motion"],
     source: "https://github.com/Deevyn9/page-transition",
   },
   {
     id: "12",
     name: "Theme Changing Footer",
-    description: "Full viewport entrance and exit animations between pages — smooth, intentional, and fast.",
     preview: "/videos/Coolfooter.mp4",
-    tags: ["Animation", "GSAP", "Motion"],
     source: "https://github.com/Deevyn9/page-transition",
   },
 ];
 ---
 
-<Layout title="Explorations — Divine Obeten">
+<Layout title="Divine's Explorations">
   <main class="mx-auto w-full xl:w-6xl px-5 xl:px-0 pt-24 pb-20">
 
-    <!-- Header -->
-      <a
-        href="/"
-        class="group inline-flex items-center gap-1 font-display text-xs uppercase tracking-[0.2em] text-muted hover:text-black transition-colors duration-200"
+  <!-- Header -->
+  <div class="mb-10">
+    <a
+      href="/"
+      class="group inline-flex items-center gap-1 font-display text-xs uppercase tracking-[0.2em] text-muted hover:text-black transition-colors duration-200"
+    >
+      <span
+        class="group-hover:-translate-x-0.5 transition-transform duration-200"
+        >←</span
       >
-        <span
-          class="group-hover:-translate-x-0.5 transition-transform duration-200"
-          >←</span
+      Back Home
+    </a>
+
+    <div class="mt-10 flex items-start justify-between gap-6">
+      <div class="">
+        <p class="font-display text-xl text-black">
+          The Lab
+        </p>
+
+        <p
+          class="max-w-2xl text-sm leading-relaxed text-muted"
         >
-        Back Home
-      </a>
-    <div class="my-6 flex items-center justify-between">
-      <p class="font-display text-xs uppercase tracking-[0.2em] text-muted mb-2">
-        The Lab
-      </p>
-      <div class="flex items-end gap-4">
-        <span class="font-display text-xs text-muted mb-2 md:mb-3">
-          {explorations.length} experiments
-        </span>
+          A space for experiments, playful interactions,
+          motion studies and interface ideas.
+        </p>
       </div>
+
+      <span class="shrink-0 font-display text-xs text-muted mt-1">
+        {explorations.length} experiments
+      </span>
     </div>
+  </div>
 
-    <!-- Full width stacked list -->
-    <div class="flex flex-col gap-20">
-      {
-        explorations.map((exp) => (
-          <div class="flex flex-col gap-4">
+  <!-- Full width stacked list -->
+  <div class="flex flex-col gap-10 lg:gap-20">
+    {
+      explorations.map((exp) => (
+        <div class="flex flex-col gap-4">
 
-            <!-- Full width preview -->
-            <div class="exploration-skew relative w-full aspect-16/7 bg-neutral-100 overflow-hidden p-5 md:py-10 md:px-7">
-  <video autoplay muted loop playsinline class="w-full h-full object-contain">
-    <source src={exp.preview} type="video/mp4" />
-  </video>
-</div>
+          <!-- Full width preview -->
+          <div class="exploration-skew relative w-full aspect-16/7 bg-neutral-100 overflow-hidden p-5 md:py-10 md:px-7">
+            <video autoplay muted loop playsinline class="w-full h-full object-contain">
+              <source src={exp.preview} type="video/mp4" />
+            </video>
+          </div>
 
-            <!-- Name + meta + source -->
-            <div class="flex items-start justify-between gap-4">
-              <div class="flex flex-col gap-2">
-                <div class="flex items-center gap-3">
-                  <span class="font-display text-xs text-muted">{exp.id}</span>
-                  <h2 class="text-xl text-black font-display font-normal">{exp.name}</h2>
-                </div>
-                <p class="text-sm text-muted leading-relaxed max-w-xl">
-                  {exp.description}
-                </p>
-                <div class="flex flex-wrap gap-2 mt-1">
-                  {exp.tags.map((tag) => (
-                    <span class="font-display text-xs px-3 py-1 border border-neutral-200 text-muted">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
+          <!-- Name + meta + source -->
+          <div class="flex items-start justify-between gap-4">
+            <div class="flex flex-col gap-2">
+              <div class="flex items-end gap-2 lg:gap-3">
+                <span class="font-display leading-none text-xs text-muted">{exp.id}</span>
+
+                <h2 class="text-xl leading-none text-black font-display font-normal">
+                  {exp.name}
+                </h2>
               </div>
-              <a
-                href={exp.source}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="shrink-0 font-display text-xs uppercase tracking-[0.2em] text-muted hover:text-black transition-colors duration-200 mt-1"
-              >
-                Source ↗
-              </a>
+
+              {/* <div class="flex flex-wrap gap-2 mt-1">
+                {exp.tags.map((tag) => (
+                  <span class="font-display text-xs px-3 py-1 border border-neutral-200 text-muted">
+                    {tag}
+                  </span>
+                ))}
+              </div> */}
             </div>
 
+            {/* <a
+              href={exp.source}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="shrink-0 font-display text-xs uppercase tracking-[0.2em] text-muted hover:text-black transition-colors duration-200 mt-1"
+            >
+              Source ↗
+            </a> */}
           </div>
-        ))
-      }
-    </div>
 
-  </main>
+        </div>
+      ))
+    }
+  </div>
+
+</main>
 </Layout>
 
 <script>
