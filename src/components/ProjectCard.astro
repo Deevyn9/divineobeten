@@ -56,7 +56,7 @@ const {
   <div class="flex items-start justify-between gap-4">
     <a
       href={`/projects/${slug}`}
-      class="text-xl font-normal hover:underline underline-offset-4 transition-all duration-200"
+      class="text-xl font-normal hover:underline text-black font-display underline-offset-4 transition-all duration-200"
     >
       {title}
     </a>
@@ -85,9 +85,9 @@ const {
       caseStudy && (
         <a
           href={`/projects/${slug}`}
-          class="font-display text-xs uppercase tracking-[0.2em] text-black hover:underline underline-offset-4 transition-all duration-200"
+          class="font-display text-sm tracking-wider text-black hover:underline underline-offset-4 transition-all duration-200"
         >
-          Deep Dive →
+          Deep Dive ↗
         </a>
       )
     }
@@ -97,7 +97,7 @@ const {
           href={live}
           target="_blank"
           rel="noopener noreferrer"
-          class="font-display text-xs uppercase tracking-[0.2em] text-muted hover:text-black transition-colors duration-200"
+          class="font-display text-sm tracking-wider text-black hover:underline underline-offset-4 transition-all duration-200"
         >
           Live ↗
         </a>
