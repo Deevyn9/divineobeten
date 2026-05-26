@@ -9,9 +9,10 @@ tags: ["React", "TypeScript", "Tailwind CSS"]
 image: "/images/atwork.webp"
 images:
   [
-    "/images/segura-auth.webp",
-    "/images/segura-users.webp",
-    "/images/segura-wallet.webp",
+    "/images/Atwork2.png",
+    "/images/Atwork3.png",
+    "/images/Atwork4.png",
+    "/images/Atwork5.png",
   ]
 caseStudy: true
 ---
