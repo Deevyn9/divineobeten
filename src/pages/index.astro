@@ -37,7 +37,7 @@ const sections = [
 ---
 
 <Layout
-  title="Divine Obeten | Portfolio"
+  title="Divine Obeten | Frontend Engineer"
   description="Frontend Engineer"
   image="/og-image.svg"
 >
@@ -54,7 +54,7 @@ const sections = [
             id="local-time"
             class="text-black font-semibold text-base"></span>
         </p>
-        <h3 class="text-xl md:text-3xl max-w-175 font-normal">
+        <h3 class="text-xl md:text-3xl max-w-[90%] sm:max-w-175 font-normal">
           Frontend Engineer. I've built across fintech, edtech, ecommerce, and
           web3 — and somewhere along the way I became obsessed with how things
           feel, not just what they do.
@@ -68,15 +68,17 @@ const sections = [
         <div
           class="mt-10 lg:mt-7 md:mt-auto flex flex-col gap-y-8 md:flex-row md:items-end md:justify-between"
         >
-          <div class="max-w-lg text-sm">
-            Interested in motion systems, creative tooling, typography, and
-            expressive frontend experiences.
-          </div>
+          <p class="max-w-lg text-sm text-muted">
+            Motion systems, creative tooling, typography, and expressive
+            frontend experiences.
+          </p>
 
-          <div class="text-xs tracking-[0.2em] text-black text-right">
-            <p class="mb-3 uppercase font-display">Currently Exploring</p>
+          <div class="text-black text-left md:text-right">
+            <p class="mb-2 font-medium text-sm uppercase font-display">
+              Currently Exploring
+            </p>
 
-            <div class="space-y-1 font-light">
+            <div class="space-y-1 tracking-[0.02em] font-normal text-xs">
               <p>Creative Development</p>
               <p>Interaction Systems</p>
               <p>Motion Design</p>
@@ -111,21 +113,40 @@ const sections = [
             <!-- Bio -->
             <div class="flex flex-col gap-4 text-sm text-muted leading-relaxed">
               <p>
-                I'm Divine Obeten, a Frontend Engineer based in Enugu, Nigeria.
-                I build websites and web apps across fintech, edtech, ecommerce,
-                and web3 — and somewhere along the way I became obsessed with
-                how things feel, not just what they do.
+                A Frontend Engineer with 3+ years building across fintech,
+                edtech, ecommerce, and web3 — who enjoys football, gaming,
+                reading, and is slowly learning to draw. Weekday mornings you'll
+                find me at the gym on <a
+                  href="https://hevy.com/user/obe10"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="underline underline-offset-2">Hevy</a
+                >, and Tuesday, Thursday and Saturday mornings on the road with
+                <a
+                  href="https://strava.app.link/kBFvApizu3b"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="underline underline-offset-2">Strava</a
+                >. My philosophy is simple: keep going, and make it feel good.
               </p>
               <p>
-                I care deeply about the layer beyond functionality — the
-                transitions, the microinteractions, the details that nobody
-                explicitly asks for but everybody feels. That's where I operate.
+                I grew up drawn to things that had both skill and feel — games
+                that rewarded precision, football that punished hesitation,
+                drawings that only worked when every line was intentional.
+                Frontend found me the same way. The first time I saw a GSAP
+                animation do something I didn't think a browser could do, it
+                felt like a door opening. This wasn't just code. It could move,
+                breathe, and make people feel something. I've been chasing that
+                ever since.
               </p>
               <p>
-                Currently working as a founding frontend engineer at SeguraPay,
-                building production-grade fintech infrastructure, while actively
-                seeking remote opportunities at funded startups and SaaS
-                companies that care about craft.
+                I put an unnecessary amount of care into everything I touch
+                because I believe people should feel that someone made this for
+                them — with intention and a little extra attention to the
+                details nobody asked for. I don't like leaving things to chance.
+                It's why I never think something is truly done until it's live,
+                out in the world, and feeling exactly the way it was supposed
+                to.
               </p>
             </div>
 
@@ -136,37 +157,92 @@ const sections = [
               >
                 Skills & Tools
               </p>
-              <div class="flex flex-wrap gap-2">
-                {
-                  [
-                    "React",
-                    "Next.js",
-                    "TypeScript",
-                    "Tailwind CSS",
-                    "GSAP",
-                    "Framer Motion",
-                    "Astro",
-                    "REST APIs",
-                    "Figma",
-                    "Git",
-                    "Motion Design",
-                    "Design Systems",
-                    "Responsive UI",
-                    "Web3 / Solidity",
-                  ].map((skill) => (
-                    <span class="font-display text-xs px-3 py-1 border border-neutral-200 text-muted">
-                      {skill}
-                    </span>
-                  ))
-                }
+              <div class="flex flex-col gap-6">
+                <div>
+                  <p
+                    class="font-display text-xs uppercase tracking-[0.2em] text-muted mb-3"
+                  >
+                    Core
+                  </p>
+
+                  <div class="flex flex-wrap gap-2">
+                    {
+                      [
+                        "React",
+                        "Next.js",
+                        "TypeScript",
+                        "JavaScript",
+                        "Astro",
+                        "Tailwind CSS",
+                        "HTML/CSS",
+                      ].map((s) => (
+                        <span class="font-display text-xs px-3 py-1 border border-neutral-200 text-black">
+                          {s}
+                        </span>
+                      ))
+                    }
+                  </div>
+                </div>
+
+                <div>
+                  <p
+                    class="font-display text-xs uppercase tracking-[0.2em] text-muted mb-3"
+                  >
+                    Motion & Design
+                  </p>
+
+                  <div class="flex flex-wrap gap-2">
+                    {
+                      [
+                        "GSAP",
+                        "Framer Motion",
+                        "Motion Design",
+                        "Interaction Design",
+                        "Figma",
+                        "Design Systems",
+                        "UI Animation",
+                      ].map((s) => (
+                        <span class="font-display text-xs px-3 py-1 border border-neutral-200 text-black">
+                          {s}
+                        </span>
+                      ))
+                    }
+                  </div>
+                </div>
+
+                <div>
+                  <p
+                    class="font-display text-xs uppercase tracking-[0.2em] text-muted mb-3"
+                  >
+                    Engineering
+                  </p>
+
+                  <div class="flex flex-wrap gap-2">
+                    {
+                      [
+                        "Creative Development",
+                        "Frontend Architecture",
+                        "REST APIs",
+                        "Git/GitHub",
+                        "Responsive Design",
+                        "Web3",
+                        "Solidity",
+                      ].map((s) => (
+                        <span class="font-display text-xs px-3 py-1 border border-neutral-200 text-black">
+                          {s}
+                        </span>
+                      ))
+                    }
+                  </div>
+                </div>
               </div>
             </div>
           </div>
 
           <!-- Right: experience -->
-          <div class="flex flex-col gap-6">
+          <div class="flex flex-col">
             <p
-              class="font-display text-xs uppercase tracking-[0.2em] text-muted mb-2"
+              class="font-display text-xs uppercase tracking-[0.2em] text-muted mb-6"
             >
               Experience
             </p>
@@ -175,43 +251,55 @@ const sections = [
               [
                 {
                   company: "SeguraPay",
-                  role: "Founding Frontend Engineer",
-                  period: "2023 — Present",
-                  description:
-                    "Building the entire frontend of a B2B payment gateway and Banking-as-a-Service platform. Owned the architecture, dashboards, RBAC system, and all user-facing features across three user roles.",
+                  role: "Software Engineer - Frontend",
+                  period: "2024 — Present",
+                  industry: "Fintech / Banking-as-a-Service",
                 },
                 {
                   company: "Illusion Services",
                   role: "Frontend Developer",
-                  period: "2024 — Present",
-                  description:
-                    "Built across multiple products including a Web3 freelance platform and logistics SaaS. Rebuilt full frontends, integrated APIs, and delivered production-ready interfaces from Figma designs.",
+                  period: "2024 — 2025",
+                  industry: "Agency",
+                },
+                {
+                  company: "Medorii Innovations",
+                  role: "Frontend Developer",
+                  period: "2023",
+                  industry: "Web3",
+                },
+                {
+                  company: "Stunhaul",
+                  role: "Frontend Developer",
+                  period: "2022",
+                  industry: "Logistics / Ecommerce",
                 },
                 {
                   company: "Freelance",
                   role: "Frontend Developer",
                   period: "2022 — 2023",
-                  description:
-                    "Delivered websites and web apps for clients across ecommerce and edtech — including landing pages, multi-page sites, and interactive UIs.",
                 },
               ].map((exp) => (
-                <div class="flex flex-col gap-1 pb-6 border-b border-neutral-100 last:border-none">
-                  <div class="flex items-start justify-between gap-4">
+                <div class="flex flex-col gap-1 py-4 border-b border-neutral-200 last:border-none">
+                  <div class="flex flex-col sm:flex-row items-start justify-between gap-y-2 sm:gap-4">
                     <div>
                       <p class="text-sm font-medium text-black">
                         {exp.company}
                       </p>
+
                       <p class="font-display text-xs text-muted mt-0.5">
                         {exp.role}
                       </p>
                     </div>
-                    <span class="font-display text-xs text-muted shrink-0 mt-0.5">
-                      {exp.period}
-                    </span>
+
+                    <div class="text-left sm:text-right flex-col-reverse flex sm:flex-col">
+                      <span class="font-display text-xs text-muted shrink-0">
+                        {exp.period}
+                      </span>
+                      <p class="text-sm text-muted sm:leading-0 mt-0.5 md:mt-2">
+                        {exp.industry}
+                      </p>
+                    </div>
                   </div>
-                  <p class="text-sm text-muted leading-relaxed mt-2">
-                    {exp.description}
-                  </p>
                 </div>
               ))
             }
