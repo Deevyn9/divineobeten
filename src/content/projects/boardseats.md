@@ -2,7 +2,7 @@
 title: "Boardseats"
 category: "Agency"
 year: "2024"
-featured: false
+featured: true
 order: 4
 description: "A full website redesign for Boardseats — overhauling 15+ screens with improved UI, better UX flows, and connected contact forms that actually convert."
 tags: ["React", "Tailwind CSS", "TypeScript"]
