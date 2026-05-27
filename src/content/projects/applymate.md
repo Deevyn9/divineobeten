@@ -1,7 +1,7 @@
 ---
 title: "ApplyMate"
 category: "Productivity"
-year: "2025"
+year: "2026"
 featured: true
 order: 2
 description: "A job application tracker built for engineers in active job searches — track applications, log statuses, monitor streaks, and filter opportunities, all in one focused tool designed and built from scratch."
