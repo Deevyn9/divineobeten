@@ -7,8 +7,7 @@ order: 7
 description: "A full ecommerce frontend for Stunhaul — a gift-focused online store with a complete shopping experience including product listings, cart, checkout, and admin interfaces."
 tags: ["React", "TypeScript", "Tailwind CSS"]
 image: "/images/stunhaul.png"
-images:
-  ["/images/stunhaul2.png", "/images/stunhaul3.png", "/images/stunhaul4.png"]
+images: ["/images/stunhaul2.png", "/images/stunhaul3.png"]
 caseStudy: true
 ---
 
