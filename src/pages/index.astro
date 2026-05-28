@@ -94,8 +94,7 @@ const sections = [
 
       <!-- About section -->
       <section class="pt-20 w-full" id="about">
-        <!-- Section heading -->
-        <div class="mb-9">
+        <div class="mb-7">
           <p
             class="font-display text-xs uppercase tracking-[0.2em] text-muted mb-1"
           >
@@ -106,147 +105,54 @@ const sections = [
           </h2>
         </div>
 
-        <!-- Main grid: left (bio + skills) / right (experience) -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
-          <!-- Left: bio + skills -->
-          <div class="flex flex-col gap-10">
-            <!-- Bio -->
-            <div class="flex flex-col gap-4 text-sm text-muted leading-relaxed">
-              <p>
-                A Frontend Engineer with 3+ years building across fintech,
-                edtech, ecommerce, and web3 — who enjoys football, gaming,
-                reading, and is slowly learning to draw. Weekday mornings you'll
-                find me at the gym on <a
-                  href="https://hevy.com/user/obe10"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="underline underline-offset-2">Hevy</a
-                >, and Tuesday, Thursday and Saturday mornings on the road with
-                <a
-                  href="https://strava.app.link/kBFvApizu3b"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="underline underline-offset-2">Strava</a
-                >. My philosophy is simple: keep going, and make it feel good.
-              </p>
-              <p>
-                I grew up drawn to things that had both skill and feel — games
-                that rewarded precision, football that punished hesitation,
-                drawings that only worked when every line was intentional.
-                Frontend found me the same way. The first time I saw a GSAP
-                animation do something I didn't think a browser could do, it
-                felt like a door opening. This wasn't just code. It could move,
-                breathe, and make people feel something. I've been chasing that
-                ever since.
-              </p>
-              <p>
-                I put an unnecessary amount of care into everything I touch
-                because I believe people should feel that someone made this for
-                them — with intention and a little extra attention to the
-                details nobody asked for. I don't like leaving things to chance.
-                It's why I never think something is truly done until it's live,
-                out in the world, and feeling exactly the way it was supposed
-                to.
-              </p>
-            </div>
-
-            <!-- Skills -->
-            <div>
-              <p
-                class="font-display text-xs uppercase tracking-[0.2em] text-muted mb-4"
-              >
-                Skills & Tools
-              </p>
-              <div class="flex flex-col gap-6">
-                <div>
-                  <p
-                    class="font-display text-xs uppercase tracking-[0.2em] text-muted mb-3"
-                  >
-                    Core
-                  </p>
-
-                  <div class="flex flex-wrap gap-2">
-                    {
-                      [
-                        "React",
-                        "Next.js",
-                        "TypeScript",
-                        "JavaScript",
-                        "Astro",
-                        "Tailwind CSS",
-                        "HTML/CSS",
-                      ].map((s) => (
-                        <span class="font-display text-xs px-3 py-1 border border-neutral-200 text-black">
-                          {s}
-                        </span>
-                      ))
-                    }
-                  </div>
-                </div>
-
-                <div>
-                  <p
-                    class="font-display text-xs uppercase tracking-[0.2em] text-muted mb-3"
-                  >
-                    Motion & Design
-                  </p>
-
-                  <div class="flex flex-wrap gap-2">
-                    {
-                      [
-                        "GSAP",
-                        "Framer Motion",
-                        "Motion Design",
-                        "Interaction Design",
-                        "Figma",
-                        "Design Systems",
-                        "UI Animation",
-                      ].map((s) => (
-                        <span class="font-display text-xs px-3 py-1 border border-neutral-200 text-black">
-                          {s}
-                        </span>
-                      ))
-                    }
-                  </div>
-                </div>
-
-                <div>
-                  <p
-                    class="font-display text-xs uppercase tracking-[0.2em] text-muted mb-3"
-                  >
-                    Engineering
-                  </p>
-
-                  <div class="flex flex-wrap gap-2">
-                    {
-                      [
-                        "Creative Development",
-                        "Frontend Architecture",
-                        "REST APIs",
-                        "Git/GitHub",
-                        "Responsive Design",
-                        "Web3",
-                        "Solidity",
-                      ].map((s) => (
-                        <span class="font-display text-xs px-3 py-1 border border-neutral-200 text-black">
-                          {s}
-                        </span>
-                      ))
-                    }
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div class="flex flex-col gap-4 text-sm text-muted leading-relaxed">
+            <p>
+              A Frontend Engineer with 3+ years building across fintech, edtech,
+              ecommerce, and web3 — who enjoys football, gaming, reading, and is
+              slowly learning to draw. Weekday mornings you'll find me at the
+              gym on <a
+                href="https://hevy.com/user/obe10"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="underline
+              underline-offset-2">Hevy</a
+              >, and Tuesday, Thursday and Saturday mornings on the road with
+              <a
+                href="https://strava.app.link/kBFvApizu3b"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="underline
+            underline-offset-2">Strava</a
+              >. My philosophy is simple: keep going, and make it feel good.
+            </p>
+            <p>
+              I grew up drawn to things that had both skill and feel — games
+              that rewarded precision, football that punished hesitation,
+              drawings that only worked when every line was intentional.
+              Frontend found me the same way. The first time I saw a GSAP
+              animation do something I didn't think a browser could do, it felt
+              like a door opening. This wasn't just code. It could move,
+              breathe, and make people feel something. I've been chasing that
+              ever since.
+            </p>
+            <p>
+              I put an unnecessary amount of care into everything I touch
+              because I believe people should feel that someone made this for
+              them — with intention and a little extra attention to the details
+              nobody asked for. I don't like leaving things to chance. It's why
+              I never think something is truly done until it's live, out in the
+              world, and feeling exactly the way it was supposed to.
+            </p>
           </div>
 
           <!-- Right: experience -->
           <div class="flex flex-col">
             <p
-              class="font-display text-xs uppercase tracking-[0.2em] text-muted mb-6"
+              class="font-display text-xs uppercase tracking-[0.2em] text-muted mb-4"
             >
               Experience
             </p>
-
             {
               [
                 {
@@ -277,6 +183,7 @@ const sections = [
                   company: "Freelance",
                   role: "Frontend Developer",
                   period: "2022 — 2023",
+                  industry: "",
                 },
               ].map((exp) => (
                 <div class="flex flex-col gap-1 py-4 border-b border-neutral-200 last:border-none">
@@ -285,24 +192,104 @@ const sections = [
                       <p class="text-sm font-medium text-black">
                         {exp.company}
                       </p>
-
                       <p class="font-display text-xs text-muted mt-0.5">
                         {exp.role}
                       </p>
                     </div>
-
                     <div class="text-left sm:text-right flex-col-reverse flex sm:flex-col">
                       <span class="font-display text-xs text-muted shrink-0">
                         {exp.period}
                       </span>
-                      <p class="text-sm text-muted sm:leading-0 mt-0.5 md:mt-2">
-                        {exp.industry}
-                      </p>
+                      {exp.industry && (
+                        <p class="text-sm text-muted mt-0.5 md:mt-2">
+                          {exp.industry}
+                        </p>
+                      )}
                     </div>
                   </div>
                 </div>
               ))
             }
+          </div>
+        </div>
+
+        <!-- Skills: full width below grid -->
+        <div class="mt-16 flex flex-col gap-6">
+          <p class="font-display text-xs uppercase tracking-[0.2em] text-muted">
+            Skills & Tools
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+              <p
+                class="font-display text-xs uppercase tracking-[0.2em] text-muted mb-3"
+              >
+                Core
+              </p>
+              <div class="flex flex-wrap gap-2">
+                {
+                  [
+                    "React",
+                    "Next.js",
+                    "TypeScript",
+                    "JavaScript",
+                    "Astro",
+                    "Tailwind CSS",
+                    "HTML/CSS",
+                  ].map((s) => (
+                    <span class="font-display text-xs px-3 py-1 border border-neutral-200 text-black">
+                      {s}
+                    </span>
+                  ))
+                }
+              </div>
+            </div>
+            <div>
+              <p
+                class="font-display text-xs uppercase tracking-[0.2em] text-muted mb-3"
+              >
+                Motion & Design
+              </p>
+              <div class="flex flex-wrap gap-2">
+                {
+                  [
+                    "GSAP",
+                    "Framer Motion",
+                    "Motion Design",
+                    "Interaction Design",
+                    "Figma",
+                    "Design Systems",
+                    "UI Animation",
+                  ].map((s) => (
+                    <span class="font-display text-xs px-3 py-1 border border-neutral-200 text-black">
+                      {s}
+                    </span>
+                  ))
+                }
+              </div>
+            </div>
+            <div>
+              <p
+                class="font-display text-xs uppercase tracking-[0.2em] text-muted mb-3"
+              >
+                Engineering
+              </p>
+              <div class="flex flex-wrap gap-2">
+                {
+                  [
+                    "Creative Development",
+                    "Frontend Architecture",
+                    "REST APIs",
+                    "Git/GitHub",
+                    "Responsive Design",
+                    "Web3",
+                  ].map((s) => (
+                    <span class="font-display text-xs px-3 py-1 border border-neutral-200 text-black">
+                      {s}
+                    </span>
+                  ))
+                }
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -335,26 +322,26 @@ const sections = [
       </div>
     </section> -->
     </div>
-  </main>
-</Layout>
 
-<script>
-  function updateTime() {
-    const el = document.getElementById("local-time");
-    if (!el) return;
+    <script>
+      function updateTime() {
+        const el = document.getElementById("local-time");
+        if (!el) return;
 
-    const now = new Date();
-    const time = now.toLocaleTimeString("en-US", {
-      timeZone: "Africa/Lagos",
-      hour: "2-digit",
-      minute: "2-digit",
-      second: "2-digit",
-      hour12: true,
-    });
+        const now = new Date();
+        const time = now.toLocaleTimeString("en-US", {
+          timeZone: "Africa/Lagos",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: true,
+        });
 
-    el.textContent = `${time} WAT`;
-  }
+        el.textContent = `${time} WAT`;
+      }
 
-  updateTime();
-  setInterval(updateTime, 1000);
-</script>
+      updateTime();
+      setInterval(updateTime, 1000);
+    </script>
+  </main></Layout
+>
