@@ -143,11 +143,14 @@ const {
     </div>
 
     <!-- Extra images grid -->
+    <p class="font-display text-sm text-muted mb-2 mt-5 italic">
+      Selected Screens
+    </p>
     {
       images && images.length > 0 && (
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
           {images.map((img, i) => (
-            <div class="w-full aspect-video bg-neutral-100 overflow-hidden">
+            <div class="w-full bg-neutral-100/50 p-5 overflow-hidden">
               <img
                 src={img}
                 alt={`${title} screenshot ${i + 1}`}
