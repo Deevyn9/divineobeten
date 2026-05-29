@@ -23,7 +23,7 @@ const icons = [
 ---
 
 <div
-  class="preloader fixed top-0 bg-bg inset-0 z-9999 grid place-items-center"
+  class="preloader fixed top-0 bg-bg inset-0 z-9999 place-items-center"
   aria-hidden="true"
 >
   <div
@@ -52,216 +52,97 @@ const icons = [
   </div>
 </div>
 
-<!-- <script>
-  import { gsap } from "gsap";
-
-  // Mouse Trail setup
-  const flair = gsap.utils.toArray<HTMLImageElement>(".flair");
-  const wrapper = gsap.utils.wrap(0, flair.length);
-  let index = 0;
-  let gap = 90;
-  let mousePos = { x: 0, y: 0 };
-  let lastMousePos = { x: 0, y: 0 };
-  let cachedMousePos = { x: 0, y: 0 };
-
-  function playAnimation(shape: HTMLImageElement) {
-    let tl = gsap.timeline();
-    tl.from(shape, {
-      opacity: 0,
-      scale: 0,
-      ease: "elastic.out(1,0.3)",
-    })
-      .to(
-        shape,
-        {
-          rotation: "random([-360, 360])",
-        },
-        "<",
-      )
-      .to(
-        shape,
-        {
-          y: "120vh",
-          ease: "back.in(.4)",
-          duration: 1,
-        },
-        0,
-      );
-  }
-
-  function animateImage() {
-    let wrappedIndex = wrapper(index);
-    let img = flair[wrappedIndex];
-    gsap.killTweensOf(img);
-    gsap.set(img, { clearProps: "all" });
-    gsap.set(img, {
-      opacity: 1,
-      left: mousePos.x,
-      top: mousePos.y,
-      xPercent: -50,
-      yPercent: -50,
-    });
-    playAnimation(img);
-    index++;
-  }
-
-  function ImageTrail() {
-    let travelDistance = Math.hypot(
-      lastMousePos.x - mousePos.x,
-      lastMousePos.y - mousePos.y,
-    );
-    cachedMousePos.x = gsap.utils.interpolate(
-      cachedMousePos.x || mousePos.x,
-      mousePos.x,
-      0.1,
-    );
-    cachedMousePos.y = gsap.utils.interpolate(
-      cachedMousePos.y || mousePos.y,
-      mousePos.y,
-      0.1,
-    );
-    if (travelDistance > gap) {
-      animateImage();
-      lastMousePos = { ...mousePos };
-    }
-  }
-
-  window.addEventListener("mousemove", (e) => {
-    mousePos = { x: e.clientX, y: e.clientY };
-  });
-
-  gsap.defaults({ duration: 1 });
-  gsap.ticker.add(ImageTrail);
-
-  // PRELOADER EXIT
-  const initPreloader = () => {
-    const preloader = document.querySelector(".preloader");
-    const countEl = document.getElementById("preloader-count");
-
-    if (!preloader || !countEl) return;
-
-    const isMobile = window.matchMedia("(pointer: coarse)").matches;
-
-    gsap
-      .timeline({ defaults: { ease: "power3.out" } })
-      .to(preloader, {
-        delay: 5,
-        yPercent: -100,
-        duration: 0.9,
-      })
-      // .from(
-      //   introItems,
-      //   {
-      //     y: 32,
-      //     opacity: 0,
-      //     stagger: 0.08,
-      //     duration: 0.7,
-      //   },
-      //   "-=0.25",
-      // )
-      .set(preloader, { display: "none" });
-  };
-
-  document.addEventListener("astro:page-load", initPreloader);
-  initPreloader();
-</script> -->
 <script>
   import { gsap } from "gsap";
 
-  // Mouse Trail setup
-  const flair = gsap.utils.toArray<HTMLImageElement>(".flair");
-  const wrapper = gsap.utils.wrap(0, flair.length);
-  let index = 0;
-  let gap = 90;
-  let mousePos = { x: 0, y: 0 };
-  let lastMousePos = { x: 0, y: 0 };
-  let cachedMousePos = { x: 0, y: 0 };
+  gsap.defaults({ duration: 1 });
 
-  function playAnimation(shape: HTMLImageElement) {
-    let tl = gsap.timeline();
-    tl.from(shape, {
-      opacity: 0,
-      scale: 0,
-      ease: "elastic.out(1,0.3)",
-    })
-      .to(
-        shape,
-        {
-          rotation: "random([-360, 360])",
-        },
-        "<",
-      )
-      .to(
-        shape,
-        {
-          y: "120vh",
-          ease: "back.in(.4)",
-          duration: 1,
-        },
-        0,
-      );
-  }
-
-  function animateImage() {
-    let wrappedIndex = wrapper(index);
-    let img = flair[wrappedIndex];
-    gsap.killTweensOf(img);
-    gsap.set(img, { clearProps: "all" });
-    gsap.set(img, {
-      opacity: 1,
-      left: mousePos.x,
-      top: mousePos.y,
-      xPercent: -50,
-      yPercent: -50,
-    });
-    playAnimation(img);
-    index++;
-  }
-
-  function ImageTrail() {
-    let travelDistance = Math.hypot(
-      lastMousePos.x - mousePos.x,
-      lastMousePos.y - mousePos.y,
-    );
-    cachedMousePos.x = gsap.utils.interpolate(
-      cachedMousePos.x || mousePos.x,
-      mousePos.x,
-      0.1,
-    );
-    cachedMousePos.y = gsap.utils.interpolate(
-      cachedMousePos.y || mousePos.y,
-      mousePos.y,
-      0.1,
-    );
-    if (travelDistance > gap) {
-      animateImage();
-      lastMousePos = { ...mousePos };
-    }
-  }
-
-  window.addEventListener("mousemove", (e) => {
-    mousePos = { x: e.clientX, y: e.clientY };
+  // clear flag on actual page reload/close, not on client-side nav
+  window.addEventListener("beforeunload", () => {
+    sessionStorage.removeItem("preloaderDone");
   });
 
-  gsap.defaults({ duration: 1 });
-  gsap.ticker.add(ImageTrail);
-
-  // PRELOADER EXIT
   const initPreloader = () => {
-    const preloader = document.querySelector(".preloader");
+    if (sessionStorage.getItem("preloaderDone")) return; // ← just return, no hiding needed
+
+    const preloader = document.querySelector(
+      ".preloader",
+    ) as HTMLElement | null;
     const countEl = document.getElementById("preloader-count");
 
     if (!preloader || !countEl) return;
 
-    // lock scroll
-    document.body.style.overflow = "hidden";
-    document.documentElement.style.overflow = "hidden";
+    preloader.classList.add("is-active"); // ← add this line here
+
+    sessionStorage.setItem("preloaderDone", "true");
+
+    const flair = gsap.utils.toArray<HTMLImageElement>(".flair");
+    const wrapper = gsap.utils.wrap(0, flair.length);
+    let index = 0;
+    const gap = 90;
+    let mousePos = { x: 0, y: 0 };
+    let lastMousePos = { x: 0, y: 0 };
+    let cachedMousePos = { x: 0, y: 0 };
+
+    function playAnimation(shape: HTMLImageElement) {
+      const tl = gsap.timeline();
+      tl.from(shape, { opacity: 0, scale: 0, ease: "elastic.out(1,0.3)" })
+        .to(shape, { rotation: "random([-360, 360])" }, "<")
+        .to(shape, { y: "120vh", ease: "back.in(.4)", duration: 1 }, 0);
+    }
+
+    function animateImage() {
+      const wrappedIndex = wrapper(index);
+      const img = flair[wrappedIndex];
+      gsap.killTweensOf(img);
+      gsap.set(img, { clearProps: "all" });
+      gsap.set(img, {
+        opacity: 1,
+        left: mousePos.x,
+        top: mousePos.y,
+        xPercent: -50,
+        yPercent: -50,
+      });
+      playAnimation(img);
+      index++;
+    }
+
+    function ImageTrail() {
+      const travelDistance = Math.hypot(
+        lastMousePos.x - mousePos.x,
+        lastMousePos.y - mousePos.y,
+      );
+      cachedMousePos.x = gsap.utils.interpolate(
+        cachedMousePos.x || mousePos.x,
+        mousePos.x,
+        0.1,
+      );
+      cachedMousePos.y = gsap.utils.interpolate(
+        cachedMousePos.y || mousePos.y,
+        mousePos.y,
+        0.1,
+      );
+      if (travelDistance > gap) {
+        animateImage();
+        lastMousePos = { ...mousePos };
+      }
+    }
+
+    window.addEventListener("mousemove", (e) => {
+      mousePos = { x: e.clientX, y: e.clientY };
+    });
+
+    gsap.ticker.add(ImageTrail);
+
+    window.dispatchEvent(new Event("preloader:start"));
 
     const isMobile = window.matchMedia("(pointer: coarse)").matches;
 
     const unlockScroll = () => {
       document.body.style.overflow = "";
       document.documentElement.style.overflow = "";
+      window.dispatchEvent(new Event("preloader:end"));
+      gsap.ticker.remove(ImageTrail);
     };
 
     const exitPreloader = () => {
