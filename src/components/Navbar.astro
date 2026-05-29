@@ -1,33 +1,75 @@
 ---
 const links = [
   { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/projects", label: "Projects" },
-  { href: "/contact", label: "Contact" },
+  { href: "/projects", label: "Works" },
+  { href: "/#about", label: "Him" },
+  { href: "/explorations", label: "Explorations" },
 ];
 
 const currentPath = Astro.url.pathname;
 ---
 
-<header class="sticky top-0 z-20">
-  <nav
-    class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4 sm:px-10 lg:px-16"
-  >
-    <a
-      class="text-sm font-semibold uppercase tracking-[0.35em] text-white"
-      href="/"
+<header
+  id="site-header"
+  class="fixed top-0 left-0 z-50 w-full bg-white transition-transform duration-300 ease-in-out"
+>
+  <div class="relative">
+    <nav
+      class="relative z-30 bg-white mx-auto flex w-full xl:w-6xl items-center justify-between px-5 xl:px-0 py-4"
     >
-      Divine Obeten
-    </a>
+      <a
+        class="text-lg outline-none md:text-2xl font-display font-semibold tracking-normal text-black capitalize"
+        href="/"
+      >
+        o<span class="italic -ml-0.75 mr-px">b</span>eten.
+      </a>
 
-    <div class="hidden items-center gap-2 md:flex">
+      <div class="hidden items-center gap-5 md:flex font-display text-sm">
+        {
+          links.map((link) => {
+            const isActive = currentPath === link.href;
+            return (
+              <a
+                class={`nav-link relative flex items-center gap-1 outline-none transition-all duration-200 ${isActive ? "font-bold text-black" : "font-light text-gray-500"}`}
+                href={link.href}
+              >
+                <span class="nav-arrow inline-block translate-x-0 opacity-0 transition-all duration-200 ease-out">
+                  ↗
+                </span>
+                {link.label}
+              </a>
+            );
+          })
+        }
+      </div>
+
+      <button
+        id="menu-btn"
+        class="md:hidden grid grid-cols-3 gap-0.5 p-1"
+        aria-label="Toggle menu"
+      >
+        {
+          Array.from({ length: 9 }).map((_, i) => (
+            <span
+              data-dot={i}
+              class="block w-1 h-1 rounded-full bg-black transition-colors duration-200"
+            />
+          ))
+        }
+      </button>
+    </nav>
+
+    <div
+      id="mobile-menu"
+      class="md:hidden z-20 flex flex-col px-5 pb-6 gap-5 font-display text-sm bg-white absolute w-full transition-transform duration-300 ease-in-out"
+      style="transform: translateY(-150%)"
+    >
       {
         links.map((link) => {
           const isActive = currentPath === link.href;
-
           return (
             <a
-              class:list={["nav-link", { "nav-link-active": isActive }]}
+              class={`${isActive ? "font-bold text-black" : "font-light text-gray-500"}`}
               href={link.href}
             >
               {link.label}
@@ -36,9 +78,113 @@ const currentPath = Astro.url.pathname;
         })
       }
     </div>
-
-    <a class="button-secondary hidden md:inline-flex" href="/contact"
-      >Let&apos;s talk</a
-    >
-  </nav>
+  </div>
 </header>
+
+<div
+  id="menu-backdrop"
+  class="fixed inset-0 z-40 backdrop-blur-[7px] bg-black/10 opacity-0 pointer-events-none transition-opacity duration-300"
+>
+</div>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    // --- scroll hide/show ---
+    const header = document.getElementById("site-header");
+    let lastScrollY = window.scrollY;
+    let ticking = false;
+    let isOpen = false;
+
+    window.addEventListener("scroll", () => {
+      if (ticking || isOpen) return;
+      window.requestAnimationFrame(() => {
+        const currentScrollY = window.scrollY;
+
+        if (currentScrollY <= 0) {
+          // at the very top, always show
+          header?.style.setProperty("transform", "translateY(0)");
+        } else if (currentScrollY > lastScrollY) {
+          // scrolling down — hide
+          header?.style.setProperty("transform", "translateY(-100%)");
+        } else {
+          // scrolling up — show
+          header?.style.setProperty("transform", "translateY(0)");
+        }
+
+        lastScrollY = currentScrollY;
+        ticking = false;
+      });
+
+      ticking = true;
+    });
+
+    // --- arrow hover effect ---
+    const navLinks = document.querySelectorAll(".nav-link");
+
+    navLinks.forEach((link) => {
+      const arrow = link.querySelector(".nav-arrow") as HTMLElement;
+
+      link.addEventListener("mouseenter", () => {
+        if (!arrow) return;
+        arrow.style.opacity = "1";
+        arrow.style.transform = "translateX(0px)";
+      });
+
+      link.addEventListener("mouseleave", () => {
+        if (!arrow) return;
+        arrow.style.opacity = "0";
+        arrow.style.transform = "translateX(-6px)";
+      });
+    });
+
+    // --- mobile menu ---
+    const btn = document.getElementById("menu-btn");
+    const menu = document.getElementById("mobile-menu");
+    const backdrop = document.getElementById("menu-backdrop");
+    const dots = btn?.querySelectorAll("[data-dot]");
+
+    const greyDots = new Set([1, 3, 5, 7]);
+
+    const openMenu = () => {
+      isOpen = true;
+      header?.style.setProperty("transform", "translateY(0)");
+      if (menu) menu.style.transform = "translateY(0)";
+      if (backdrop) {
+        backdrop.style.opacity = "1";
+        backdrop.style.pointerEvents = "auto";
+      }
+      document.body.style.overflow = "hidden";
+      document.body.style.height = "100%";
+      document.documentElement.style.overflow = "hidden";
+      document.documentElement.style.height = "100%";
+      dots?.forEach((dot, i) => {
+        (dot as HTMLElement).style.backgroundColor = greyDots.has(i)
+          ? "#9ca3af"
+          : "#000000";
+      });
+    };
+
+    const closeMenu = () => {
+      isOpen = false;
+      if (menu) menu.style.transform = "translateY(-150%)";
+      if (backdrop) {
+        backdrop.style.opacity = "0";
+        backdrop.style.pointerEvents = "none";
+      }
+      document.body.style.overflow = "scroll";
+      document.body.style.height = "auto";
+      document.documentElement.style.overflow = "scroll";
+      document.documentElement.style.height = "auto";
+      dots?.forEach((dot) => {
+        (dot as HTMLElement).style.backgroundColor = "#000000";
+      });
+    };
+
+    btn?.addEventListener("click", () => (isOpen ? closeMenu() : openMenu()));
+    backdrop?.addEventListener("click", closeMenu);
+    const mobileLinks = menu?.querySelectorAll("a");
+    mobileLinks?.forEach((link) => {
+      link.addEventListener("click", closeMenu);
+    });
+  });
+</script>

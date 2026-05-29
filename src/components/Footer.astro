@@ -1,10 +1,263 @@
-<footer class="border-t border-white/10 px-6 py-8 sm:px-10 lg:px-16">
-  <div class="mx-auto flex max-w-6xl flex-col gap-4 text-sm text-neutral-400 md:flex-row md:items-center md:justify-between">
-    <p>Built with Astro, Tailwind CSS, and GSAP.</p>
-    <div class="flex items-center gap-4">
-      <a class="footer-link" href="mailto:hello@divineobeten.com">Email</a>
-      <a class="footer-link" href="https://www.linkedin.com" target="_blank" rel="noreferrer">LinkedIn</a>
-      <a class="footer-link" href="https://github.com" target="_blank" rel="noreferrer">GitHub</a>
+---
+import { Icon } from "astro-icon/components";
+---
+
+<div class="footer-wrapper">
+  <svg
+    preserveAspectRatio="none"
+    id="footer-wave"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 2278 120"
+    aria-hidden="true"
+  >
+    <path
+      id="bouncy-path"
+      fill="#000000"
+      d="M0-0.3C0-0.3,464,156,1139,156S2278-0.3,2278-0.3V120H0V-0.3z"></path>
+  </svg>
+
+  <footer
+    class="footer-body border-t flex justify-center border-white/10 pb-14 px-5 xl:px-0"
+  >
+    <div class="w-full xl:w-6xl">
+      <div id="intouch" class="text-muted uppercase text-xs mb-7 md:mb-10">
+        Get in touch
+      </div>
+      <div
+        class="flex gap-y-5 flex-col sm:flex-row justify-between items-start"
+      >
+        <div class="font-display text-3xl md:text-4xl font-black">
+          <h3>Got a project in mind?</h3>
+          <div class="gap-1 flex flex-col">
+            <a
+              data-hover
+              href="https://mail.google.com/mail/?view=cm&to=divineobeten5@gmail.com"
+              target="_blank"
+              class="flex mt-2 group relative hover:text-accent items-center lg:items-end w-max cursor-pointer"
+            >
+              Send a mail! <Icon
+                name="lucide:arrow-up-right"
+                class="w-8 h-8 md:w-10 md:h-10"
+              />
+              <span
+                id="hover-line"
+                class="absolute bottom-0 left-0 h-1 w-full group-hover:bg-accent bg-white origin-left transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.16,1)]"
+                style="transform:scaleX(0)"></span>
+            </a>
+            <span class="text-sm text-muted select-all"
+              >divineobeten5@gmail.com</span
+            >
+          </div>
+        </div>
+        <div class="flex flex-col text-right md:items-end">
+          <div
+            id="footer-links"
+            class="flex justify-between flex-wrap sm:grid grid-cols-2 grid-rows-2 items-center lg:gap-x-4 gap-x-2 gap-y-1 sm:justify-items-end"
+          >
+            <a
+              data-social="#24292e"
+              class="footer-link"
+              href="https://github.com/deevyn9">Github</a
+            >
+            <a
+              class="footer-link"
+              data-social="#0B63C6"
+              href="https://www.linkedin.com/in/deevyn9"
+              target="_blank"
+              rel="noreferrer">LinkedIn</a
+            >
+            <a
+              class="footer-link"
+              data-social="#000000"
+              href="https://x.com/wyddivine"
+              target="_blank"
+              rel="noreferrer">Twitter</a
+            >
+            <a
+              class="footer-link"
+              data-social="#E1306C"
+              href="https://instagram.com/ledivineobeten"
+              target="_blank"
+              rel="noreferrer">Instagram</a
+            >
+          </div>
+          <div
+            class="w-max mt-5 flex flex-col gap-y-5 gap-0.5 text-sm text-muted md:flex-row md:items-center md:justify-between"
+          >
+            <p id="footer-location" class="flex items-center gap-0.5">
+              <Icon name="proicons:location" width="16" height="16" /> Enugu, Nigeria
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="my-5 mb-10 lg:mb-0 lg:my-12.5">
+        <svg
+          viewBox="0 0 1200 230"
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-full"
+          aria-label="Divine Obeten"
+        >
+          <text
+            x="0"
+            y="220"
+            font-family="Bricolage Grotesque, sans-serif"
+            font-weight="900"
+            fill="rgba(255,255,255,0.06)"
+            font-size="300"
+            textLength="1200"
+            lengthAdjust="spacingAndGlyphs"
+          >
+            Divine Obeten
+          </text>
+        </svg>
+      </div>
+      <div class="w-full h-px my-10 bg-white/8"></div>
+      <div id="copyright" class="font-display text-center text-muted">
+        © 2026 Divine Obeten
+      </div>
     </div>
-  </div>
-</footer>
+  </footer>
+</div>
+
+<style>
+  .footer-wrapper {
+    position: relative;
+    width: 100%;
+    background-color: transparent;
+  }
+
+  #footer-wave {
+    display: block;
+    width: 100%;
+    height: 50px;
+    overflow: visible;
+  }
+
+  .footer-body {
+    background-color: #000000;
+    margin-top: -1px;
+  }
+
+  .footer-link {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    color: #6f6f6f;
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import { MorphSVGPlugin } from "gsap/MorphSVGPlugin";
+
+  gsap.registerPlugin(ScrollTrigger, MorphSVGPlugin);
+
+  document.addEventListener("astro:page-load", () => {
+    const footerBody = document.querySelector(
+      ".footer-body",
+    ) as HTMLElement | null;
+    const bouncyPath = document.querySelector(
+      "#bouncy-path",
+    ) as SVGPathElement | null;
+    const defaultColor = "#000000";
+
+    document.querySelectorAll("[data-social]").forEach((el) => {
+      const color = el.getAttribute("data-social");
+      const htmlEl = el as HTMLElement;
+
+      el.addEventListener("mouseenter", () => {
+        if (!footerBody || !bouncyPath || !color) return;
+        gsap.to(footerBody, {
+          backgroundColor: color,
+          duration: 0.4,
+          ease: "power2.out",
+        });
+        gsap.to(bouncyPath, { fill: color, duration: 0.4, ease: "power2.out" });
+        gsap.to(htmlEl, {
+          color: "#e8e8e8",
+          duration: 0.2,
+          ease: "power2.out",
+        });
+        gsap.to(
+          "#footer-eyebrow, #footer-location, #intouch, #copyright, #footer-links a:not([data-social='" +
+            color +
+            "'])",
+          {
+            color: "#a0a0a0",
+            duration: 0.2,
+            ease: "power2.out",
+          },
+        );
+      });
+
+      el.addEventListener("mouseleave", () => {
+        if (!footerBody || !bouncyPath || !color) return;
+        gsap.to(footerBody, {
+          backgroundColor: defaultColor,
+          duration: 0.4,
+          ease: "power2.out",
+        });
+        gsap.to(bouncyPath, {
+          fill: defaultColor,
+          duration: 0.4,
+          ease: "power2.out",
+        });
+        gsap.to(htmlEl, {
+          color: "",
+          duration: 0.2,
+          ease: "power2.out",
+        });
+        gsap.to(
+          "#footer-eyebrow, #copyright, #intouch, #footer-location, #footer-links a",
+          {
+            color: "",
+            duration: 0.2,
+            ease: "power2.out",
+          },
+        );
+      });
+    });
+
+    const down = "M0-0.3C0-0.3,464,156,1139,156S2278-0.3,2278-0.3V120H0V-0.3z";
+    const center = "M0-0.3C0-0.3,464,0,1139,0s1139-0.3,1139-0.3V120H0V-0.3z";
+
+    ScrollTrigger.create({
+      trigger: ".footer-wrapper",
+      start: "top bottom",
+      toggleActions: "play pause resume reverse",
+      onEnter: (self) => {
+        const velocity = self.getVelocity();
+        const variation = velocity / 5000;
+
+        gsap.fromTo(
+          "#bouncy-path",
+          { morphSVG: down },
+          {
+            duration: 2,
+            morphSVG: center,
+            ease: `elastic.out(${1 + variation}, ${1 - variation})`,
+            overwrite: true,
+          },
+        );
+      },
+    });
+
+    document.querySelectorAll("[data-hover]").forEach((el) => {
+      const line = el.querySelector("#hover-line") as HTMLElement | null;
+
+      el.addEventListener("mouseenter", () => {
+        if (!line) return;
+        line.style.transformOrigin = "left";
+        line.style.transform = "scaleX(1)";
+      });
+
+      el.addEventListener("mouseleave", () => {
+        if (!line) return;
+        line.style.transformOrigin = "right";
+        line.style.transform = "scaleX(0)";
+      });
+    });
+  });
+</script>

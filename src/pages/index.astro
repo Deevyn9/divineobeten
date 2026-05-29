@@ -1,5 +1,6 @@
 ---
-import Preloader from "../components/Preloader.astro";
+import FeaturedExplorations from "../components/FeaturedExplorations.astro";
+import FeaturedProjects from "../components/FeaturedProjects.astro";
 import Layout from "../layouts/Layout.astro";
 
 const skills = [
@@ -36,97 +37,311 @@ const sections = [
 ---
 
 <Layout
-  title="Divine Obeten | Portfolio"
-  description="Portfolio scaffold built with Astro, Tailwind CSS, and GSAP."
-  image="/og-image.svg"
+  title="Divine Obeten | Frontend Engineer"
+  description="Frontend Engineer"
+  image="/images/linkimg.png"
 >
-  <section class="relative overflow-hidden px-6 pb-18 pt-24 sm:px-10 lg:px-16">
-    <div
-      class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(251,191,36,0.18),transparent_34%),radial-gradient(circle_at_80%_20%,rgba(45,212,191,0.12),transparent_22%),linear-gradient(180deg,rgba(255,255,255,0.02),transparent)]"
-    >
-    </div>
-    <div
-      class="mx-auto grid max-w-6xl gap-14 lg:grid-cols-[1.15fr_0.85fr] lg:items-end"
-    >
-      <div class="space-y-8">
-        <p data-intro class="eyebrow">Portfolio scaffold</p>
-        <div class="space-y-5">
-          <h1
-            data-intro
-            class="max-w-4xl text-5xl font-semibold tracking-tight text-white sm:text-6xl lg:text-7xl"
-          >
-            Lightweight, SEO-friendly, and ready for your real story.
-          </h1>
-          <p
-            data-intro
-            class="max-w-2xl text-base leading-7 text-neutral-300 sm:text-lg"
-          >
-            This starter gives you Astro, Tailwind, GSAP, and Astro view
-            transitions in a clean base we can now shape around your identity,
-            work, and voice.
+  <main
+    class="min-h-screen text-black bg-[radial-gradient(circle,#ebebeb_1px,transparent_1px)] bg-size-[28px_28px]"
+  >
+    <div class="mx-auto w-full xl:w-6xl px-5 xl:px-0">
+      <!-- hero section -->
+      <section
+        class="relative overflow-hidden lg:pb-10 pt-24 md:pt-20 lg:pt-32 flex flex-col"
+      >
+        <p class="text-xs text-muted font-display mb-2 sm:mb-0">
+          Enugu, Nigeria — <span
+            id="local-time"
+            class="text-black font-semibold text-base"></span>
+        </p>
+        <h3 class="text-xl md:text-3xl max-w-[90%] sm:max-w-175 font-normal">
+          Frontend Engineer. I've built across fintech, edtech, ecommerce, and
+          web3 — and somewhere along the way I became obsessed with how things
+          feel, not just what they do.
+        </h3>
+        <div class="mt-3 lg:mt-5 flex items-center gap-1">
+          <div class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></div>
+          <p class="font-display text-xs uppercase leading-none">
+            available for global opportunities
           </p>
         </div>
-        <div data-intro class="flex flex-wrap gap-3">
-          <a class="button-primary" href="#about">Start shaping it</a>
-          <a class="button-secondary" href="#stack">See the stack</a>
-        </div>
-      </div>
-
-      <aside data-intro class="panel space-y-6">
         <div
-          class="flex items-center justify-between border-b border-white/10 pb-4"
+          class="mt-10 lg:mt-7 md:mt-auto flex flex-col gap-y-8 md:flex-row md:items-end md:justify-between"
         >
-          <p class="text-sm uppercase tracking-[0.3em] text-neutral-400">
-            Current stack
+          <p class="max-w-lg text-sm text-muted">
+            Motion systems, creative tooling, typography, and expressive
+            frontend experiences.
           </p>
-          <span
-            class="rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1 text-xs text-emerald-300"
-          >
-            Ready
-          </span>
-        </div>
-        <ul id="stack" class="grid gap-3 text-sm text-neutral-200">
-          <li class="stack-row">
-            <span>Framework</span><strong>Astro</strong>
-          </li>
-          <li class="stack-row">
-            <span>Styling</span><strong>Tailwind CSS</strong>
-          </li>
-          <li class="stack-row"><span>Animation</span><strong>GSAP</strong></li>
-          <li class="stack-row">
-            <span>Transitions</span><strong>astro:transitions</strong>
-          </li>
-          <li class="stack-row">
-            <span>Language</span><strong>TypeScript-ready</strong>
-          </li>
-        </ul>
-      </aside>
-    </div>
-  </section>
 
-  <section class="px-6 py-10 sm:px-10 lg:px-16">
-    <div class="mx-auto max-w-6xl">
-      <div class="flex flex-wrap gap-3">
-        {skills.map((skill) => <span class="chip">{skill}</span>)}
-      </div>
-    </div>
-  </section>
-
-  <section id="about" class="px-6 py-10 sm:px-10 lg:px-16">
-    <div class="mx-auto grid max-w-6xl gap-6 md:grid-cols-2">
-      {
-        sections.map((section) => (
-          <article class="panel min-h-64 space-y-4">
-            <p class="eyebrow">{section.eyebrow}</p>
-            <h2 class="text-2xl font-semibold tracking-tight text-white">
-              {section.title}
-            </h2>
-            <p class="max-w-xl text-sm leading-7 text-neutral-300">
-              {section.copy}
+          <div class="text-black text-left md:text-right">
+            <p class="mb-2 font-medium text-sm uppercase font-display">
+              Currently Exploring
             </p>
-          </article>
-        ))
-      }
+
+            <div class="space-y-1 tracking-[0.02em] font-normal text-xs">
+              <p>Creative Development</p>
+              <p>Interaction Systems</p>
+              <p>Motion Design</p>
+              <p>Frontend Architecture</p>
+              <p>Design Engineering</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Works section -->
+      <FeaturedProjects />
+
+      <!-- About section -->
+      <section class="pt-20 w-full" id="about">
+        <div class="mb-7">
+          <p
+            class="font-display text-xs uppercase tracking-[0.2em] text-muted mb-1"
+          >
+            Who is he?
+          </p>
+          <h2 class="text-2xl md:text-3xl tracking-normal font-medium">
+            A<span class="italic">b</span>out
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+          <div class="flex flex-col gap-4 text-sm text-muted leading-relaxed">
+            <p>
+              A Frontend Engineer with 3+ years building across fintech, edtech,
+              ecommerce, and web3 — who enjoys football, gaming, reading, and is
+              slowly learning to draw. Weekday mornings you'll find me at the
+              gym on <a
+                href="https://hevy.com/user/obe10"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="underline
+              underline-offset-2">Hevy</a
+              >, and Tuesday, Thursday and Saturday mornings on the road with
+              <a
+                href="https://strava.app.link/kBFvApizu3b"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="underline
+            underline-offset-2">Strava</a
+              >. My philosophy is simple: keep going, and make it feel good.
+            </p>
+            <p>
+              I grew up drawn to things that had both skill and feel — games
+              that rewarded precision, football that punished hesitation,
+              drawings that only worked when every line was intentional.
+              Frontend found me the same way. The first time I saw a GSAP
+              animation do something I didn't think a browser could do, it felt
+              like a door opening. This wasn't just code. It could move,
+              breathe, and make people feel something. I've been chasing that
+              ever since.
+            </p>
+            <p>
+              I put an unnecessary amount of care into everything I touch
+              because I believe people should feel that someone made this for
+              them — with intention and a little extra attention to the details
+              nobody asked for. I don't like leaving things to chance. It's why
+              I never think something is truly done until it's live, out in the
+              world, and feeling exactly the way it was supposed to.
+            </p>
+          </div>
+
+          <!-- Right: experience -->
+          <div class="flex flex-col">
+            <p
+              class="font-display text-xs uppercase tracking-[0.2em] text-muted mb-4"
+            >
+              Experience
+            </p>
+            {
+              [
+                {
+                  company: "SeguraPay",
+                  role: "Software Engineer - Frontend",
+                  period: "2024 — Present",
+                  industry: "Fintech / Banking-as-a-Service",
+                },
+                {
+                  company: "Illusion Services",
+                  role: "Frontend Developer",
+                  period: "2024 — 2025",
+                  industry: "Agency",
+                },
+                {
+                  company: "Medorii Innovations",
+                  role: "Frontend Developer",
+                  period: "2023",
+                  industry: "Web3",
+                },
+                {
+                  company: "Stunhaul",
+                  role: "Frontend Developer",
+                  period: "2022",
+                  industry: "Logistics / Ecommerce",
+                },
+                {
+                  company: "Freelance",
+                  role: "Frontend Developer",
+                  period: "2022 — 2023",
+                  industry: "",
+                },
+              ].map((exp) => (
+                <div class="flex flex-col gap-1 py-4 border-b border-neutral-200 last:border-none">
+                  <div class="flex flex-col sm:flex-row items-start justify-between gap-y-2 sm:gap-4">
+                    <div>
+                      <p class="text-sm font-medium text-black">
+                        {exp.company}
+                      </p>
+                      <p class="font-display text-xs text-muted mt-0.5">
+                        {exp.role}
+                      </p>
+                    </div>
+                    <div class="text-left sm:text-right flex-col-reverse flex sm:flex-col">
+                      <span class="font-display text-xs text-muted shrink-0">
+                        {exp.period}
+                      </span>
+                      {exp.industry && (
+                        <p class="text-sm text-muted mt-0.5 md:mt-2">
+                          {exp.industry}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+
+        <!-- Skills: full width below grid -->
+        <div class="mt-16 flex flex-col gap-6">
+          <p class="font-display text-xs uppercase tracking-[0.2em] text-muted">
+            Skills & Tools
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+              <p
+                class="font-display text-xs uppercase tracking-[0.2em] text-muted mb-3"
+              >
+                Core
+              </p>
+              <div class="flex flex-wrap gap-2">
+                {
+                  [
+                    "React",
+                    "Next.js",
+                    "TypeScript",
+                    "JavaScript",
+                    "Astro",
+                    "Tailwind CSS",
+                    "HTML/CSS",
+                  ].map((s) => (
+                    <span class="font-display text-xs px-3 py-1 border border-neutral-200 text-black">
+                      {s}
+                    </span>
+                  ))
+                }
+              </div>
+            </div>
+            <div>
+              <p
+                class="font-display text-xs uppercase tracking-[0.2em] text-muted mb-3"
+              >
+                Motion & Design
+              </p>
+              <div class="flex flex-wrap gap-2">
+                {
+                  [
+                    "GSAP",
+                    "Framer Motion",
+                    "Motion Design",
+                    "Interaction Design",
+                    "Figma",
+                    "Design Systems",
+                    "UI Animation",
+                  ].map((s) => (
+                    <span class="font-display text-xs px-3 py-1 border border-neutral-200 text-black">
+                      {s}
+                    </span>
+                  ))
+                }
+              </div>
+            </div>
+            <div>
+              <p
+                class="font-display text-xs uppercase tracking-[0.2em] text-muted mb-3"
+              >
+                Engineering
+              </p>
+              <div class="flex flex-wrap gap-2">
+                {
+                  [
+                    "Creative Development",
+                    "Frontend Architecture",
+                    "REST APIs",
+                    "Git/GitHub",
+                    "Responsive Design",
+                    "Web3",
+                  ].map((s) => (
+                    <span class="font-display text-xs px-3 py-1 border border-neutral-200 text-black">
+                      {s}
+                    </span>
+                  ))
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <FeaturedExplorations />
+      <!-- <section class="px-6 py-10 sm:px-10 lg:px-16">
+  </div>
+      <div class="mx-auto max-w-6xl">
+        <div class="flex flex-wrap gap-3">
+          {skills.map((skill) => <span class="chip">{skill}</span>)}
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="px-6 py-10 sm:px-10 lg:px-16">
+      <div class="mx-auto grid max-w-6xl gap-6 md:grid-cols-2">
+        {
+          sections.map((section) => (
+            <article class="panel min-h-64 space-y-4">
+              <p class="eyebrow">{section.eyebrow}</p>
+              <h2 class="text-2xl font-semibold tracking-tight text-white">
+                {section.title}
+              </h2>
+              <p class="max-w-xl text-sm leading-7 text-neutral-300">
+                {section.copy}
+              </p>
+            </article>
+          ))
+        }
+      </div>
+    </section> -->
     </div>
-  </section>
-</Layout>
+
+    <script>
+      function updateTime() {
+        const el = document.getElementById("local-time");
+        if (!el) return;
+
+        const now = new Date();
+        const time = now.toLocaleTimeString("en-US", {
+          timeZone: "Africa/Lagos",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: true,
+        });
+
+        el.textContent = `${time} WAT`;
+      }
+
+      updateTime();
+      setInterval(updateTime, 1000);
+    </script>
+  </main></Layout
+>

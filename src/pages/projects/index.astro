@@ -1,0 +1,68 @@
+---
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import ProjectCard from "../../components/ProjectCard.astro";
+
+const allProjects = await getCollection("projects");
+const projects = allProjects.sort(
+  (a: CollectionEntry<"projects">, b: CollectionEntry<"projects">) =>
+    (a.data.order ?? 99) - (b.data.order ?? 99),
+);
+---
+
+<Layout title="Divine's Projects">
+  <main class="mx-auto w-full xl:w-6xl px-5 xl:px-0 pt-24 pb-20">
+    <!-- Header -->
+    <div class="mb-10">
+      <div class="mb-10 flex justify-between items-center">
+        <a
+          href="/"
+          class="group inline-flex items-center gap-1 font-display text-xs uppercase tracking-[0.2em] text-muted hover:text-black transition-colors duration-200"
+        >
+          <span
+            class="group-hover:-translate-x-0.5 transition-transform duration-200"
+            >←</span
+          >
+          Back Home
+        </a>
+
+        <p
+          class="font-display text-xs uppercase tracking-[0.2em] text-muted mb-2"
+        >
+          All Work ({projects.length})
+        </p>
+      </div>
+
+      <!-- Intro -->
+      <div class="">
+        <p class="font-display text-xl text-black">Selected Work</p>
+
+        <p class="max-w-2xl text-sm leading-relaxed text-muted">
+          A selection of thoughtful digital products designed and engineered
+          over the years.
+        </p>
+      </div>
+    </div>
+
+    <!-- Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-20">
+      {
+        projects.map((project) => (
+          <ProjectCard
+            title={project.data.title}
+            category={project.data.category}
+            year={project.data.year}
+            description={project.data.description}
+            tags={project.data.tags}
+            image={project.data.image}
+            slug={project.slug}
+            live={project.data.live}
+            caseStudy={project.data.caseStudy ?? true}
+            order={project.data.order}
+          />
+        ))
+      }
+    </div>
+  </main>
+</Layout>

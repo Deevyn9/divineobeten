@@ -1,0 +1,76 @@
+---
+const explorations = [
+  {
+    id: "01",
+    name: "Hold to Delete",
+    preview: "/videos/Holdtocopy.mp4",
+    tags: ["Interaction", "Microinteraction", "Clip Path"],
+    source: "https://github.com/Deevyn9/hold-to-delete",
+  },
+  {
+    id: "02",
+    name: "Grid-Stack",
+    preview: "/videos/Gridstack.mp4",
+    tags: ["Interaction", "GSAP"],
+    source: "https://github.com/Deevyn9/hover-reveal",
+  },
+  {
+    id: "03",
+    name: "Bubble Studios",
+    preview: "/videos/Bubblestudios.mp4",
+    tags: ["UI Component", "Animation"],
+    source: "https://github.com/Deevyn9/password-validation",
+  },
+  {
+    id: "04",
+    name: "Mouse Trail",
+    preview: "/videos/Mousetrail.mp4",
+    tags: ["GSAP"],
+    source: "https://github.com/Deevyn9/page-transition",
+  },
+];
+---
+
+<section class="py-20 w-full" id="explorations">
+
+  <!-- Header -->
+  <div class="flex items-end justify-between mb-12">
+    <div>
+      <p class="font-display text-xs uppercase tracking-[0.2em] text-muted mb-2">
+        His Lab
+      </p>
+      <h2 class="text-2xl md:text-3xl font-medium">Exp<span class="italic">l</span>orations</h2>
+    </div>
+    <a
+      href="/explorations"
+      class="group font-display text-xs uppercase tracking-[0.2em] text-muted flex items-center gap-1 hover:text-black transition-colors duration-200"
+    >
+      <span class="group-hover:translate-x-0.5 transition-transform duration-200">
+        View All
+      </span>
+      ↗
+    </a>
+  </div>
+
+  <!-- Filmstrip row -->
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+    {
+      explorations.map((exp) => (
+        <div class="flex flex-col gap-3">
+          <!-- Square preview -->
+          <div class="exploration-preview relative w-full aspect-square bg-neutral-100 px-4 overflow-hidden">
+              <video autoplay muted loop playsinline class="w-full h-full object-contain">
+    <source src={exp.preview} type="video/mp4" />
+  </video>
+          </div>
+          
+          <div class="flex justify-between items-baseline">
+            <p class="text-sm font-normal">{exp.name}</p>
+            <p class="text-xs text-muted font-normal">{exp.id}</p>
+             </div>
+        </div>
+      ))
+    }
+  </div>
+
+</section>
