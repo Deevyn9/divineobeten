@@ -76,3 +76,11 @@ body {
     @apply text-neutral-400 transition hover:text-white;
   }
 }
+
+.preloader {
+  display: none;
+}
+
+.preloader.is-active {
+  display: grid;
+}

@@ -26,7 +26,7 @@ const socialImage = new URL(image, siteUrl).toString();
 <html lang="en" class="">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
     <link rel="icon" href="/favicon.ico" />
     <link
@@ -75,6 +75,17 @@ const socialImage = new URL(image, siteUrl).toString();
       }
 
       requestAnimationFrame(raf);
+
+      window.addEventListener("preloader:start", () => lenis.stop());
+      window.addEventListener("preloader:end", () => lenis.start());
+    </script>
+    <script is:inline>
+      if (sessionStorage.getItem("preloaderDone")) {
+        document.documentElement.style.setProperty(
+          "--preloader-display",
+          "none",
+        );
+      }
     </script>
     <ClientRouter />
   </head>
