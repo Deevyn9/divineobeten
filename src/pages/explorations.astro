@@ -113,12 +113,13 @@ const explorations = [
       {
         explorations.map((exp) => (
           <div class="flex flex-col gap-4">
-            <div class="exploration-skew relative w-full aspect-16/7 bg-neutral-100 overflow-hidden p-5 md:py-10 md:px-7">
+            <div class="exploration-skew relative w-full md:aspect-16/7 bg-neutral-100 overflow-hidden p-5 md:py-10 md:px-7">
               <video
-                autoplay
                 muted
+                autoplay
                 loop
                 playsinline
+                webkit-playsinline
                 class="w-full h-full object-contain"
               >
                 <source src={exp.preview} type="video/mp4" />
@@ -169,6 +170,16 @@ const explorations = [
   gsap.registerPlugin(ScrollTrigger);
 
   document.addEventListener("astro:page-load", () => {
+    document.addEventListener("astro:page-load", () => {
+      const videos = document.querySelectorAll("video");
+      videos.forEach((video) => {
+        video.muted = true;
+        video.play().catch(() => {
+          // autoplay failed, browser will show play button
+        });
+      });
+    });
+
     const images = document.querySelectorAll(".exploration-skew");
 
     let currentSkew = 0;
