@@ -6,8 +6,8 @@ featured: false
 order: 8
 description: "A full website rebuild for Illusion Services — a tech consulting company offering design, engineering, and tech services. Built to showcase their work, services, and team with clarity and craft."
 tags: ["React", "TypeScript", "Tailwind CSS"]
-image: "/images/illusionservices.png"
-images: ["/images/illusionsevices2.png", "/images/illusionsevices3.png"]
+image: "/images/illusionservices.webp"
+images: ["/images/illusionsevices2.webp", "/images/illusionsevices3.webp"]
 caseStudy: true
 ---
 

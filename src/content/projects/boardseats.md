@@ -6,8 +6,8 @@ featured: true
 order: 4
 description: "A full website redesign for Boardseats — overhauling 15+ screens with improved UI, better UX flows, and connected contact forms that actually convert."
 tags: ["React", "Tailwind CSS", "TypeScript"]
-image: "/images/boardseats.png"
-images: ["/images/boardseats2.png", "/images/boardseats3.png"]
+image: "/images/boardseats.webp"
+images: ["/images/boardseats2.webp", "/images/boardseats3.webp"]
 live: "https://boardseats.io"
 caseStudy: true
 ---

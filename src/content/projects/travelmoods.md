@@ -6,12 +6,12 @@ featured: false
 order: 5
 description: "A mood-based travel discovery app — pick how you're feeling and get destination suggestions paired with immersive YouTube previews for each mood."
 tags: ["React", "TypeScript", "Tailwind CSS"]
-image: "/images/travelmoods.png"
+image: "/images/travelmoods.webp"
 images:
   [
-    "/images/travelmoods2.png",
-    "/images/travelmoods3.png",
-    "/images/travelmoods4.png",
+    "/images/travelmoods2.webp",
+    "/images/travelmoods3.webp",
+    "/images/travelmoods4.webp",
   ]
 live: "https://travelmoods.vercel.app"
 caseStudy: true

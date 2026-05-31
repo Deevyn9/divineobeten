@@ -6,8 +6,8 @@ featured: false
 order: 6
 description: "A landing page build for SpaceHub — a coworking space company giving professionals a place to show up, focus, and get work done."
 tags: ["React", "Tailwind CSS", "TypeScript"]
-image: "/images/spacehub.png"
-images: ["/images/spacehub2.png", "/images/spacehub3.png"]
+image: "/images/spacehub.webp"
+images: ["/images/spacehub2.webp", "/images/spacehub3.webp"]
 caseStudy: true
 ---
 

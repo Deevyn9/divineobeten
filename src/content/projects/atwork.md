@@ -9,10 +9,10 @@ tags: ["React", "TypeScript", "Tailwind CSS"]
 image: "/images/atwork.webp"
 images:
   [
-    "/images/Atwork2.png",
-    "/images/Atwork3.png",
-    "/images/Atwork4.png",
-    "/images/Atwork5.png",
+    "/images/Atwork2.webp",
+    "/images/Atwork3.webp",
+    "/images/Atwork4.webp",
+    "/images/Atwork5.webp",
   ]
 caseStudy: true
 ---

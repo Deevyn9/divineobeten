@@ -8,7 +8,11 @@ description: "A job application tracker built for engineers in active job search
 tags: ["Next.js", "TypeScript", "Tailwind CSS"]
 image: "/images/applymate.webp"
 images:
-  ["/images/applymate2.png", "/images/applymate3.png", "/images/applymate4.png"]
+  [
+    "/images/applymate2.webp",
+    "/images/applymate3.webp",
+    "/images/applymate4.webp",
+  ]
 live: "https://applymate.divineobeten.xyz"
 caseStudy: true
 ---
