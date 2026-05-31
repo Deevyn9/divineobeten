@@ -32,7 +32,13 @@ const icons = [
   >
     {
       icons.map((icon) => (
-        <img class="flair absolute opacity-0 w-12 h-12" src={icon.src} />
+        <img
+          class="flair absolute opacity-0 w-12 h-12"
+          src={icon.src}
+          alt={icon.src}
+          loading="lazy"
+          decoding="async"
+        />
       ))
     }
   </div>
