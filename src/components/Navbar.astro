@@ -145,18 +145,20 @@ const currentPath = Astro.url.pathname;
 
     const greyDots = new Set([1, 3, 5, 7]);
 
+    let savedScrollY = 0;
+
     const openMenu = () => {
       isOpen = true;
+      savedScrollY = window.scrollY;
       header?.style.setProperty("transform", "translateY(0)");
       if (menu) menu.style.transform = "translateY(0)";
       if (backdrop) {
         backdrop.style.opacity = "1";
         backdrop.style.pointerEvents = "auto";
       }
-      document.body.style.overflow = "hidden";
-      document.body.style.height = "100%";
-      document.documentElement.style.overflow = "hidden";
-      document.documentElement.style.height = "100%";
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${savedScrollY}px`;
+      document.body.style.width = "100%";
       dots?.forEach((dot, i) => {
         (dot as HTMLElement).style.backgroundColor = greyDots.has(i)
           ? "#9ca3af"
@@ -171,10 +173,10 @@ const currentPath = Astro.url.pathname;
         backdrop.style.opacity = "0";
         backdrop.style.pointerEvents = "none";
       }
-      document.body.style.overflow = "scroll";
-      document.body.style.height = "auto";
-      document.documentElement.style.overflow = "scroll";
-      document.documentElement.style.height = "auto";
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
+      window.scrollTo(0, savedScrollY);
       dots?.forEach((dot) => {
         (dot as HTMLElement).style.backgroundColor = "#000000";
       });
