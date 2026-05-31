@@ -38,10 +38,12 @@ const icons = [
   </div>
 
   <div
-    class="flex flex-col items-center text-2xl uppercase text-gray-900 font-semibold leading-6"
+    class="flex flex-col items-center text-3xl sm:text-4xl uppercase text-gray-900 font-semibold leading-6"
   >
-    <span>Divine Obeten</span>
-    <span class="text-xs">(wiggle your mouse around.)</span>
+    <span class="font-display">Divine Obeten</span>
+    <span class="text-xs" id="preloader-subtitle"
+      >(wiggle your mouse around.)</span
+    >
   </div>
   <div
     class="absolute flex gap-1 items-center capitalize italic text-gray-900 right-5 bottom-5 font-semibold"
@@ -72,7 +74,7 @@ const icons = [
 
     if (!preloader || !countEl) return;
 
-    preloader.classList.add("is-active"); // ← add this line here
+    preloader.classList.add("is-active");
 
     sessionStorage.setItem("preloaderDone", "true");
 
@@ -137,6 +139,10 @@ const icons = [
     window.dispatchEvent(new Event("preloader:start"));
 
     const isMobile = window.matchMedia("(pointer: coarse)").matches;
+    const subtitle = document.getElementById("preloader-subtitle");
+    if (isMobile && subtitle) {
+      subtitle.textContent = "(tap screen for a surprise)";
+    }
 
     const unlockScroll = () => {
       document.body.style.overflow = "";
@@ -163,12 +169,7 @@ const icons = [
         countEl.textContent = `${Math.round(counter.val)}%`;
       },
       onComplete: () => {
-        if (isMobile) {
-          countEl.textContent = "tap screen";
-          preloader?.addEventListener("click", exitPreloader, { once: true });
-        } else {
-          gsap.delayedCall(0.4, exitPreloader);
-        }
+        gsap.delayedCall(0.4, exitPreloader);
       },
     });
   };
