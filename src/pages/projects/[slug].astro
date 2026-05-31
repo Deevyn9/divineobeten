@@ -84,7 +84,13 @@ const {
 
     <!-- Hero image -->
     <div class="w-full aspect-video bg-neutral-100 overflow-hidden mb-16">
-      <img src={image} alt={title} class="w-full h-full object-cover" />
+      <img
+        src={image}
+        alt={title}
+        class="w-full h-full object-cover"
+        loading="lazy"
+        decoding="async"
+      />
     </div>
 
     <!-- Case study content -->
@@ -155,6 +161,8 @@ const {
                 src={img}
                 alt={`${title} screenshot ${i + 1}`}
                 class="w-full h-full object-cover"
+                loading="lazy"
+                decoding="async"
               />
             </div>
           ))}

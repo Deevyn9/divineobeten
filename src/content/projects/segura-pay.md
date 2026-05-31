@@ -7,7 +7,7 @@ order: 1
 description: "A comprehensive Banking-as-a-Service platform providing corporate clients with banking functionalities through a secure, scalable API-first architecture — enabling businesses to integrate account management, payments processing, and financial transactions directly into their operations."
 tags: ["Next.js", "TypeScript", "Tailwind CSS"]
 image: "/images/segura-dash.webp"
-images: ["/images/segura2.png", "/images/segura3.png", "/images/segura4.png"]
+images: ["/images/segura2.webp", "/images/segura3.webp", "/images/segura4.webp"]
 caseStudy: true
 ---
 

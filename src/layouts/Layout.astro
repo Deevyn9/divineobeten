@@ -29,10 +29,24 @@ const socialImage = new URL(image, siteUrl).toString();
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
     <link rel="icon" href="/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin="anonymous"
+    />
     <link
       href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=Inter:wght@300..700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"
       rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
     />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=Inter:wght@300..700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
     <meta name="theme-color" content="#09090b" />
@@ -78,14 +92,6 @@ const socialImage = new URL(image, siteUrl).toString();
 
       window.addEventListener("preloader:start", () => lenis.stop());
       window.addEventListener("preloader:end", () => lenis.start());
-    </script>
-    <script is:inline>
-      if (sessionStorage.getItem("preloaderDone")) {
-        document.documentElement.style.setProperty(
-          "--preloader-display",
-          "none",
-        );
-      }
     </script>
     <ClientRouter />
   </head>
