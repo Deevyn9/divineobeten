@@ -3,7 +3,7 @@ title: "Illusion Services"
 category: "Agency"
 year: "2024"
 featured: false
-order: 8
+order: 9
 description: "A full website rebuild for Illusion Services — a tech consulting company offering design, engineering, and tech services. Built to showcase their work, services, and team with clarity and craft."
 tags: ["React", "TypeScript", "Tailwind CSS"]
 image: "/images/illusionservices.webp"

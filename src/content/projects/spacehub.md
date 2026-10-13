@@ -3,7 +3,7 @@ title: "SpaceHub"
 category: "Landing Page"
 year: "2024"
 featured: false
-order: 6
+order: 7
 description: "A landing page build for SpaceHub — a coworking space company giving professionals a place to show up, focus, and get work done."
 tags: ["React", "Tailwind CSS", "TypeScript"]
 image: "/images/spacehub.webp"
