@@ -3,7 +3,7 @@ title: "AtWork"
 category: "Web3"
 year: "2025"
 featured: true
-order: 3
+order: 4
 description: "A Web3 freelance platform that streamlines hiring by giving businesses instant access to skilled professionals — enabling seamless collaboration through on-chain bounties, gig management, and trustless payments."
 tags: ["React", "TypeScript", "Tailwind CSS"]
 image: "/images/atwork.webp"

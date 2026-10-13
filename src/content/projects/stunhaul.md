@@ -3,7 +3,7 @@ title: "Stunhaul"
 category: "Ecommerce"
 year: "2023"
 featured: false
-order: 7
+order: 8
 description: "A full ecommerce frontend for Stunhaul — a gift-focused online store with a complete shopping experience including product listings, cart, checkout, and admin interfaces."
 tags: ["React", "TypeScript", "Tailwind CSS"]
 image: "/images/stunhaul.webp"

@@ -3,7 +3,7 @@ title: "TravelMoods"
 category: "Personal Project"
 year: "2024"
 featured: false
-order: 5
+order: 6
 description: "A mood-based travel discovery app — pick how you're feeling and get destination suggestions paired with immersive YouTube previews for each mood."
 tags: ["React", "TypeScript", "Tailwind CSS"]
 image: "/images/travelmoods.webp"
