@@ -7,7 +7,16 @@ order: 1
 description: "A habit tracker where streaks can freeze, break, and be won back. Daily challenges, streak restores, trophies, offline support and an installable app, designed and built from scratch."
 tags: ["Next.js", "TypeScript", "Tailwind CSS", "PostgreSQL", "Zustand"]
 image: "/images/quests.webp"
-images: ["/images/quests2.webp", "/images/quests3.webp", "/images/quests4.webp"]
+images:
+  [
+    "/images/quests1.webp",
+    "/images/quests2.webp",
+    "/images/quests3.webp",
+    "/images/quests4.webp",
+    "/images/quests5.webp",
+    "/images/quests6.webp",
+    "/images/quests7.webp",
+  ]
 live: "https://quests.divineobeten.xyz"
 caseStudy: true
 ---
