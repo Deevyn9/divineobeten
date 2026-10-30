@@ -277,5 +277,51 @@ import Layout from "../layouts/Layout.astro";
       updateTime();
       setInterval(updateTime, 1000);
     </script>
+
+    <script>
+      import { gsap } from "gsap";
+
+      const revealHero = () => {
+        const root = document.documentElement;
+        const items = gsap.utils.toArray<HTMLElement>("[data-hero]");
+
+        if (
+          !items.length ||
+          window.matchMedia("(prefers-reduced-motion: reduce)").matches
+        ) {
+          root.classList.remove("hero-pending");
+          return;
+        }
+
+        gsap.fromTo(
+          items,
+          { y: 32, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.7,
+            ease: "power3.out",
+            stagger: 0.08,
+            onComplete: () => gsap.set(items, { clearProps: "all" }),
+          },
+        );
+        // GSAP has already written inline styles, so dropping the class can't flash
+        root.classList.remove("hero-pending");
+      };
+
+      const initHero = () => {
+        if (!document.documentElement.classList.contains("hero-pending"))
+          return;
+
+        // first load: wait for the preloader to exit. navigation: play immediately
+        if (document.documentElement.classList.contains("is-loading")) {
+          window.addEventListener("preloader:end", revealHero, { once: true });
+        } else {
+          revealHero();
+        }
+      };
+
+      document.addEventListener("astro:page-load", initHero);
+    </script>
   </main></Layout
 >
