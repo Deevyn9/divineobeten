@@ -104,6 +104,18 @@ const socialImage = new URL(image, siteUrl).toString();
 
       window.addEventListener("preloader:end", () => lenis.start());
     </script>
+
+    <script>
+      import type { TransitionBeforeSwapEvent } from "astro:transitions/client";
+
+      document.addEventListener("astro:before-swap", (e) => {
+        const { to, newDocument } = e as TransitionBeforeSwapEvent;
+        if (to.pathname === "/") {
+          newDocument.documentElement.classList.add("hero-pending");
+        }
+      });
+    </script>
+
     <ClientRouter />
   </head>
   <body class="min-h-screen font-sans bg-bg antialiased">
