@@ -91,6 +91,9 @@ const socialImage = new URL(image, siteUrl).toString();
       import Lenis from "lenis";
 
       const lenis = new Lenis();
+      if (document.documentElement.classList.contains("is-loading")) {
+        lenis.stop();
+      }
 
       function raf(time: number) {
         lenis.raf(time);
@@ -99,7 +102,6 @@ const socialImage = new URL(image, siteUrl).toString();
 
       requestAnimationFrame(raf);
 
-      window.addEventListener("preloader:start", () => lenis.stop());
       window.addEventListener("preloader:end", () => lenis.start());
     </script>
     <ClientRouter />
