@@ -84,3 +84,15 @@ body {
 .preloader.is-active {
   display: grid;
 }
+
+html.hero-pending [data-hero] {
+  opacity: 0;
+  transform: translateY(32px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.hero-pending [data-hero] {
+    opacity: 1;
+    transform: none;
+  }
+}
