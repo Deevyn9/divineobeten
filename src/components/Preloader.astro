@@ -35,8 +35,7 @@ const icons = [
         <img
           class="flair absolute opacity-0 w-12 h-12"
           src={icon.src}
-          alt={icon.src}
-          loading="lazy"
+          alt=""
           decoding="async"
         />
       ))
@@ -51,12 +50,9 @@ const icons = [
       >(wiggle your mouse around.)</span
     >
   </div>
-  <div
-    class="absolute flex gap-1 items-center capitalize italic text-gray-900 right-5 bottom-5 font-semibold"
-  >
-    <div class="absolute right-5 bottom-5 font-semibold text-gray-900">
-      <span id="preloader-count" class="text-sm tabular-nums">0%</span>
-    </div>
+
+  <div class="absolute right-5 bottom-5 font-semibold text-gray-900">
+    <span id="preloader-count" class="text-sm tabular-nums">0%</span>
   </div>
 </div>
 
@@ -65,43 +61,44 @@ const icons = [
 
   gsap.defaults({ duration: 1 });
 
-  // clear flag on actual page reload/close, not on client-side nav
-  window.addEventListener("beforeunload", () => {
-    sessionStorage.removeItem("preloaderDone");
-  });
+  let started = false;
 
   const initPreloader = () => {
-    if (sessionStorage.getItem("preloaderDone")) return; // ← just return, no hiding needed
+    const root = document.documentElement;
+    if (started || !root.classList.contains("is-loading")) return;
 
     const preloader = document.querySelector(
       ".preloader",
     ) as HTMLElement | null;
     const countEl = document.getElementById("preloader-count");
-
     if (!preloader || !countEl) return;
 
-    preloader.classList.add("is-active");
+    started = true;
 
-    sessionStorage.setItem("preloaderDone", "true");
+    const isMobile = window.matchMedia("(pointer: coarse)").matches;
+    const subtitle = document.getElementById("preloader-subtitle");
+    if (isMobile && subtitle) {
+      subtitle.textContent = "(tap screen for a surprise)";
+    }
 
+    // mouse / touch trail
     const flair = gsap.utils.toArray<HTMLImageElement>(".flair");
     const wrapper = gsap.utils.wrap(0, flair.length);
     let index = 0;
     const gap = 90;
     let mousePos = { x: 0, y: 0 };
     let lastMousePos = { x: 0, y: 0 };
-    let cachedMousePos = { x: 0, y: 0 };
 
-    function playAnimation(shape: HTMLImageElement) {
-      const tl = gsap.timeline();
-      tl.from(shape, { opacity: 0, scale: 0, ease: "elastic.out(1,0.3)" })
+    const playAnimation = (shape: HTMLImageElement) => {
+      gsap
+        .timeline()
+        .from(shape, { opacity: 0, scale: 0, ease: "elastic.out(1,0.3)" })
         .to(shape, { rotation: "random([-360, 360])" }, "<")
         .to(shape, { y: "120vh", ease: "back.in(.4)", duration: 1 }, 0);
-    }
+    };
 
-    function animateImage() {
-      const wrappedIndex = wrapper(index);
-      const img = flair[wrappedIndex];
+    const animateImage = () => {
+      const img = flair[wrapper(index)];
       gsap.killTweensOf(img);
       gsap.set(img, { clearProps: "all" });
       gsap.set(img, {
@@ -113,56 +110,49 @@ const icons = [
       });
       playAnimation(img);
       index++;
-    }
+    };
 
-    function ImageTrail() {
-      const travelDistance = Math.hypot(
+    const imageTrail = () => {
+      const travel = Math.hypot(
         lastMousePos.x - mousePos.x,
         lastMousePos.y - mousePos.y,
       );
-      cachedMousePos.x = gsap.utils.interpolate(
-        cachedMousePos.x || mousePos.x,
-        mousePos.x,
-        0.1,
-      );
-      cachedMousePos.y = gsap.utils.interpolate(
-        cachedMousePos.y || mousePos.y,
-        mousePos.y,
-        0.1,
-      );
-      if (travelDistance > gap) {
+      if (travel > gap) {
         animateImage();
         lastMousePos = { ...mousePos };
       }
-    }
+    };
 
-    window.addEventListener("mousemove", (e) => {
+    const onMove = (e: MouseEvent) => {
       mousePos = { x: e.clientX, y: e.clientY };
-    });
+    };
+    const onTouch = (e: TouchEvent) => {
+      const t = e.touches[0];
+      mousePos = { x: t.clientX, y: t.clientY };
+    };
 
-    gsap.ticker.add(ImageTrail);
+    window.addEventListener("mousemove", onMove);
+    window.addEventListener("touchstart", onTouch, { passive: true });
+    window.addEventListener("touchmove", onTouch, { passive: true });
+    gsap.ticker.add(imageTrail);
 
-    window.dispatchEvent(new Event("preloader:start"));
-
-    const isMobile = window.matchMedia("(pointer: coarse)").matches;
-    const subtitle = document.getElementById("preloader-subtitle");
-    if (isMobile && subtitle) {
-      subtitle.textContent = "(tap screen for a surprise)";
-    }
-
-    const unlockScroll = () => {
-      document.body.style.overflow = "";
-      document.documentElement.style.overflow = "";
+    const cleanup = () => {
+      gsap.ticker.remove(imageTrail);
+      window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("touchstart", onTouch);
+      window.removeEventListener("touchmove", onTouch);
+      root.classList.remove("is-loading");
       window.dispatchEvent(new Event("preloader:end"));
-      gsap.ticker.remove(ImageTrail);
     };
 
     const exitPreloader = () => {
+      // content animates in as the curtain lifts
+      window.dispatchEvent(new Event("preloader:exit"));
       gsap.to(preloader, {
         yPercent: -100,
         duration: 0.9,
         ease: "power3.out",
-        onComplete: unlockScroll,
+        onComplete: cleanup,
       });
     };
 
@@ -174,9 +164,7 @@ const icons = [
       onUpdate: () => {
         countEl.textContent = `${Math.round(counter.val)}%`;
       },
-      onComplete: () => {
-        gsap.delayedCall(0.4, exitPreloader);
-      },
+      onComplete: () => gsap.delayedCall(0.4, exitPreloader),
     });
   };
 
