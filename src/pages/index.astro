@@ -286,15 +286,28 @@ import Layout from "../layouts/Layout.astro";
       const revealHero = () => {
         const root = document.documentElement;
         const items = gsap.utils.toArray<HTMLElement>("[data-hero]");
+        const nav = gsap.utils.toArray<HTMLElement>("[data-hero-nav]");
 
         if (
-          !items.length ||
-          window.matchMedia("(prefers-reduced-motion: reduce)").matches
+          window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+          (!items.length && !nav.length)
         ) {
           root.classList.remove("hero-pending");
           return;
         }
 
+        gsap.fromTo(
+          nav,
+          { y: -16, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.6,
+            delay: 0.15,
+            ease: "power3.out",
+            clearProps: "transform,opacity",
+          },
+        );
         gsap.fromTo(
           items,
           { y: 32, opacity: 0 },
@@ -302,22 +315,23 @@ import Layout from "../layouts/Layout.astro";
             y: 0,
             opacity: 1,
             duration: 0.7,
-            ease: "power3.out",
+            delay: 0.2,
             stagger: 0.08,
-            onComplete: () => gsap.set(items, { clearProps: "all" }),
+            ease: "power3.out",
+            clearProps: "transform,opacity",
           },
         );
-        // GSAP has already written inline styles, so dropping the class can't flash
+
+        // from-values are already applied inline, so dropping the class can't flash
         root.classList.remove("hero-pending");
       };
 
       const initHero = () => {
-        if (!document.documentElement.classList.contains("hero-pending"))
-          return;
+        const root = document.documentElement;
+        if (!root.classList.contains("hero-pending")) return;
 
-        // first load: wait for the preloader to exit. navigation: play immediately
-        if (document.documentElement.classList.contains("is-loading")) {
-          window.addEventListener("preloader:end", revealHero, { once: true });
+        if (root.classList.contains("is-loading")) {
+          window.addEventListener("preloader:exit", revealHero, { once: true });
         } else {
           revealHero();
         }
