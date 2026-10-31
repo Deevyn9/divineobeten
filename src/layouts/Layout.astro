@@ -13,7 +13,7 @@ interface Props {
 
 const {
   title = "Divine Obeten - Frontend Engineer",
-  description = "A lightweight, animation-ready portfolio built with Astro, Tailwind, and GSAP.",
+  description = "Divine Obeten's portfolio built with Astro, Tailwind, and GSAP.",
   image = "/og-image.svg",
 } = Astro.props;
 
@@ -37,19 +37,34 @@ const socialImage = new URL(image, siteUrl).toString();
       }
     </script>
     <style is:inline>
-  .preloader { display: none; }
-  html.is-loading .preloader { display: grid; }
-  html.is-loading,
-  html.is-loading body { overflow: hidden; }
+      .preloader {
+        display: none;
+      }
+      html.is-loading .preloader {
+        display: grid;
+      }
+      html.is-loading,
+      html.is-loading body {
+        overflow: hidden;
+      }
 
-  html.hero-pending [data-hero] { opacity: 0; transform: translateY(32px); }
-  html.hero-pending [data-hero-nav] { opacity: 0; transform: translateY(-16px); }
+      html.hero-pending [data-hero] {
+        opacity: 0;
+        transform: translateY(32px);
+      }
+      html.hero-pending [data-hero-nav] {
+        opacity: 0;
+        transform: translateY(-16px);
+      }
 
-  @media (prefers-reduced-motion: reduce) {
-    html.hero-pending [data-hero],
-    html.hero-pending [data-hero-nav] { opacity: 1; transform: none; }
-  }
-</style>
+      @media (prefers-reduced-motion: reduce) {
+        html.hero-pending [data-hero],
+        html.hero-pending [data-hero-nav] {
+          opacity: 1;
+          transform: none;
+        }
+      }
+    </style>
     <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
     <link rel="icon" href="/favicon.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
