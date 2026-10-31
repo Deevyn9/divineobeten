@@ -77,14 +77,6 @@ body {
   }
 }
 
-.preloader {
-  display: none;
-}
-
-.preloader.is-active {
-  display: grid;
-}
-
 html.hero-pending [data-hero] {
   opacity: 0;
   transform: translateY(32px);
