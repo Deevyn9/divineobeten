@@ -146,7 +146,6 @@ const icons = [
     };
 
     const exitPreloader = () => {
-      // content animates in as the curtain lifts
       window.dispatchEvent(new Event("preloader:exit"));
       gsap.to(preloader, {
         yPercent: -100,
