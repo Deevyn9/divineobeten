@@ -11,14 +11,15 @@ const currentPath = Astro.url.pathname;
 
 <header
   id="site-header"
-  class="fixed top-0 left-0 z-50 w-full bg-white transition-transform duration-300 ease-in-out"
+  class="fixed top-0 left-0 z-50 w-full bg-bg transition-transform duration-300 ease-in-out"
 >
   <div class="relative">
     <nav
-      class="relative z-30 bg-white mx-auto flex w-full xl:w-6xl items-center justify-between px-5 xl:px-0 py-4"
+      data-hero-nav
+      class="relative z-30 bg-bg mx-auto flex w-full xl:w-6xl items-center justify-between px-5 xl:px-0 py-4"
     >
       <a
-        class="text-lg outline-none md:text-2xl font-display font-semibold tracking-normal text-black capitalize"
+        class="text-lg outline-none md:text-2xl font-display font-semibold tracking-normal text-fg capitalize"
         href="/"
       >
         o<span class="italic -ml-0.75 mr-px">b</span>eten.
@@ -30,7 +31,7 @@ const currentPath = Astro.url.pathname;
             const isActive = currentPath === link.href;
             return (
               <a
-                class={`nav-link relative flex items-center gap-1 outline-none transition-all duration-200 ${isActive ? "font-bold text-black" : "font-light text-gray-500"}`}
+                class={`nav-link relative flex items-center gap-1 outline-none transition-all duration-200 ${isActive ? "font-bold text-fg" : "font-light text-muted"}`}
                 href={link.href}
               >
                 <span class="nav-arrow inline-block translate-x-0 opacity-0 transition-all duration-200 ease-out">
@@ -41,6 +42,38 @@ const currentPath = Astro.url.pathname;
             );
           })
         }
+
+        <button
+          type="button"
+          aria-label="Toggle theme"
+          class="theme-toggle text-muted hover:text-fg transition-colors"
+        >
+          <svg
+            class="size-4 dark:hidden"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path>
+          </svg>
+          <svg
+            class="hidden size-4 dark:block"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="12" cy="12" r="4"></circle>
+            <path
+              d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"
+            ></path>
+          </svg>
+        </button>
       </div>
 
       <button
@@ -52,7 +85,7 @@ const currentPath = Astro.url.pathname;
           Array.from({ length: 9 }).map((_, i) => (
             <span
               data-dot={i}
-              class="block w-1 h-1 rounded-full bg-black transition-colors duration-200"
+              class="block w-1 h-1 rounded-full bg-fg transition-colors duration-200"
             />
           ))
         }
@@ -61,7 +94,7 @@ const currentPath = Astro.url.pathname;
 
     <div
       id="mobile-menu"
-      class="md:hidden z-20 flex flex-col px-5 pb-6 gap-5 font-display text-sm bg-white absolute w-full transition-transform duration-300 ease-in-out"
+      class="md:hidden z-20 flex flex-col px-5 pb-6 gap-5 font-display text-sm bg-bg absolute w-full transition-transform duration-300 ease-in-out"
       style="transform: translateY(-150%)"
     >
       {
@@ -69,7 +102,7 @@ const currentPath = Astro.url.pathname;
           const isActive = currentPath === link.href;
           return (
             <a
-              class={`${isActive ? "font-bold text-black" : "font-light text-gray-500"}`}
+              class={`${isActive ? "font-bold text-fg" : "font-light text-muted"}`}
               href={link.href}
             >
               {link.label}
@@ -77,13 +110,22 @@ const currentPath = Astro.url.pathname;
           );
         })
       }
+
+      <button
+        type="button"
+        aria-label="Toggle theme"
+        class="theme-toggle flex items-center gap-2 text-left font-light text-muted hover:text-fg transition-colors"
+      >
+        <span class="dark:hidden">Dark mode</span>
+        <span class="hidden dark:inline">Light mode</span>
+      </button>
     </div>
   </div>
 </header>
 
 <div
   id="menu-backdrop"
-  class="fixed inset-0 z-40 backdrop-blur-[7px] bg-black/10 opacity-0 pointer-events-none transition-opacity duration-300"
+  class="fixed inset-0 z-40 backdrop-blur-[7px] bg-black/10 dark:bg-black/40 opacity-0 pointer-events-none transition-opacity duration-300"
 >
 </div>
 
@@ -137,6 +179,17 @@ const currentPath = Astro.url.pathname;
       });
     });
 
+    // --- theme toggle ---
+    document.querySelectorAll(".theme-toggle").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const next = !document.documentElement.classList.contains("dark");
+        document.documentElement.classList.toggle("dark", next);
+        try {
+          localStorage.setItem("theme", next ? "dark" : "light");
+        } catch {}
+      });
+    });
+
     // --- mobile menu ---
     const btn = document.getElementById("menu-btn");
     const menu = document.getElementById("mobile-menu");
@@ -161,8 +214,8 @@ const currentPath = Astro.url.pathname;
       document.body.style.width = "100%";
       dots?.forEach((dot, i) => {
         (dot as HTMLElement).style.backgroundColor = greyDots.has(i)
-          ? "#9ca3af"
-          : "#000000";
+          ? "var(--muted)"
+          : "var(--fg)";
       });
     };
 
@@ -178,7 +231,7 @@ const currentPath = Astro.url.pathname;
       document.body.style.width = "";
       window.scrollTo(0, savedScrollY);
       dots?.forEach((dot) => {
-        (dot as HTMLElement).style.backgroundColor = "#000000";
+        (dot as HTMLElement).style.backgroundColor = "var(--fg)";
       });
     };
 
