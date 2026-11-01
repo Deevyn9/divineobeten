@@ -23,10 +23,76 @@ const socialImage = new URL(image, siteUrl).toString();
 ---
 
 <!doctype html>
-<html lang="en" class="">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- boot flags: run before first paint -->
+    <script is:inline>
+      if (!window.__booted) {
+        window.__booted = true;
+        const root = document.documentElement;
+        root.classList.add("is-loading");
+        if (location.pathname === "/") root.classList.add("hero-pending");
+      }
+    </script>
+
+    <!-- theme: saved choice wins, otherwise follow the OS -->
+    <script is:inline>
+      (function () {
+        var mq = window.matchMedia("(prefers-color-scheme: dark)");
+        function saved() {
+          try {
+            return localStorage.getItem("theme");
+          } catch (e) {
+            return null;
+          }
+        }
+        window.__applyTheme = function (root) {
+          var s = saved();
+          var dark = s ? s === "dark" : mq.matches;
+          root.classList.toggle("dark", dark);
+          return dark;
+        };
+        window.__applyTheme(document.documentElement);
+        mq.addEventListener("change", function () {
+          if (!saved()) window.__applyTheme(document.documentElement);
+        });
+      })();
+    </script>
+
+    <!-- critical CSS: first paint never depends on the stylesheet -->
+    <style is:inline>
+      .preloader {
+        display: none;
+      }
+      html.is-loading .preloader {
+        display: grid;
+      }
+      html.is-loading,
+      html.is-loading body {
+        overflow: hidden;
+      }
+
+      html.hero-pending [data-hero] {
+        opacity: 0;
+        transform: translateY(32px);
+      }
+      html.hero-pending [data-hero-nav] {
+        opacity: 0;
+        transform: translateY(-16px);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html.hero-pending [data-hero],
+        html.hero-pending [data-hero-nav] {
+          opacity: 1;
+          transform: none;
+        }
+      }
+    </style>
+
     <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
     <link rel="icon" href="/favicon.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -49,7 +115,16 @@ const socialImage = new URL(image, siteUrl).toString();
     </noscript>
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#09090b" />
+    <meta
+      name="theme-color"
+      content="#ffffff"
+      media="(prefers-color-scheme: light)"
+    />
+    <meta
+      name="theme-color"
+      content="#0b0b0c"
+      media="(prefers-color-scheme: dark)"
+    />
     <link rel="canonical" href={canonicalUrl} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -65,6 +140,7 @@ const socialImage = new URL(image, siteUrl).toString();
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImage} />
     <title>{title}</title>
+
     <script>
       document.addEventListener("astro:page-load", () => {
         document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
@@ -78,10 +154,14 @@ const socialImage = new URL(image, siteUrl).toString();
         });
       });
     </script>
+
     <script>
       import Lenis from "lenis";
 
       const lenis = new Lenis();
+      if (document.documentElement.classList.contains("is-loading")) {
+        lenis.stop();
+      }
 
       function raf(time: number) {
         lenis.raf(time);
@@ -90,12 +170,25 @@ const socialImage = new URL(image, siteUrl).toString();
 
       requestAnimationFrame(raf);
 
-      window.addEventListener("preloader:start", () => lenis.stop());
       window.addEventListener("preloader:end", () => lenis.start());
     </script>
+
+    <!-- one before-swap handler: keep theme + flag hero on the incoming document -->
+    <script>
+      import type { TransitionBeforeSwapEvent } from "astro:transitions/client";
+
+      document.addEventListener("astro:before-swap", (e) => {
+        const { to, newDocument } = e as TransitionBeforeSwapEvent;
+        (window as any).__applyTheme(newDocument.documentElement);
+        if (to.pathname === "/") {
+          newDocument.documentElement.classList.add("hero-pending");
+        }
+      });
+    </script>
+
     <ClientRouter />
   </head>
-  <body class="min-h-screen font-sans bg-bg antialiased">
+  <body class="min-h-screen font-sans bg-bg text-fg antialiased">
     <Navbar />
     <Preloader />
     <main transition:animate="slide" class="min-h-screen">
