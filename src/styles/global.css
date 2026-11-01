@@ -1,86 +1,85 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
+  color-scheme: light;
+  --bg: #ffffff;
+  --bg2: #f7f7f7;
+  --fg: #0c0c0c;
+  --muted: #6f6f6f;
+  --border: rgba(0, 0, 0, 0.08);
+  --border-hover: rgba(0, 0, 0, 0.2);
+  --accent: #2563eb;
+  --accent2: #60a5fa;
+  --dot: #ebebeb;
+  --selection: rgba(37, 99, 235, 0.2);
+}
+
+.dark {
   color-scheme: dark;
+  --bg: #0b0b0c;
+  --bg2: #141416;
+  --fg: #f2f2f2;
+  --muted: #8f8f94;
+  --border: rgba(255, 255, 255, 0.09);
+  --border-hover: rgba(255, 255, 255, 0.22);
+  --accent: #3b82f6;
+  --accent2: #93c5fd;
+  --dot: #1a1a1d;
+  --selection: rgba(59, 130, 246, 0.35);
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
-}
-
-@theme {
+@theme inline {
   --font-sans: "Inter", sans-serif;
   --font-display: "Bricolage Grotesque", sans-serif;
   --font-mono: "Space Mono", monospace;
-  --color-bg: #ffffff;
-  --color-bg2: #f7f7f7;
-  --color-fg: #0c0c0c;
-  --color-muted: #6f6f6f;
-  --color-border: rgba(0, 0, 0, 0.08);
-  --color-border-hover: rgba(0, 0, 0, 0.2);
-  --color-accent: #2563eb;
-  --color-accent2: #60a5fa;
+
+  --color-bg: var(--bg);
+  --color-bg2: var(--bg2);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-border-hover: var(--border-hover);
+  --color-accent: var(--accent);
+  --color-accent2: var(--accent2);
+
   --radius: 14px;
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+    background-color: var(--bg);
+    color: var(--fg);
+  }
+
   * {
-    @apply border-white/10;
+    border-color: var(--border);
   }
 
   ::selection {
-    background: rgba(251, 191, 36, 0.35);
-    color: white;
+    background: var(--selection);
+    color: var(--fg);
   }
 }
 
-@layer components {
-  .eyebrow {
-    @apply text-xs font-medium uppercase tracking-[0.35em] text-amber-300;
-  }
-
-  .panel {
-    @apply rounded-[2rem] border border-white/10 bg-white/5 p-6 backdrop-blur;
-  }
-
-  .button-primary {
-    @apply inline-flex items-center justify-center rounded-full bg-white px-5 py-3 text-sm font-medium text-neutral-950 transition hover:bg-amber-300;
-  }
-
-  .button-secondary {
-    @apply inline-flex items-center justify-center rounded-full border border-white/15 px-5 py-3 text-sm font-medium text-white transition hover:border-white/30 hover:bg-white/5;
-  }
-
-  .chip {
-    @apply rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-neutral-200;
-  }
-
-  .stack-row {
-    @apply flex items-center justify-between gap-4 rounded-2xl border border-white/8 bg-black/20 px-4 py-3;
-  }
-
-  .stack-row span {
-    @apply text-neutral-400;
-  }
-
-  .stack-row strong {
-    @apply font-medium text-white;
-  }
-
-  .footer-link {
-    @apply text-neutral-400 transition hover:text-white;
-  }
+@utility dot-grid {
+  background-image: radial-gradient(circle, var(--dot) 1px, transparent 1px);
+  background-size: 28px 28px;
 }
 
-.preloader {
-  display: none;
-}
+/* footer is always dark, so these are intentionally fixed */
+@utility footer-link {
+  color: #a3a3a3;
+  transition: color 150ms ease;
 
-.preloader.is-active {
-  display: grid;
+  &:hover {
+    color: #ffffff;
+  }
 }
