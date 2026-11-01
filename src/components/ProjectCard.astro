@@ -29,7 +29,7 @@ const {
 <article class="group cursor-pointer flex flex-col gap-4 w-full">
   <!-- Image -->
   <!-- <a href={`/projects/${slug}`} class="block overflow-hidden"> -->
-  <div class="relative w-full aspect-4/3 bg-neutral-100 overflow-hidden">
+  <div class="relative w-full aspect-4/3 bg-bg2 overflow-hidden">
     <img
       src={image}
       alt={title}
@@ -58,7 +58,7 @@ const {
   <div class="flex items-start justify-between gap-4">
     <a
       href={`/projects/${slug}`}
-      class="text-xl font-normal hover:underline text-black font-display underline-offset-4 transition-all duration-200"
+      class="text-xl font-normal hover:underline text-fg font-display underline-offset-4 transition-all duration-200"
     >
       {title}
     </a>
@@ -74,7 +74,7 @@ const {
   <div class="flex flex-wrap gap-2">
     {
       tags.map((tag) => (
-        <span class="font-display text-xs px-3 py-1 border border-neutral-200 text-muted">
+        <span class="font-display text-xs px-3 py-1 border border-border text-muted">
           {tag}
         </span>
       ))
@@ -87,7 +87,7 @@ const {
       caseStudy && (
         <a
           href={`/projects/${slug}`}
-          class="font-display text-sm tracking-wider text-black hover:underline underline-offset-4 transition-all duration-200"
+          class="font-display text-sm tracking-wider text-fg hover:underline underline-offset-4 transition-all duration-200"
         >
           Deep Dive ↗
         </a>
@@ -99,7 +99,7 @@ const {
           href={live}
           target="_blank"
           rel="noopener noreferrer"
-          class="font-display text-sm tracking-wider text-black hover:underline underline-offset-4 transition-all duration-200"
+          class="font-display text-sm tracking-wider text-fg hover:underline underline-offset-4 transition-all duration-200"
         >
           Live ↗
         </a>

@@ -83,7 +83,7 @@ const explorations = [
     <div class="mb-10">
       <a
         href="/"
-        class="group inline-flex items-center gap-1 font-display text-xs uppercase tracking-[0.2em] text-muted hover:text-black transition-colors duration-200"
+        class="group inline-flex items-center gap-1 font-display text-xs uppercase tracking-[0.2em] text-muted hover:text-fg transition-colors duration-200"
       >
         <span
           class="group-hover:-translate-x-0.5 transition-transform duration-200"
@@ -94,7 +94,7 @@ const explorations = [
 
       <div class="mt-10 flex items-start justify-between gap-6">
         <div class="">
-          <p class="font-display text-xl text-black">The Lab</p>
+          <p class="font-display text-xl text-fg">The Lab</p>
 
           <p class="max-w-2xl text-sm leading-relaxed text-muted">
             A space for experiments, playful interactions, motion studies and
@@ -113,7 +113,7 @@ const explorations = [
       {
         explorations.map((exp) => (
           <div class="flex flex-col gap-4">
-            <div class="exploration-skew relative w-full md:aspect-16/7 bg-neutral-100 overflow-hidden p-5 md:py-10 md:px-7">
+            <div class="exploration-skew relative w-full md:aspect-16/7 bg-bg2 overflow-hidden p-5 md:py-10 md:px-7">
               <video
                 muted
                 autoplay
@@ -133,14 +133,14 @@ const explorations = [
                     {exp.id}
                   </p>
 
-                  <h2 class="text-xl leading-none text-black font-display transform font-normal">
+                  <h2 class="text-xl leading-none text-fg font-display transform font-normal">
                     {exp.name}
                   </h2>
                 </div>
 
                 {/* <div class="flex flex-wrap gap-2 mt-1">
                 {exp.tags.map((tag) => (
-                  <span class="font-display text-xs px-3 py-1 border border-neutral-200 text-muted">
+                  <span class="font-display text-xs px-3 py-1 border border-border text-muted">
                     {tag}
                   </span>
                 ))}
@@ -151,7 +151,7 @@ const explorations = [
               href={exp.source}
               target="_blank"
               rel="noopener noreferrer"
-              class="shrink-0 font-display text-xs uppercase tracking-[0.2em] text-muted hover:text-black transition-colors duration-200 mt-1"
+              class="shrink-0 font-display text-xs uppercase tracking-[0.2em] text-muted hover:text-fg transition-colors duration-200 mt-1"
             >
               Source ↗
             </a> */}

@@ -36,7 +36,7 @@ const {
     <a
       href="/projects"
       class="inline-flex items-center gap-1 font-display text-xs
-    uppercase tracking-[0.2em] text-muted hover:text-black transition-colors
+    uppercase tracking-[0.2em] text-muted hover:text-fg transition-colors
     duration-200 mb-12"
     >
       ← All Projects
@@ -49,7 +49,7 @@ const {
       >
         {category} — {year}
       </p>
-      <h1 class="text-3xl md:text-5xl text-black font-normal mb-4 max-w-3xl">
+      <h1 class="text-3xl md:text-5xl text-fg font-normal mb-4 max-w-3xl">
         {title}
       </h1>
       <p class="text-sm text-muted leading-relaxed max-w-2xl">{description}</p>
@@ -60,7 +60,7 @@ const {
       <div class="flex flex-wrap gap-2">
         {
           tags.map((tag) => (
-            <span class="font-display text-xs px-3 py-1 border border-neutral-200 text-muted">
+            <span class="font-display text-xs px-3 py-1 border border-border text-muted">
               {tag}
             </span>
           ))
@@ -73,7 +73,7 @@ const {
               href={live}
               target="_blank"
               rel="noopener noreferrer"
-              class="font-display text-xs uppercase tracking-[0.2em] text-black hover:underline underline-offset-4"
+              class="font-display text-xs uppercase tracking-[0.2em] text-fg hover:underline underline-offset-4"
             >
               Live ↗
             </a>
@@ -83,7 +83,7 @@ const {
     </div>
 
     <!-- Hero image -->
-    <div class="w-full aspect-video bg-neutral-100 overflow-hidden mb-16">
+    <div class="w-full aspect-video bg-bg2 overflow-hidden mb-16">
       <img
         src={image}
         alt={title}
@@ -104,7 +104,7 @@ const {
       <aside class="flex flex-col gap-8 lg:pt-1">
         <div>
           <p
-            class="font-display font-medium text-xs uppercase tracking-[0.2em] text-black mb-3"
+            class="font-display font-medium text-xs uppercase tracking-[0.2em] text-fg mb-3"
           >
             Category
           </p>
@@ -112,7 +112,7 @@ const {
         </div>
         <div>
           <p
-            class="font-display font-medium text-xs uppercase tracking-[0.2em] text-black mb-3"
+            class="font-display font-medium text-xs uppercase tracking-[0.2em] text-fg mb-3"
           >
             Year
           </p>
@@ -120,7 +120,7 @@ const {
         </div>
         <div>
           <p
-            class="font-display font-medium text-xs uppercase tracking-[0.2em] text-black mb-3"
+            class="font-display font-medium text-xs uppercase tracking-[0.2em] text-fg mb-3"
           >
             Stack
           </p>
@@ -156,7 +156,7 @@ const {
       images && images.length > 0 && (
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
           {images.map((img, i) => (
-            <div class="w-full bg-neutral-100/50 p-5 overflow-hidden">
+            <div class="w-full bg-bg2/50 p-5 overflow-hidden">
               <img
                 src={img}
                 alt={`${title} screenshot ${i + 1}`}
@@ -171,10 +171,10 @@ const {
     }
 
     <!-- Back Home -->
-    <div class="border-t border-neutral-200 pt-12">
+    <div class="border-t border-border pt-12">
       <a
         href="/"
-        class="group inline-flex items-center gap-2 font-display text-xs uppercase tracking-[0.2em] text-muted hover:text-black transition-colors duration-200"
+        class="group inline-flex items-center gap-2 font-display text-xs uppercase tracking-[0.2em] text-muted hover:text-fg transition-colors duration-200"
       >
         <span
           class="group-hover:-translate-x-0.5 transition-transform duration-200"
