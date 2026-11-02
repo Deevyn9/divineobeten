@@ -43,7 +43,7 @@ const explorations = [
     </div>
     <a
       href="/explorations"
-      class="group font-display text-xs uppercase sm:tracking-[0.2em] text-muted flex items-center gap-1 hover:text-black transition-colors duration-200 -mt-2 md:mt-0"
+      class="group font-display text-xs uppercase sm:tracking-[0.2em] text-muted flex items-center gap-1 hover:text-fg transition-colors duration-200 -mt-2 md:mt-0"
     >
       <span class="group-hover:translate-x-0.5 transition-transform duration-200">
         View All
@@ -58,7 +58,7 @@ const explorations = [
       explorations.map((exp) => (
         <div class="flex flex-col gap-3">
           <!-- Square preview -->
-          <div class="exploration-preview relative w-full aspect-square bg-neutral-100 px-4 overflow-hidden">
+          <div class="exploration-preview relative w-full aspect-square bg-bg2 px-4 overflow-hidden">
               <video autoplay muted loop playsinline class="w-full h-full object-contain">
     <source src={exp.preview} type="video/mp4" />
   </video>
