@@ -36,6 +36,7 @@ const icons = [
           class="flair absolute opacity-0 w-12 h-12"
           src={icon.src}
           alt=""
+          alt=""
           decoding="async"
         />
       ))
@@ -62,8 +63,11 @@ const icons = [
   gsap.defaults({ duration: 1 });
 
   let started = false;
+  let started = false;
 
   const initPreloader = () => {
+    const root = document.documentElement;
+    if (started || !root.classList.contains("is-loading")) return;
     const root = document.documentElement;
     if (started || !root.classList.contains("is-loading")) return;
 
@@ -74,7 +78,15 @@ const icons = [
     if (!preloader || !countEl) return;
 
     started = true;
+    started = true;
 
+    const isMobile = window.matchMedia("(pointer: coarse)").matches;
+    const subtitle = document.getElementById("preloader-subtitle");
+    if (isMobile && subtitle) {
+      subtitle.textContent = "(tap screen for a surprise)";
+    }
+
+    // mouse / touch trail
     const isMobile = window.matchMedia("(pointer: coarse)").matches;
     const subtitle = document.getElementById("preloader-subtitle");
     if (isMobile && subtitle) {
@@ -93,10 +105,17 @@ const icons = [
       gsap
         .timeline()
         .from(shape, { opacity: 0, scale: 0, ease: "elastic.out(1,0.3)" })
+    const playAnimation = (shape: HTMLImageElement) => {
+      gsap
+        .timeline()
+        .from(shape, { opacity: 0, scale: 0, ease: "elastic.out(1,0.3)" })
         .to(shape, { rotation: "random([-360, 360])" }, "<")
         .to(shape, { y: "120vh", ease: "back.in(.4)", duration: 1 }, 0);
     };
+    };
 
+    const animateImage = () => {
+      const img = flair[wrapper(index)];
     const animateImage = () => {
       const img = flair[wrapper(index)];
       gsap.killTweensOf(img);
@@ -111,18 +130,24 @@ const icons = [
       playAnimation(img);
       index++;
     };
+    };
 
+    const imageTrail = () => {
+      const travel = Math.hypot(
     const imageTrail = () => {
       const travel = Math.hypot(
         lastMousePos.x - mousePos.x,
         lastMousePos.y - mousePos.y,
       );
       if (travel > gap) {
+      if (travel > gap) {
         animateImage();
         lastMousePos = { ...mousePos };
       }
     };
+    };
 
+    const onMove = (e: MouseEvent) => {
     const onMove = (e: MouseEvent) => {
       mousePos = { x: e.clientX, y: e.clientY };
     };
@@ -130,7 +155,23 @@ const icons = [
       const t = e.touches[0];
       mousePos = { x: t.clientX, y: t.clientY };
     };
+    };
+    const onTouch = (e: TouchEvent) => {
+      const t = e.touches[0];
+      mousePos = { x: t.clientX, y: t.clientY };
+    };
 
+    window.addEventListener("mousemove", onMove);
+    window.addEventListener("touchstart", onTouch, { passive: true });
+    window.addEventListener("touchmove", onTouch, { passive: true });
+    gsap.ticker.add(imageTrail);
+
+    const cleanup = () => {
+      gsap.ticker.remove(imageTrail);
+      window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("touchstart", onTouch);
+      window.removeEventListener("touchmove", onTouch);
+      root.classList.remove("is-loading");
     window.addEventListener("mousemove", onMove);
     window.addEventListener("touchstart", onTouch, { passive: true });
     window.addEventListener("touchmove", onTouch, { passive: true });
@@ -153,6 +194,7 @@ const icons = [
         duration: 0.9,
         ease: "power3.out",
         onComplete: cleanup,
+        onComplete: cleanup,
       });
     };
 
@@ -164,6 +206,7 @@ const icons = [
       onUpdate: () => {
         countEl.textContent = `${Math.round(counter.val)}%`;
       },
+      onComplete: () => gsap.delayedCall(0.4, exitPreloader),
       onComplete: () => gsap.delayedCall(0.4, exitPreloader),
     });
   };

@@ -13,7 +13,7 @@ interface Props {
 
 const {
   title = "Divine Obeten - Frontend Engineer",
-  description = "A lightweight, animation-ready portfolio built with Astro, Tailwind, and GSAP.",
+  description = "Divine Obeten's portfolio built with Astro, Tailwind, and GSAP.",
   image = "/og-image.svg",
 } = Astro.props;
 
@@ -159,6 +159,9 @@ const socialImage = new URL(image, siteUrl).toString();
       import Lenis from "lenis";
 
       const lenis = new Lenis();
+      if (document.documentElement.classList.contains("is-loading")) {
+        lenis.stop();
+      }
       if (document.documentElement.classList.contains("is-loading")) {
         lenis.stop();
       }
