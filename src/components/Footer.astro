@@ -17,10 +17,13 @@ import { Icon } from "astro-icon/components";
   </svg>
 
   <footer
-    class="footer-body border-t flex justify-center border-white/10 pb-14 px-5 xl:px-0"
+    class="footer-body text-white border-t flex justify-center border-white/10 pb-14 px-5 xl:px-0"
   >
     <div class="w-full xl:w-6xl">
-      <div id="intouch" class="text-muted uppercase text-xs mb-7 md:mb-10">
+      <div
+        id="intouch"
+        class="text-neutral-400 uppercase text-xs mb-7 md:mb-10"
+      >
         Get in touch
       </div>
       <div
@@ -41,10 +44,10 @@ import { Icon } from "astro-icon/components";
               />
               <span
                 id="hover-line"
-                class="absolute bottom-0 left-0 h-1 w-full group-hover:bg-accent bg-bg origin-left transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.16,1)]"
+                class="absolute bottom-0 left-0 h-1 w-full group-hover:bg-accent bg-white origin-left transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.16,1)]"
                 style="transform:scaleX(0)"></span>
             </a>
-            <span class="text-sm text-muted select-all"
+            <span class="text-sm text-neutral-400 select-all"
               >divineobeten5@gmail.com</span
             >
           </div>
@@ -82,7 +85,7 @@ import { Icon } from "astro-icon/components";
             >
           </div>
           <div
-            class="w-max mt-5 flex flex-col gap-y-5 gap-0.5 text-sm text-muted md:flex-row md:items-center md:justify-between"
+            class="w-max mt-5 flex flex-col gap-y-5 gap-0.5 text-sm text-neutral-400 md:flex-row md:items-center md:justify-between"
           >
             <p id="footer-location" class="flex items-center gap-0.5">
               <Icon name="proicons:location" width="16" height="16" /> Enugu, Nigeria
@@ -112,8 +115,8 @@ import { Icon } from "astro-icon/components";
           </text>
         </svg>
       </div>
-      <div class="w-full h-px my-10 bg-bg/8"></div>
-      <div id="copyright" class="font-display text-center text-muted">
+      <div class="w-full h-px my-10 bg-white/10"></div>
+      <div id="copyright" class="font-display text-center text-neutral-400">
         © 2026 Divine Obeten
       </div>
     </div>
@@ -143,7 +146,12 @@ import { Icon } from "astro-icon/components";
     display: flex;
     align-items: center;
     gap: 2px;
-    color: #6f6f6f;
+    color: #a3a3a3;
+    transition: color 150ms ease;
+  }
+
+  .footer-link:hover {
+    color: #ffffff;
   }
 </style>
 
