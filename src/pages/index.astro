@@ -24,14 +24,19 @@ import Layout from "../layouts/Layout.astro";
           data-hero
           class="text-xl md:text-3xl max-w-[90%] sm:max-w-175 font-normal"
         >
-          <h3
-            data-hero
-            class="text-xl md:text-3xl max-w-[90%] sm:max-w-175 font-normal"
-          >
-            Frontend Engineer. I've built across fintech, edtech, ecommerce, and
-            web3 — and somewhere along the way I became obsessed with how things
-            feel, not just what they do.
-          </h3>
+         <h1
+          data-hero
+          class="text-xl md:text-3xl max-w-[90%] sm:max-w-175 font-normal"
+        >
+          <span class="inline-grid align-baseline">
+            <span id="role-word" class="col-start-1 row-start-1">Frontend</span>
+            <span aria-hidden="true" data-w="Frontend" class="role-sizer col-start-1 row-start-1 invisible"></span>
+            <span aria-hidden="true" data-w="Design" class="role-sizer col-start-1 row-start-1 invisible"></span>
+            <span aria-hidden="true" data-w="Software" class="role-sizer col-start-1 row-start-1 invisible"></span>
+          </span> Engineer. I've built across fintech, edtech, ecommerce, and web3 — and
+          somewhere along the way I became obsessed with how things feel, not just what
+          they do.
+        </h1>
           <div data-hero class="mt-3 lg:mt-5 flex items-center gap-1">
             <div class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></div>
             <p class="font-display text-xs uppercase leading-none">
@@ -290,71 +295,93 @@ import Layout from "../layouts/Layout.astro";
           setInterval(updateTime, 1000);
         </script>
 
-        <script>
-          import { gsap } from "gsap";
+       <script>
+  import { gsap } from "gsap";
 
-          const revealHero = () => {
-            const root = document.documentElement;
-            if (!root.classList.contains("hero-pending")) return;
+  const revealHero = () => {
+    const root = document.documentElement;
+    if (!root.classList.contains("hero-pending")) return;
 
-            const items = gsap.utils.toArray<HTMLElement>("[data-hero]");
-            const nav = gsap.utils.toArray<HTMLElement>("[data-hero-nav]");
+    const items = gsap.utils.toArray<HTMLElement>("[data-hero]");
+    const nav = gsap.utils.toArray<HTMLElement>("[data-hero-nav]");
 
-            if (
-              window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
-              (!items.length && !nav.length)
-            ) {
-              root.classList.remove("hero-pending");
-              return;
-            }
+    if (
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+      (!items.length && !nav.length)
+    ) {
+      root.classList.remove("hero-pending");
+      return;
+    }
 
-            gsap.fromTo(
-              nav,
-              { y: -16, opacity: 0 },
-              {
-                y: 0,
-                opacity: 1,
-                duration: 0.6,
-                delay: 0.15,
-                ease: "power3.out",
-                clearProps: "transform,opacity",
-              },
-            );
-            gsap.fromTo(
-              items,
-              { y: 32, opacity: 0 },
-              {
-                y: 0,
-                opacity: 1,
-                duration: 0.7,
-                delay: 0.2,
-                stagger: 0.08,
-                ease: "power3.out",
-                clearProps: "transform,opacity",
-              },
-            );
+    gsap.fromTo(
+      nav,
+      { y: -16, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.6, delay: 0.35, ease: "power3.out", clearProps: "transform,opacity" },
+    );
+    gsap.fromTo(
+      items,
+      { y: 32, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.7, delay: 0.45, stagger: 0.08, ease: "power3.out", clearProps: "transform,opacity" },
+    );
 
-            root.classList.remove("hero-pending");
-          };
+    root.classList.remove("hero-pending");
+  };
 
-          const initHero = () => {
-            const root = document.documentElement;
-            if (!root.classList.contains("hero-pending")) return;
+  const initHero = () => {
+    const root = document.documentElement;
+    if (!root.classList.contains("hero-pending")) return;
 
-            setTimeout(() => root.classList.remove("hero-pending"), 10000);
+    // failsafe: content can never stay hidden
+    setTimeout(() => root.classList.remove("hero-pending"), 10000);
 
-            if (root.classList.contains("is-loading")) {
-              window.addEventListener("preloader:exit", revealHero, {
-                once: true,
-              });
-            } else {
-              revealHero();
-            }
-          };
+    const state = (window as any).__curtain?.state;
+    if (state === "covering" || state === "covered") {
+      window.addEventListener("curtain:reveal", revealHero, { once: true });
+    } else {
+      revealHero();
+    }
+  };
 
-          document.addEventListener("astro:page-load", initHero);
-          initHero();
-        </script>
+  document.addEventListener("astro:page-load", initHero);
+  initHero();
+</script>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrambleTextPlugin } from "gsap/ScrambleTextPlugin";
+
+  gsap.registerPlugin(ScrambleTextPlugin);
+
+  const ROLES = ["Frontend", "Design", "Software"];
+  let timer: number | undefined;
+
+  const initRoleShuffle = () => {
+    window.clearTimeout(timer);
+    const el = document.getElementById("role-word");
+    if (!el || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    let i = 0;
+    const next = () => {
+      i = (i + 1) % ROLES.length;
+      gsap.to(el, {
+        duration: 1.2,
+        ease: "none",
+        scrambleText: { text: ROLES[i], chars: "lowerCase", speed: 0.5, revealDelay: 0.2 },
+      });
+      timer = window.setTimeout(next, gsap.utils.random(10, 15) * 1000);
+    };
+    timer = window.setTimeout(next, gsap.utils.random(10, 15) * 1000);
+  };
+
+  document.addEventListener("astro:page-load", initRoleShuffle);
+  initRoleShuffle();
+</script>
+
+<style>
+  .role-sizer::before {
+    content: attr(data-w);
+  }
+</style>
       </section>
     </div>
   </main></Layout
