@@ -1,0 +1,237 @@
+---
+const letters = "Divine Obeten".split("");
+---
+
+<div id="curtain" transition:persist="curtain" aria-hidden="true">
+  <div class="curtain-accent"></div>
+  <div class="curtain-main">
+    <div id="curtain-line" class="curtain-line">
+      {
+        letters.map((ch) => (
+          <span class="cw-ch">{ch === " " ? "\u00A0" : ch}</span>
+        ))
+      }
+    </div>
+  </div>
+</div>
+
+<script>
+  import { gsap } from "gsap";
+  import type { TransitionBeforePreparationEvent } from "astro:transitions/client";
+
+  type State = "idle" | "covering" | "covered" | "revealing";
+
+  const NAME = "Divine Obeten";
+  const FLASH = 0.17; // seconds each surname letter is on screen
+  const HOLD = 0.5; // pause on the finished name before the curtain lifts
+  const EASE = "power3.inOut";
+
+  const w = window as any;
+  const setState = (state: State) => {
+    w.__curtain = { state };
+  };
+  const reduced = () =>
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const wait = (ms: number) => new Promise<void>((r) => setTimeout(r, ms));
+
+  const els = () => ({
+    root: document.getElementById("curtain") as HTMLElement | null,
+    main: document.querySelector<HTMLElement>(".curtain-main"),
+    accent: document.querySelector<HTMLElement>(".curtain-accent"),
+    line: document.getElementById("curtain-line") as HTMLElement | null,
+  });
+
+  const play = (build: (t: gsap.core.Timeline) => void) =>
+    new Promise<void>((resolve) => {
+      const t = gsap.timeline({ onComplete: resolve });
+      build(t);
+    });
+
+  // lift: the main panel leaves first, the accent panel trails it
+  const reveal = async () => {
+    const { root, main, accent, line } = els();
+    const html = document.documentElement;
+
+    setState("revealing");
+    window.dispatchEvent(new Event("curtain:unlock"));
+    window.dispatchEvent(new Event("curtain:reveal"));
+
+    if (!root || !main || !accent) {
+      html.classList.remove("is-loading");
+      setState("idle");
+      return;
+    }
+
+    gsap.set(root, { visibility: "visible", pointerEvents: "none" });
+    html.classList.remove("is-loading");
+
+    await play((t) => {
+      t.to(main, { yPercent: -100, duration: 0.9, ease: EASE, overwrite: "auto" }, 0).to(
+        accent,
+        { yPercent: -100, duration: 0.9, ease: EASE, overwrite: "auto" },
+        0.14,
+      );
+    });
+
+    gsap.set(root, { visibility: "hidden" });
+    if (line) {
+      gsap.set(line.querySelectorAll(".cw-ch"), {
+        opacity: 0,
+        clearProps: "transform",
+      });
+    }
+    setState("idle");
+  };
+
+  // cover: rises from the bottom, accent panel leads
+  const cover = async () => {
+    const { root, main, accent } = els();
+    if (!root || !main || !accent) return;
+
+    setState("covering");
+    window.dispatchEvent(new Event("curtain:lock"));
+    gsap.set([main, accent], { yPercent: 100 });
+    gsap.set(root, { visibility: "visible", pointerEvents: "auto" });
+
+    await play((t) => {
+      t.to(accent, { yPercent: 0, duration: 0.6, ease: EASE }, 0).to(
+        main,
+        { yPercent: 0, duration: 0.6, ease: EASE },
+        0.1,
+      );
+    });
+    setState("covered");
+  };
+
+  // ---------- page transitions ----------
+  let navigating = false;
+
+  document.addEventListener("astro:before-preparation", (e) => {
+    if (reduced() || w.__curtain?.state !== "idle") return;
+    const event = e as TransitionBeforePreparationEvent;
+    const original = event.loader;
+    navigating = true;
+    event.loader = async () => {
+      // fetch the next page while the curtain rises; never wait more than 2s
+      await Promise.all([Promise.race([cover(), wait(2000)]), original()]);
+    };
+  });
+
+  // ---------- first-load sequence ----------
+  const fontsReady = () =>
+    new Promise<void>((resolve) => {
+      const timeout = window.setTimeout(resolve, 1500);
+      const done = () => {
+        window.clearTimeout(timeout);
+        resolve();
+      };
+      const load = () =>
+        document.fonts.load('800 100px "Bricolage Grotesque"').then(done, done);
+      const link = document.querySelector<HTMLLinkElement>(
+        'link[href*="fonts.googleapis.com/css2"]',
+      );
+      if (!link || link.media === "all") load();
+      else link.addEventListener("load", load, { once: true });
+    });
+
+  const sequence = (line: HTMLElement) => {
+    const letters = gsap.utils.toArray<HTMLElement>(".cw-ch", line);
+    const pad = Math.max(20, window.innerWidth * 0.04);
+    const target = window.innerWidth - pad * 2;
+
+    // fit the whole name to the screen width
+    line.style.fontSize = "100px";
+    const fs = (100 * target) / line.getBoundingClientRect().width;
+    line.style.fontSize = `${fs}px`;
+
+    // measure every letter at rest, before anything moves
+    const cx = window.innerWidth / 2;
+    const cy = window.innerHeight / 2;
+    const pos = letters.map((el) => {
+      const r = el.getBoundingClientRect();
+      return { x: cx - (r.left + r.width / 2), y: cy - (r.top + r.height / 2) };
+    });
+
+    // size of a lone letter while it flashes
+    const big = Math.min(
+      (window.innerHeight * 0.5) / (fs * 0.72),
+      (window.innerWidth * 0.6) / (fs * 0.8),
+    );
+
+    const first = NAME.indexOf("Obeten");
+    const surname = letters.slice(first);
+    const n = letters[letters.length - 1];
+    const rest = letters.slice(0, -1);
+
+    const t = gsap.timeline();
+
+    // O, b, e, t, e, n: one at a time, each alone at the centre
+    surname.forEach((el, k) => {
+      const i = first + k;
+      t.fromTo(
+        el,
+        { x: pos[i].x, y: pos[i].y, scale: big * 0.88, opacity: 1 },
+        { scale: big, duration: FLASH, ease: "power2.out", immediateRender: false },
+        k * FLASH,
+      );
+      if (el !== n) t.set(el, { opacity: 0 }, (k + 1) * FLASH);
+    });
+
+    const moveAt = surname.length * FLASH + 0.2;
+
+    // the lone n travels to the far right and settles at its real size
+    t.to(n, { x: 0, y: 0, scale: 1, duration: 0.95, ease: "power4.inOut" }, moveAt);
+
+    // the rest of the name drops in around it, in random order
+    t.set(rest, { x: 0, y: 0, scale: 1, opacity: 0 }, moveAt).fromTo(
+      rest,
+      { y: 28, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.55,
+        ease: "power3.out",
+        stagger: { each: 0.05, from: "random" },
+        immediateRender: false,
+      },
+      moveAt + 0.7,
+    );
+
+    t.call(reveal, [], moveAt + 0.7 + 0.55 + rest.length * 0.05 + HOLD);
+  };
+
+  let started = false;
+
+  const start = async () => {
+    const html = document.documentElement;
+    if (started || !html.classList.contains("is-loading")) return;
+    const { line } = els();
+    if (!line) return;
+    started = true;
+
+    if (reduced()) {
+      html.classList.remove("is-loading");
+      window.dispatchEvent(new Event("curtain:unlock"));
+      setState("idle");
+      window.dispatchEvent(new Event("curtain:reveal"));
+      return;
+    }
+
+    try {
+      await fontsReady();
+      sequence(line);
+    } catch {
+      await reveal();
+    }
+  };
+
+  document.addEventListener("astro:page-load", () => {
+    if (navigating) {
+      navigating = false;
+      reveal();
+      return;
+    }
+    start();
+  });
+  start(); // also run directly, in case page-load already fired
+</script>
