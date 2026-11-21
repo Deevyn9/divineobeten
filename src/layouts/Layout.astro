@@ -3,7 +3,7 @@ import Footer from "../components/Footer.astro";
 import Navbar from "../components/Navbar.astro";
 import { ClientRouter } from "astro:transitions";
 import "../styles/global.css";
-import Preloader from "../components/Preloader.astro";
+import Curtain from "../components/Curtain.astro";
 
 interface Props {
   title?: string;
@@ -13,7 +13,7 @@ interface Props {
 
 const {
   title = "Divine Obeten - Frontend Engineer",
-  description = "Divine Obeten's portfolio built with Astro, Tailwind, and GSAP.",
+  description = "A lightweight, animation-ready portfolio built with Astro, Tailwind, and GSAP.",
   image = "/og-image.svg",
 } = Astro.props;
 
@@ -30,12 +30,18 @@ const socialImage = new URL(image, siteUrl).toString();
 
     <!-- boot flags: run before first paint -->
     <script is:inline>
-      if (!window.__booted) {
+      (function () {
+        if (window.__booted) return;
         window.__booted = true;
-        const root = document.documentElement;
+        window.__curtain = { state: "covered" };
+        var root = document.documentElement;
         root.classList.add("is-loading");
         if (location.pathname === "/") root.classList.add("hero-pending");
-      }
+        // failsafe: the site can never stay covered if a script fails
+        setTimeout(function () {
+          root.classList.remove("is-loading");
+        }, 9000);
+      })();
     </script>
 
     <!-- theme: saved choice wins, otherwise follow the OS -->
@@ -64,32 +70,60 @@ const socialImage = new URL(image, siteUrl).toString();
 
     <!-- critical CSS: first paint never depends on the stylesheet -->
     <style is:inline>
-      .preloader {
-        display: none;
+      #curtain {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        visibility: hidden;
+        pointer-events: none;
       }
-      html.is-loading .preloader {
-        display: grid;
+      html.is-loading #curtain {
+        visibility: visible;
+        pointer-events: auto;
       }
       html.is-loading,
       html.is-loading body {
         overflow: hidden;
       }
 
-      html.hero-pending [data-hero] {
-        opacity: 0;
-        transform: translateY(32px);
+      .curtain-accent,
+      .curtain-main {
+        position: absolute;
+        inset: 0;
+        will-change: transform;
       }
-      html.hero-pending [data-hero-nav] {
-        opacity: 0;
-        transform: translateY(-16px);
+      .curtain-accent {
+        background: var(--accent);
       }
+      .curtain-main {
+        background: var(--bg);
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+      }
+      .curtain-line {
+        display: flex;
+        width: max-content;
+        white-space: nowrap;
+        font-family: "Bricolage Grotesque", sans-serif;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        line-height: 1;
+        font-size: 100px;
+        color: var(--fg);
+      }
+      .cw-ch {
+        display: inline-block;
+        opacity: 0;
+        will-change: transform, opacity;
+      }
+
+      html.hero-pending [data-hero] { opacity: 0; transform: translateY(32px); }
+      html.hero-pending [data-hero-nav] { opacity: 0; transform: translateY(-16px); }
 
       @media (prefers-reduced-motion: reduce) {
         html.hero-pending [data-hero],
-        html.hero-pending [data-hero-nav] {
-          opacity: 1;
-          transform: none;
-        }
+        html.hero-pending [data-hero-nav] { opacity: 1; transform: none; }
       }
     </style>
 
@@ -115,16 +149,8 @@ const socialImage = new URL(image, siteUrl).toString();
     </noscript>
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
-    <meta
-      name="theme-color"
-      content="#ffffff"
-      media="(prefers-color-scheme: light)"
-    />
-    <meta
-      name="theme-color"
-      content="#0b0b0c"
-      media="(prefers-color-scheme: dark)"
-    />
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0b0b0c" media="(prefers-color-scheme: dark)" />
     <link rel="canonical" href={canonicalUrl} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -162,9 +188,6 @@ const socialImage = new URL(image, siteUrl).toString();
       if (document.documentElement.classList.contains("is-loading")) {
         lenis.stop();
       }
-      if (document.documentElement.classList.contains("is-loading")) {
-        lenis.stop();
-      }
 
       function raf(time: number) {
         lenis.raf(time);
@@ -173,10 +196,11 @@ const socialImage = new URL(image, siteUrl).toString();
 
       requestAnimationFrame(raf);
 
-      window.addEventListener("preloader:end", () => lenis.start());
+      window.addEventListener("curtain:lock", () => lenis.stop());
+      window.addEventListener("curtain:unlock", () => lenis.start());
     </script>
 
-    <!-- one before-swap handler: keep theme + flag hero on the incoming document -->
+    <!-- keep theme + flag hero on the incoming document -->
     <script>
       import type { TransitionBeforeSwapEvent } from "astro:transitions/client";
 
@@ -193,8 +217,8 @@ const socialImage = new URL(image, siteUrl).toString();
   </head>
   <body class="min-h-screen font-sans bg-bg text-fg antialiased">
     <Navbar />
-    <Preloader />
-    <main transition:animate="slide" class="min-h-screen">
+    <Curtain />
+    <main transition:animate="none" class="min-h-screen">
       <slot />
     </main>
     <Footer />
