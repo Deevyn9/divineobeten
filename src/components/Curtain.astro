@@ -25,6 +25,9 @@ const letters = "Divine Obeten".split("");
   const FLASH = 0.17; // seconds each surname letter is on screen
   const HOLD = 0.5; // pause on the finished name before the curtain lifts
   const EASE = "power3.inOut";
+  const NAME_SHARE_DESKTOP = 0.6; // how much of the screen width the finished name fills
+const NAME_SHARE_MOBILE = 0.88;
+const FLASH_HEIGHT = 0.38; // height of a lone flashing letter, as a share of screen height
 
   const w = window as any;
   const setState = (state: State) => {
@@ -134,12 +137,13 @@ const letters = "Divine Obeten".split("");
       else link.addEventListener("load", load, { once: true });
     });
 
-  const sequence = (line: HTMLElement) => {
+    const sequence = (line: HTMLElement) => {
     const letters = gsap.utils.toArray<HTMLElement>(".cw-ch", line);
-    const pad = Math.max(20, window.innerWidth * 0.04);
-    const target = window.innerWidth - pad * 2;
+    const share =
+      window.innerWidth >= 768 ? NAME_SHARE_DESKTOP : NAME_SHARE_MOBILE;
+    const target = window.innerWidth * share;
 
-    // fit the whole name to the screen width
+    // fit the whole name to the chosen width
     line.style.fontSize = "100px";
     const fs = (100 * target) / line.getBoundingClientRect().width;
     line.style.fontSize = `${fs}px`;
@@ -154,8 +158,8 @@ const letters = "Divine Obeten".split("");
 
     // size of a lone letter while it flashes
     const big = Math.min(
-      (window.innerHeight * 0.5) / (fs * 0.72),
-      (window.innerWidth * 0.6) / (fs * 0.8),
+      (window.innerHeight * FLASH_HEIGHT) / (fs * 0.72),
+      (window.innerWidth * 0.5) / (fs * 0.8),
     );
 
     const first = NAME.indexOf("Obeten");
@@ -179,7 +183,7 @@ const letters = "Divine Obeten".split("");
 
     const moveAt = surname.length * FLASH + 0.2;
 
-    // the lone n travels to the far right and settles at its real size
+    // the lone n travels to its place at the end of the name
     t.to(n, { x: 0, y: 0, scale: 1, duration: 0.95, ease: "power4.inOut" }, moveAt);
 
     // the rest of the name drops in around it, in random order
@@ -199,7 +203,7 @@ const letters = "Divine Obeten".split("");
 
     t.call(reveal, [], moveAt + 0.7 + 0.55 + rest.length * 0.05 + HOLD);
   };
-
+  
   let started = false;
 
   const start = async () => {
