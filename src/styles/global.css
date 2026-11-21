@@ -11,10 +11,10 @@
   --muted: #6f6f6f;
   --border: rgba(0, 0, 0, 0.08);
   --border-hover: rgba(0, 0, 0, 0.2);
-  --accent: #2563eb;
-  --accent2: #60a5fa;
+  --accent: #98c5fc;
+  --accent2: #7dd3fc;
   --dot: #ebebeb;
-  --selection: rgba(37, 99, 235, 0.2);
+  --selection: rgba(56, 189, 248, 0.3);
 }
 
 .dark {
