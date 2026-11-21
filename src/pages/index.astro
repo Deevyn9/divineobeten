@@ -24,19 +24,16 @@ import Layout from "../layouts/Layout.astro";
           data-hero
           class="text-xl md:text-3xl max-w-[90%] sm:max-w-175 font-normal"
         >
-         <h1
-          data-hero
-          class="text-xl md:text-3xl max-w-[90%] sm:max-w-175 font-normal"
-        >
-          <span class="inline-grid align-baseline">
-            <span id="role-word" class="col-start-1 row-start-1">Frontend</span>
-            <span aria-hidden="true" data-w="Frontend" class="role-sizer col-start-1 row-start-1 invisible"></span>
-            <span aria-hidden="true" data-w="Design" class="role-sizer col-start-1 row-start-1 invisible"></span>
-            <span aria-hidden="true" data-w="Software" class="role-sizer col-start-1 row-start-1 invisible"></span>
-          </span> Engineer. I've built across fintech, edtech, ecommerce, and web3 — and
-          somewhere along the way I became obsessed with how things feel, not just what
-          they do.
-        </h1>
+       <h1
+  data-hero
+  class="text-xl md:text-3xl max-w-[90%] sm:max-w-175 font-normal"
+>
+  <span id="role-wrap" class="inline-block whitespace-nowrap align-baseline"
+    ><span id="role-word">Frontend</span></span
+  > Engineer. I've built across fintech, edtech, ecommerce, and web3 — and
+  somewhere along the way I became obsessed with how things feel, not just what
+  they do.
+</h1>
           <div data-hero class="mt-3 lg:mt-5 flex items-center gap-1">
             <div class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></div>
             <p class="font-display text-xs uppercase leading-none">
@@ -357,19 +354,56 @@ import Layout from "../layouts/Layout.astro";
 
   const initRoleShuffle = () => {
     window.clearTimeout(timer);
-    const el = document.getElementById("role-word");
-    if (!el || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const word = document.getElementById("role-word");
+    const wrap = document.getElementById("role-wrap");
+
+    if (!word) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (!wrap) console.warn("#role-wrap not found, scrambling without the width animation");
+
+    // width the wrapper would have with `text` in it, measured without painting
+    const widthFor = (text: string) => {
+      if (!wrap) return 0;
+      const keep = word.textContent;
+      const had = wrap.style.width;
+      wrap.style.width = "auto";
+      word.textContent = text;
+      const w = wrap.getBoundingClientRect().width;
+      word.textContent = keep;
+      wrap.style.width = had;
+      return w;
+    };
 
     let i = 0;
+
     const next = () => {
       i = (i + 1) % ROLES.length;
-      gsap.to(el, {
+
+      if (wrap) {
+        const from = wrap.getBoundingClientRect().width;
+        const to = widthFor(ROLES[i]);
+        // same duration as the scramble so the width never wobbles at the end
+        gsap.fromTo(
+          wrap,
+          { width: from },
+          { width: to, duration: 1.2, ease: "power3.inOut", clearProps: "width" },
+        );
+      }
+
+      gsap.to(word, {
         duration: 1.2,
         ease: "none",
-        scrambleText: { text: ROLES[i], chars: "lowerCase", speed: 0.5, revealDelay: 0.2 },
+        scrambleText: {
+          text: ROLES[i],
+          chars: "lowerCase",
+          speed: 0.5,
+          revealDelay: 0.2,
+        },
       });
+
       timer = window.setTimeout(next, gsap.utils.random(10, 15) * 1000);
     };
+
     timer = window.setTimeout(next, gsap.utils.random(10, 15) * 1000);
   };
 
